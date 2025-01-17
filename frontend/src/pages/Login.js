@@ -25,23 +25,10 @@ const Login = () => {
             "Content-Type": "application/json",
             Accept: "Access-Control-Allow-Headers",
           },
-          timeout: 3000,
+          timeout: 10000,
         }
       );
-      // function setCookie(name, value, days) {
-      //   let expires = "";
-      //   if (days) {
-      //     let date = new Date();
-      //     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-      //     expires = "; expires=" + date.toUTCString();
-      //   }
-      //   document.cookie = name + "=" + (value || "") + expires + "; path=/";
-      // }
-      // Store the token in local storage
       console.log("User logged in successfully");
-      // console.log(response);
-      // setCookie("accessToken", response.data.accessToken, 1);
-      // setCookie("refreshToken", response.data.refreshToken, 2);
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard");
     } catch (error) {

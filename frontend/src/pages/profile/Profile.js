@@ -25,12 +25,16 @@ const Profile = () => {
     };
 
     try {
-      await axios.post(`http://localhost:4001/api/users/profile`, formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        timeout: 3000,
-      });
+      await axios.post(
+        `https://travel-app-mern.onrender.com/api/users/profile`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          timeout: 3000,
+        }
+      );
 
       navigate("/");
     } catch (error) {

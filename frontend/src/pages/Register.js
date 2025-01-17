@@ -24,7 +24,7 @@ const Register = () => {
       const response = await axios.post(
         `http://localhost:4001/api/users/register`,
         formData,
-        { headers: { "Content-Type": "application/json" }, timeout: 5000 }
+        { headers: { "Content-Type": "application/json" }, timeout: 10000 }
       );
 
       console.log("Registration successful:", response.data);

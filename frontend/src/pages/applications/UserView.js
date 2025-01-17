@@ -42,7 +42,7 @@ const UserView = () => {
             {users.map((user) => {
               const { _id, image, surname } = user;
               let correctedPath = image.replace(/\\/g, "/");
-              let imagePath = `http://localhost:4001/${correctedPath}`;
+              let imagePath = `https://travel-app-mern.onrender.com/${correctedPath}`;
               console.log(imagePath);
               return (
                 <li className=" " key={_id}>

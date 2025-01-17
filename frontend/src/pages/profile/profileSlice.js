@@ -3,7 +3,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = "http://localhost:4000"; // Define the base URL
+const API_URL = "https://travel-app-mern.onrender.com"; // Define the base URL
 
 export const updateProfile = createAsyncThunk(
   "users/updateProfile",
