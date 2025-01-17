@@ -34,7 +34,7 @@ import EditPage from "./pages/page/EditPage";
 import SliderManagement from "./pages/sliders/SliderManagement";
 import AddSliders from "./pages/sliders/AddSlider";
 import EditSlider from "./pages/sliders/EditSlider";
-import PrivateRoute from "./pages/PrivateRoute";
+//import PrivateRoute from "./pages/PrivateRoute";
 import AccessRoute from "./pages/AccessProtect";
 //import Admin from "./pages/Admin";
 
@@ -90,10 +90,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route
-            path="/dashboard"
-            element={<PrivateRoute component={Dashboard} />}
-          />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
