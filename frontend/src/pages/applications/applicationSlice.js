@@ -13,38 +13,69 @@ const api = axios.create({
 
 export const fetchApplication = createAsyncThunk(
   "users/fetchApplication",
-  async () => {
-    const response = await api.get("/fetchApplication");
-    return response.data;
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.get("/fetchApplication");
+      if (response.status === 404) {
+        return rejectWithValue("Resource not found");
+      }
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "An unexpected error occurred"
+      );
+    }
   }
 );
 
 export const addApplication = createAsyncThunk(
   "users/addApplication",
-  async (newUser) => {
-    const response = await api.post(`/addApplication`, newUser, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return response.data;
+  async (newUser, { rejectWithValue }) => {
+    try {
+      const response = await api.post("/addApplication", newUser, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "An unexpected error occurred"
+      );
+    }
   }
 );
 
 export const updateApplication = createAsyncThunk(
   "users/updateApplication",
-  async (updatedUser) => {
+  async (updatedUser, { rejectWithValue }) => {
     const { _id, ...userData } = updatedUser;
-    const response = await api.put(`/updateApplication/${_id}`, userData);
-    return response.data;
+    try {
+      const response = await api.put(`/updateApplication/${_id}`, userData);
+      if (response.status === 404) {
+        return rejectWithValue("Resource not found");
+      }
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "An unexpected error occurred"
+      );
+    }
   }
 );
 
 export const deleteApplication = createAsyncThunk(
   "users/deleteApplication",
-  async (id) => {
-    await api.delete(`/deleteApplication/${id}`);
-    return id;
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await api.delete(`/deleteApplication/${id}`);
+      if (response.status === 404) {
+        return rejectWithValue("Resource not found");
+      }
+      return id;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "An unexpected error occurred"
+      );
+    }
   }
 );
 

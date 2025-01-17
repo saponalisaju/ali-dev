@@ -11,35 +11,67 @@ const api = axios.create({
   withCredentials: true,
 });
 
-export const fetchSlider = createAsyncThunk("users/fetchSlider", async () => {
-  const response = await api.get(`/fetchSlider`);
-  return response.data;
-});
+export const fetchSlider = createAsyncThunk(
+  "users/fetchSlider",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.get("/fetchSlider");
+      if (response.status === 404) {
+        return rejectWithValue("Resource not found");
+      }
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "An unexpected error occurred"
+      );
+    }
+  }
+);
 
 export const addSlider = createAsyncThunk(
   "users/addSlider",
-  async (newUser) => {
-    const response = await api.post(`/addSlider`, newUser, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    return response.data;
+  async (newUser, { rejectWithValue }) => {
+    try {
+      const response = await api.post("/addSlider", newUser);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 
 export const updateSlider = createAsyncThunk(
   "users/updateSlider",
-  async (updatedUser) => {
-    const { _id, ...userData } = updatedUser;
-    const response = await api.put(`/updateSlider/${_id}`, userData);
-    return response.data;
+  async (editDesignation, { rejectWithValue }) => {
+    const { _id, ...userData } = editDesignation;
+    try {
+      const response = await api.put(`/updateSlider/${_id}`, userData);
+      if (response.status === 404) {
+        return rejectWithValue("Resource not found");
+      }
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "An unexpected error occurred"
+      );
+    }
   }
 );
 
 export const deleteSlider = createAsyncThunk(
   "users/deleteSlider",
-  async (id) => {
-    await api.delete(`/deleteSlider/${id}`);
-    return id;
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await api.delete(`/deleteSlider/${id}`);
+      if (response.status === 404) {
+        return rejectWithValue("Resource not found");
+      }
+      return id;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "An unexpected error occurred"
+      );
+    }
   }
 );
 

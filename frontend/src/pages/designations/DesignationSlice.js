@@ -14,34 +14,65 @@ const api = axios.create({
 
 export const fetchDesignation = createAsyncThunk(
   "users/fetchDesignation",
-  async () => {
-    const response = await api.get(`/fetchDesignation`);
-    return response.data;
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.get("/fetchDesignation");
+      if (response.status === 404) {
+        return rejectWithValue("Resource not found");
+      }
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "An unexpected error occurred"
+      );
+    }
   }
 );
 
 export const addDesignation = createAsyncThunk(
   "users/addDesignation",
-  async (newUser) => {
-    const response = await api.post(`/addDesignation`, newUser);
-    return response.data;
+  async (newUser, { rejectWithValue }) => {
+    try {
+      const response = await api.post("/addDesignation", newUser);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 
 export const editDesignation = createAsyncThunk(
   "users/editDesignation",
-  async (editDesignation) => {
+  async (editDesignation, { rejectWithValue }) => {
     const { _id, ...userData } = editDesignation;
-    const response = await api.put(`/editDesignation/${_id}`, userData);
-    return response.data;
+    try {
+      const response = await api.put(`/editDesignation/${_id}`, userData);
+      if (response.status === 404) {
+        return rejectWithValue("Resource not found");
+      }
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "An unexpected error occurred"
+      );
+    }
   }
 );
 
 export const deleteDesignation = createAsyncThunk(
   "users/deleteDesignation",
-  async (id) => {
-    await api.delete(`/deleteDesignation/${id}`);
-    return id;
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await api.delete(`/deleteDesignation/${id}`);
+      if (response.status === 404) {
+        return rejectWithValue("Resource not found");
+      }
+      return id;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "An unexpected error occurred"
+      );
+    }
   }
 );
 

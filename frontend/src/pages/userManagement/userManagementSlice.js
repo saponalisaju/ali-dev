@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://travel-app-mern.onrender.com/userManagement",
+  baseURL: "https://travel-app-mern.onrender.com/api/userManagement",
   headers: {
     "Content-Type": "application/json",
   },
@@ -13,34 +13,65 @@ const api = axios.create({
 
 export const fetchUserManagement = createAsyncThunk(
   "users/fetchUserManagement",
-  async () => {
-    const response = await api.get(`/fetchUserManagement`);
-    return response.data;
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.get("/fetchUserManagement");
+      if (response.status === 404) {
+        return rejectWithValue("Resource not found");
+      }
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "An unexpected error occurred"
+      );
+    }
   }
 );
 
 export const addUserManagement = createAsyncThunk(
   "users/addUserManagement",
-  async (newUser) => {
-    const response = await api.post(`/addUserManagement`, newUser);
-    return response.data;
+  async (newUser, { rejectWithValue }) => {
+    try {
+      const response = await api.post("/addUserManagement", newUser);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 
 export const updateUserManagement = createAsyncThunk(
   "users/updateUserManagement",
-  async (updatedUser) => {
-    const { _id, ...userData } = updatedUser;
-    const response = await api.put(`/updateUserManagement/${_id}`, userData);
-    return response.data;
+  async (editDesignation, { rejectWithValue }) => {
+    const { _id, ...userData } = editDesignation;
+    try {
+      const response = await api.put(`/updateUserManagement/${_id}`, userData);
+      if (response.status === 404) {
+        return rejectWithValue("Resource not found");
+      }
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "An unexpected error occurred"
+      );
+    }
   }
 );
 
 export const deleteUserManagement = createAsyncThunk(
   "users/deleteUserManagement",
-  async (id) => {
-    await api.delete(`/deleteUserManagement/${id}`);
-    return id;
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await api.delete(`/deleteUserManagement/${id}`);
+      if (response.status === 404) {
+        return rejectWithValue("Resource not found");
+      }
+      return id;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "An unexpected error occurred"
+      );
+    }
   }
 );
 

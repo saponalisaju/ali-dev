@@ -1,9 +1,18 @@
 const Designation = require("../models/designationModel");
 
 exports.fetchDesignation = async (req, res) => {
-  const usersAll = await Designation.find();
-  res.json(usersAll);
+  try {
+    const usersAll = await Designation.find();
+    if (!usersAll || usersAll.length === 0) {
+      return res.status(404).json({ message: "No designations found" });
+    }
+    res.status(200).json(usersAll);
+  } catch (error) {
+    console.error("Error fetching designations:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 };
+
 exports.addDesignation = async (req, res) => {
   try {
     const { name } = req.body;
