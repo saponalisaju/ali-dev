@@ -6,7 +6,7 @@ import Imag3 from "../../assets/images/setting.png";
 
 const Component2 = () => {
   return (
-    <div className="section-one d-flex">
+    <div className="section-one d-flex ">
       <div className="para1 text-center p-5">
         <img className="border rounded-circle p-3" src={Img1} alt="loading" />
         <h4 className="">ELIGIBILITY ASSESSMENT</h4>

@@ -41,6 +41,7 @@ const UserView = () => {
           <ul className="align-item-left">
             {users.map((user) => {
               const { _id, image, surname } = user;
+              console.log(user);
               let correctedPath = image.replace(/\\/g, "/");
               let imagePath = `https://travel-app-mern.onrender.com/${correctedPath}`;
               console.log(imagePath);

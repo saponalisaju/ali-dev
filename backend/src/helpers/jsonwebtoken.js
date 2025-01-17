@@ -8,8 +8,7 @@ exports.createToken = (payload, secretKey, expiresIn) => {
     throw new Error("Secret Key must be a non-empty string");
   }
   try {
-    const token = jwt.sign(payload, secretKey, { expiresIn });
-    return token;
+    return jwt.sign(payload, secretKey, { expiresIn });
   } catch (error) {
     console.error("Failed to sign in the jwt: ", error);
     throw error;

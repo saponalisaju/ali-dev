@@ -16,12 +16,19 @@ exports.fetchDesignation = async (req, res) => {
 exports.addDesignation = async (req, res) => {
   try {
     const { name } = req.body;
-    const user = await Designation.findOne({ name });
-    if (user) return res.status(400).json({ message: "User all ready exists" });
-    const newUser = new Designation({ name });
-    await newUser.save();
-    res.status(201).json(newUser);
+
+    const existingDesignation = await Designation.findOne({ name });
+    if (existingDesignation) {
+      return res.status(400).json({ message: "Designation already exists" });
+    }
+
+    const newDesignation = new Designation({ name });
+    await newDesignation.save();
+
+    console.log("New designation added:", newDesignation);
+    res.status(201).json(newDesignation);
   } catch (error) {
+    console.error("Error adding designation:", error);
     res.status(500).json({ message: error.message });
   }
 };

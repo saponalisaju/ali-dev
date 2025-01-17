@@ -41,16 +41,19 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", req.headers.origin);
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header(
+  if (allowedOrigins.includes(req.headers.origin)) {
+    res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
+  }
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+    "GET,POST,PUT,DELETE,PATCH,OPTIONS"
   );
-  res.header(
+  res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
+  console.log(`Request received from origin: ${req.headers.origin}`);
   next();
 });
 

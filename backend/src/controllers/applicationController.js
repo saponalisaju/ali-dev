@@ -9,15 +9,23 @@ exports.serveApplicationPage = (req, res) => {
 };
 
 exports.fetchApplication = async (req, res) => {
-  const applicationUsers = await Application.find();
-  res.json(applicationUsers);
+  try {
+    const applicationUsers = await Application.find();
+    res.json(applicationUsers);
+  } catch (error) {
+    res.status(500).json({
+      message: "An error occurred while fetching applications.",
+      error: error.message,
+    });
+  }
 };
 exports.addApplication = async (req, res) => {
   const image = req.file?.path;
   try {
-    if (!req.file || !{ email: req.body.email }) {
-      return res.status(400).json({ message: error.message });
+    if (!req.file || !req.body.email) {
+      return res.status(400).json({ message: "File and email are required." });
     }
+
     const newApplication = new Application({ ...req.body, image: image });
     await newApplication.save();
     console.log(newApplication);

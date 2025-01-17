@@ -1,19 +1,40 @@
 const Page = require("../models/pageModel");
 
 exports.fetchPage = async (req, res) => {
-  const allPages = await Page.find();
-  res.json(allPages);
+  try {
+    const allPages = await Page.find();
+    res.json(allPages);
+  } catch (error) {
+    console.error("Error fetching pages:", error.message);
+    res
+      .status(500)
+      .json({
+        message: "An error occurred while fetching pages.",
+        error: error.message,
+      });
+  }
 };
+
 exports.addPage = async (req, res) => {
   try {
     const { title, content } = req.body;
-    const user = await Page.findOne({ title });
-    if (user) return res.status(400).json({ message: "User all ready exists" });
-    const newUser = new Page({ title, content });
-    await newUser.save();
-    res.status(201).json(newUser);
+
+    const existingPage = await Page.findOne({ title });
+    if (existingPage) {
+      return res.status(400).json({ message: "Page already exists" });
+    }
+
+    const newPage = new Page({ title, content });
+    await newPage.save();
+
+    res.status(201).json(newPage);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    // Log the error for debugging
+    console.error("Error adding page:", error.message);
+
+    res
+      .status(500)
+      .json({ message: "An error occurred while adding the page." });
   }
 };
 
