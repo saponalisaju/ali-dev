@@ -8,34 +8,43 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    if (!email || !password) {
+      setError("All fields are required");
+      console.error("Missing input data");
+      return;
+    }
+    setIsLoading(true);
     setError("");
-
+    const formData = { email, password };
     try {
       const response = await axios.post(
         `https://travel-app-mern.onrender.com/api/users/login`,
-        { email, password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "Access-Control-Allow-Headers",
-          },
-          timeout: 10000,
-        }
+        formData,
+        { headers: { "Content-Type": "application/json" }, timeout: 5000 }
       );
-      console.log("User logged in successfully");
-      localStorage.setItem("token", response.data.token);
+      console.log("Login successful:", response.data);
       navigate("/dashboard");
     } catch (error) {
-      console.error("Login error:", error.response || error.message || error);
-      setError("Login failed. Please check your email and password.");
-    } finally {
-      setLoading(false);
+      setIsLoading(false);
+      if (error.response) {
+        console.error(
+          "Server responded with an error:",
+          error.response.status,
+          error.response.data
+        );
+        setError("Login failed. Please check your credentials.");
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+        setError("No response from server. Please try again.");
+      } else {
+        console.error("Error setting up the request:", error.message);
+        setError("An error occurred during login. Please try again.");
+      }
     }
   };
 

@@ -6,25 +6,26 @@ import "../assets/styles/main.css";
 const Register = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(""); // New state for error message
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (!name || !password) {
+    if (!name || !email || !password) {
       setError("All fields are required");
       console.error("Missing input data");
       return;
     }
     setIsLoading(true);
     setError(""); // Clear previous error message
-    const formData = { name, email: "manikkibrya@gmail.com", password };
+    const formData = { name, email, password };
     try {
       const response = await axios.post(
         `https://travel-app-mern.onrender.com/users/register`,
         formData,
-        { headers: { "Content-Type": "application/json" }, timeout: 10000 }
+        { headers: { "Content-Type": "application/json" }, timeout: 5000 }
       );
 
       console.log("Registration successful:", response.data);
@@ -78,8 +79,8 @@ const Register = () => {
               id="email"
               name="email"
               placeholder="Enter email"
-              value="manikkibrya@gmail.com"
-              disabled
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="form-field">
