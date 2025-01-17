@@ -1,0 +1,391 @@
+:root {
+  --primary-color: burlywood;
+  --secondary-color: rgb(51, 153, 131);
+  --background-color: white;
+  --hover-background-color: rgb(68, 39, 96);
+}
+/* header starts here */
+.navbar {
+  width: 100%;
+  min-height: 10vh;
+}
+
+.btn-admin {
+  visibility: hidden;
+}
+
+nav:hover .btn-admin {
+  visibility: visible;
+  color: var(--primary-color);
+
+  cursor: pointer;
+}
+
+.navbar-nav {
+  margin-left: 50%;
+}
+
+/*===== application starts==== */
+.application_img {
+  width: 10rem;
+  height: 10rem;
+  margin: 0.3rem;
+}
+.btn_approved {
+  margin: 1rem 1rem;
+  width: 15rem;
+}
+.image_heading {
+  background-color: azure;
+  text-align: center;
+  width: 15rem;
+}
+
+.theme_description {
+  width: 10rem;
+}
+/* ===== application end ===== */
+
+nav a {
+  text-decoration: none;
+  padding: 1rem;
+  color: var(--primary-color);
+  transition: color 0.5s, text-decoration 0.5s;
+}
+
+nav a.active {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+nav a:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+  transition: color 0.1s, text-decoration 0.1s;
+}
+
+nav .image_logo {
+  width: 280px;
+  border-radius: 20%;
+  padding: 1rem;
+}
+
+.activenav {
+  background-color: var(--background-color);
+  box-shadow: 1px 1px 0 grey;
+  top: 0;
+  left: 0;
+  position: fixed;
+  transition: background-color 0.8s, box-shadow 0.8s;
+}
+
+/* header ends here */
+
+/* register starts */
+.register {
+  max-width: 100vw;
+  max-height: 100vh;
+}
+.register-form {
+  width: 30rem;
+  background-color: rgb(140, 167, 168);
+  border-radius: 10px;
+  margin: 10rem auto;
+}
+.regis-login {
+  text-decoration: none;
+}
+/* register ends */
+
+/* common starts here */
+.dashboard {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+header {
+  max-width: 100vw;
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 2px solid rgb(234, 235, 240);
+}
+
+header a,
+ul li a {
+  text-decoration: none;
+  color: rgba(39, 37, 37, 0.781);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.header-icon {
+  margin: 1.8rem 0 0 2rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+.home-link {
+  margin-top: 0.8rem;
+  font-size: 1.2rem;
+}
+ul li {
+  padding: 0.8rem;
+}
+ul li.active {
+  background-color: blueviolet;
+  padding: 0.8rem;
+}
+/* common ends here */
+
+/* aside starts here */
+
+aside span {
+  padding-left: 1.4rem;
+}
+.main_body {
+  max-width: 100vw;
+  /* max-height: 33vh; */
+}
+aside {
+  width: 20%;
+  background-color: rgb(240, 243, 245);
+  border-right: 1px solid rgb(233, 225, 225);
+}
+
+.header-image img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 2rem;
+  border-radius: 100%;
+  background-color: aquamarine;
+  /* margin-left: 60%; */
+}
+
+.image-head {
+  width: 100%;
+}
+
+/* @media (max-width: 576px) {
+  #wrapper {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background: #343a40;
+    color: white;
+    transition: transform 0.3s ease;
+    transform: translateX(-250px);
+  }
+  #wrapper.active {
+    transform: translateX(0);
+  }
+} */
+
+#wrapper {
+  display: flex;
+  width: 100%;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  width: 250px;
+  margin-left: -250px;
+  transition: margin 0.25s ease-out;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+#page-content-wrapper {
+  width: 100%;
+  padding: 20px;
+}
+
+.sidebar-btn {
+  visibility: visible;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+  .sidebar-btn {
+    visibility: hidden;
+  }
+}
+/* for dashboard */
+
+/* admin common css */
+
+main {
+  max-width: 100vw;
+  max-height: 100vh;
+  margin: -35rem 0 0 18rem;
+}
+
+.total_app {
+  width: 15rem;
+  height: 15rem;
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: 5px;
+  background-color: bisque;
+}
+.total_page {
+  width: 15rem;
+  height: 15rem;
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: 5px;
+  background-color: darksalmon;
+}
+
+hr {
+  opacity: 25%;
+}
+
+.search-bar {
+  margin-top: 1rem;
+  width: 24rem;
+  height: 3rem;
+}
+
+.heading-management .btn {
+  margin-left: auto;
+  background-color: darkgreen;
+}
+
+.heading-management .btn a {
+  text-decoration: none;
+  color: aliceblue;
+}
+table {
+  box-shadow: 0 2px 4px 2px rgba(86, 88, 88, 0.2);
+}
+
+@media (max-width: 1200px) {
+  main {
+    margin: -50rem 0 0 18rem;
+  }
+}
+
+@media (max-width: 992px) {
+  main {
+    margin: -50rem 0 0 17rem;
+  }
+}
+
+@media (max-width: 810px) {
+  .navbar {
+    width: 100vw;
+    height: 14vh;
+    padding: 1rem;
+  }
+
+  main {
+    margin: -50rem 0 0 17rem;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    margin: -50rem 0 0 18rem;
+  }
+}
+
+@media (max-width: 576px) {
+  main {
+    margin: -48rem 0 0 5rem;
+  }
+
+  nav {
+    background-color: #fff;
+    width: 100%;
+  }
+  .navbar {
+    width: 100vw;
+    height: 14vh;
+    padding: 1rem;
+  }
+  button {
+    margin-top: -1rem;
+  }
+  .activenav {
+    background-color: var(--background-color);
+    box-shadow: 1px 1px 0 grey;
+    top: 0;
+    left: 0;
+    position: fixed;
+    transition: background-color 0.8s, box-shadow 0.8s;
+  }
+  nav .image_logo {
+    width: 180px;
+    border-radius: 20%;
+    margin-top: -1rem;
+  }
+  .navbar-nav {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+  .btnHome {
+    background-color: var(--hover-background-color);
+    padding: 2px;
+    margin: 0.4rem 0 0.2rem 0;
+    width: 6rem;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .btnHome {
+    background-color: var(--hover-background-color);
+    padding: 2px;
+    margin: 0.4rem 0 0.2rem 0;
+    border-radius: 10px;
+  }
+  main {
+    margin: -48rem 0 0 5rem;
+  }
+
+  nav {
+    background-color: #fff;
+    width: 100%;
+  }
+  .navbar {
+    width: 100vw;
+    height: 14vh;
+    padding: 1rem;
+  }
+  button {
+    margin-top: -1rem;
+  }
+  .activenav {
+    background-color: var(--background-color);
+    box-shadow: 1px 1px 0 grey;
+    top: 0;
+    left: 0;
+    position: fixed;
+    transition: background-color 0.8s, box-shadow 0.8s;
+  }
+  nav .image_logo {
+    width: 180px;
+    border-radius: 20%;
+    margin-top: -1rem;
+  }
+  .navbar-nav {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+  .btnHome {
+    background-color: var(--hover-background-color);
+    padding: 2px;
+    margin: 0.4rem 0 0.2rem 0;
+    width: 6rem;
+    border-radius: 10px;
+  }
+}

@@ -1,0 +1,13 @@
+@media (max-width: 412px) {
+  .section-thr {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 360px) {
+  .section-thr {
+    display: flex;
+    flex-direction: column;
+  }
+}

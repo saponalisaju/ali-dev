@@ -1,0 +1,30 @@
+.cocacola_image {
+  width: 50px;
+  height: 50px;
+}
+
+.nestle_image {
+  width: 50px;
+  height: 50px;
+}
+@media (max-width: 992px) {
+  .home_five {
+    margin: 2rem -1rem 0 1rem;
+  }
+}
+
+@media (max-width: 412px) {
+  .home_five {
+    display: flex;
+    flex-direction: column;
+    margin: 0 -4rem 0 2rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .home_five {
+    display: flex;
+    flex-direction: column;
+    margin: 0 -4rem 0 2rem;
+  }
+}

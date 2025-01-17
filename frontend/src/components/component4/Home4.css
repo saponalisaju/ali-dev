@@ -1,0 +1,54 @@
+.main-three {
+  background-color: antiquewhite;
+}
+.w-100 {
+  width: 100%;
+  height: 300px;
+}
+.my-image_1 img {
+  width: 18rem;
+  height: 13rem;
+}
+.my-image_2 img {
+  width: 18rem;
+  height: 13rem;
+}
+
+.flag_img1 img {
+  width: 10rem;
+  height: 6rem;
+  margin: 0.5rem;
+  /* padding: 0.5rem; */
+  box-shadow: 4px 6px 8px rgb(107, 100, 100);
+}
+
+.main-four h1 {
+  font-weight: 100;
+}
+.main-four p {
+  font-weight: bold;
+}
+
+@media (max-width: 992px) {
+  .main-three .image_1 {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 23rem;
+  }
+}
+
+@media (max-width: 810px) {
+  .main-three .image_1 {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 35rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-three .image_1 {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 35rem;
+  }
+}

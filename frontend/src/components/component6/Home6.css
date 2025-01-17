@@ -1,0 +1,6 @@
+@media (max-width: 360px) {
+  .main-six {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,42 @@
+.content_eleven {
+  width: 100%;
+  height: 55rem;
+}
+.qoute_simble {
+  font-size: 3rem;
+}
+.eleven {
+  width: 100%;
+}
+.eleven {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+.eleven-one .eleven-two .eleven-three {
+  width: 30%;
+  padding: 2rem;
+}
+
+@media (max-width: 412px) {
+  .eleven {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+  .eleven-three {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .eleven {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+  .eleven-three {
+    margin-bottom: 1rem;
+  }
+}

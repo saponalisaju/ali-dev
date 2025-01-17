@@ -1,0 +1,8 @@
+
+[build]
+  command = "git submodule update --init --recursive && npm install && npm run build"
+  publish = "build"
+
+[context.production.environment]
+  NETLIFY_USE_YARN_CACHE = "true"
+

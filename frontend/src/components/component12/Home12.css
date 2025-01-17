@@ -1,0 +1,43 @@
+.content_component_twelve {
+  position: relative;
+  width: 100%;
+  height: 20rem;
+}
+
+.image_twelve {
+  width: 100%;
+  height: 20rem;
+}
+.content_check {
+  position: absolute;
+  margin: -12rem 6rem;
+  color: white;
+}
+
+.btn_check {
+  position: absolute;
+  color: white;
+  transform: translate(-15rem, 10rem);
+  cursor: pointer;
+}
+
+@media (max-width: 412px) {
+  .content_component_twelve {
+    margin-top: 55rem;
+    width: 100%;
+  }
+  .btn_check {
+    transform: translate(-6rem, 16rem);
+    cursor: pointer;
+  }
+}
+@media (max-width: 360px) {
+  .content_component_twelve {
+    margin-top: 55rem;
+    width: 100%;
+  }
+  .btn_check {
+    transform: translate(-6rem, 16rem);
+    cursor: pointer;
+  }
+}
