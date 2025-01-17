@@ -1,9 +1,0 @@
-# Query: http://localhost:4001
-
-2 results - 2 files
-
-frontend\src\pages\applications\UserView.js:
-  45:               let imagePath = `https://travel-app-mern.onrender.com/${correctedPath}`;
-
-frontend\src\utils\service.js:
-  2: export const baseUrl = "https://travel-app-mern.onrender.com/api";

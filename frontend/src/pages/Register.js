@@ -22,7 +22,7 @@ const Register = () => {
     const formData = { name, email: "manikkibrya@gmail.com", password };
     try {
       const response = await axios.post(
-        `https://travel-app-mern.onrender.com/api/users/register`,
+        `http://localhost:4001/api/users/register`,
         formData,
         { headers: { "Content-Type": "application/json" }, timeout: 5000 }
       );

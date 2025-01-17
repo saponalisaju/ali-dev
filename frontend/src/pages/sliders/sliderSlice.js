@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://travel-app-mern.onrender.com/api/slider",
+  baseURL: "http://localhost:4001/api/slider",
   headers: {
     "Content-Type": "application/json",
   },
