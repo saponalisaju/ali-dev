@@ -35,7 +35,7 @@ import SliderManagement from "./pages/sliders/SliderManagement";
 import AddSliders from "./pages/sliders/AddSlider";
 import EditSlider from "./pages/sliders/EditSlider";
 //import PrivateRoute from "./pages/PrivateRoute";
-import AccessRoute from "./pages/AccessProtect";
+//import AccessRoute from "./pages/AccessProtect";
 //import Admin from "./pages/Admin";
 
 const App = () => {
@@ -43,50 +43,29 @@ const App = () => {
     <>
       <Router>
         <Routes>
-          <Route
-            path="/userManagement"
-            element={<AccessRoute component={UserManagement} />}
-          />
+          <Route path="/userManagement" element={<UserManagement />} />
           <Route path="/addUserManagement" element={<AddUserManagement />} />
           <Route path="/editUserManagement" element={<EditUserManagement />} />
-          <Route
-            path="/application"
-            element={<AccessRoute component={ApplicationManagement} />}
-          />
+          <Route path="/application" element={<ApplicationManagement />} />
           <Route path="/addUserApplication" element={<AddUserApplication />} />
           <Route path="/editApplication" element={<EditApplication />} />
           <Route path="/userView" element={<UserView />} />
-          <Route
-            path="/company"
-            element={<AccessRoute component={CompanyManagement} />}
-          />
+          <Route path="/company" element={<CompanyManagement />} />
           <Route path="/editCompany" element={<EditCompany />} />
           <Route path="/addNewCompany" element={<AddNewCompany />} />
-          <Route
-            path="/designation"
-            element={<AccessRoute component={DesignationManagement} />}
-          />
+          <Route path="/designation" element={<DesignationManagement />} />
           <Route path="/addDesignation" element={<AddDesignation />} />
           <Route path="/editDesignation" element={<EditDesignation />} />
-          <Route
-            path="/salary"
-            element={<AccessRoute component={SalaryManagement} />}
-          />
+          <Route path="/salary" element={<SalaryManagement />} />
           <Route path="/addNewSalary" element={<AddNewSalary />} />
           <Route path="/editSalary" element={<EditSalary />} />
           <Route path="/page" element={<PageManagement />} />
           <Route path="/addNewPage" element={<AddNewPage />} />
           <Route path="/editPage" element={<EditPage />} />
-          <Route
-            path="/slider"
-            element={<AccessRoute component={SliderManagement} />}
-          />
+          <Route path="/slider" element={<SliderManagement />} />
           <Route path="/addSliders" element={<AddSliders />} />
           <Route path="/editSlider" element={<EditSlider />} />
-          <Route
-            path="/profile"
-            element={<AccessRoute component={Profile} />}
-          />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
