@@ -6,3 +6,9 @@
 [context.production.environment]
   NETLIFY_USE_YARN_CACHE = "true"
 
+  [[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+
