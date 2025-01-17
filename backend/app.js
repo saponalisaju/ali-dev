@@ -18,8 +18,6 @@ const companyRouter = require("./src/routes/companyRoute");
 const applicationRouter = require("./src/routes/applicationRoute");
 const { clientURL } = require("./secret");
 
-app.use(cors(corsOptions));
-
 //middleware
 const allowedOrigins = [
   clientURL,
