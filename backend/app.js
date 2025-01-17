@@ -18,8 +18,13 @@ const companyRouter = require("./src/routes/companyRoute");
 const applicationRouter = require("./src/routes/applicationRoute");
 const { clientURL } = require("./secret");
 
+app.use(cors(corsOptions));
+
 //middleware
-const allowedOrigins = [clientURL, "http://localhost:3000"];
+const allowedOrigins = [
+  clientURL,
+  ["http://localhost:3000", "https://jobsvisa24.netlify.app"],
+];
 const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
@@ -32,6 +37,7 @@ const corsOptions = {
   allowedHeaders:
     "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   credentials: true,
+  optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
 
