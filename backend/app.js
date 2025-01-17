@@ -23,7 +23,8 @@ app.use(cors(corsOptions));
 //middleware
 const allowedOrigins = [
   clientURL,
-  ["http://localhost:3000", "https://jobsvisa24.netlify.app"],
+  "http://localhost:3000",
+  "https://jobsvisa24.netlify.app",
 ];
 const corsOptions = {
   origin: (origin, callback) => {
