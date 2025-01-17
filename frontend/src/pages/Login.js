@@ -37,7 +37,11 @@ const Login = () => {
           error.response.status,
           error.response.data
         );
-        setError("Login failed. Please check your credentials.");
+        if (error.response.status === 401) {
+          setError("Invalid email or password.");
+        } else {
+          setError("Login failed. Please check your credentials.");
+        }
       } else if (error.request) {
         console.error("No response received:", error.request);
         setError("No response from server. Please try again.");
