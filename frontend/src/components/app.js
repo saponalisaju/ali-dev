@@ -16,7 +16,6 @@ import Component12 from "./component12/Home12";
 import Component13 from "./component13/Home13";
 import Component14 from "./component14/Home14";
 import Component15 from "./component15/Home15";
-//import VerifyMessage from "../pages/VerifyMessage";
 
 const Home = () => {
   return (
