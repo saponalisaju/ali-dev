@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../assets/styles/main.css";
+import "./auth.css";
+import apiUrl from "../secret";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Register = () => {
     const formData = { name, email, password };
     try {
       const response = await axios.post(
-        `https://travel-app-mern.onrender.com/api/users/register`,
+        `${apiUrl}/api/users/register`,
         formData,
         { headers: { "Content-Type": "application/json" }, timeout: 5000 }
       );

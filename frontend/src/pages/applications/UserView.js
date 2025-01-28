@@ -32,26 +32,26 @@ const UserView = () => {
         data-bs-spy="scroll"
         data-bs-target="#example2"
         data-bs-offset="0"
-        className=" me-5"
+        className=" me-5 user_manage"
         tabIndex="0"
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
         <div className="">
           <h2 className="m-2">Applicants Copy(Approved)</h2>
           <ul className="align-item-left">
-            {users.map((user) => {
+            {users?.map((user) => {
               const { _id, image, surname } = user;
               console.log(user);
-              let correctedPath = image.replace(/\\/g, "/");
-              let imagePath = `https://travel-app-mern.onrender.com/${correctedPath}`;
-              console.log(imagePath);
+              //const correctedPath = image.replace(/\\/g, "/");
+              //const imagePath = require(`${apiUrl}/${correctedPath}`);
+
               return (
                 <li className=" " key={_id}>
                   <div className="text-bg-light d-flex">
                     <div className="d-flex">
                       <img
                         className="application_img"
-                        src={imagePath}
+                        src={`/application/${image}`}
                         alt="Applicant"
                       />
                     </div>
@@ -79,125 +79,138 @@ const UserView = () => {
         </div>
         <table className="table table-bordered">
           <tbody>
-            {users.map((user) => {
-              const {
-                surname,
-                givenN,
-                sex,
-                birthCity,
-                currentN,
-                dob,
-                identification,
-                nationalId,
-                company,
-                dutyDuration,
-                jobTitle,
-                salary,
-                passport,
-                issuedCountry,
-                phone,
-                email,
-              } = user;
+            {users &&
+              users.map((user) => {
+                const {
+                  _id,
+                  surname,
+                  givenN,
+                  sex,
+                  birthCity,
+                  currentN,
+                  dob,
+                  identification,
+                  nationalId,
+                  company,
+                  dutyDuration,
+                  jobTitle,
+                  salary,
+                  passport,
+                  issuedCountry,
+                  phone,
+                  email,
+                } = user;
 
-              return (
-                <React.Fragment key={user.id}>
-                  <h3 className="fst-italic text-black fw-bold text-center text-bg-light ">
-                    {surname}
-                  </h3>
-                  <tr>
-                    <th className="bg-primary">A. Personal Particulars</th>
-                  </tr>
-                  <td colSpan="3">
-                    <table className="table table-bordered mb-0">
-                      <tbody>
-                        <tr>
-                          <td>Surname</td>
-                          <td>{surname}</td>
-                        </tr>
-                        <tr>
-                          <td>Given Name</td>
-                          <td>{givenN}</td>
-                        </tr>
-                        <tr>
-                          <td>Sex</td>
-                          <td colSpan="2">{sex}</td>
-                          <td>Date of Birth</td>
-                          <td colSpan="2">{dob}</td>
-                        </tr>
-                        <tr>
-                          <td>Place of Birth Town/City</td>
-                          <td colSpan="2">{birthCity}</td>
-                          <td>Visible Identification Marks</td>
-                          <td colSpan="2">{identification}</td>
-                        </tr>
-                        <tr>
-                          <td>Current Nationality</td>
-                          <td colSpan="2">{currentN}</td>
-                          <td>National ID No</td>
-                          <td colSpan="2">{nationalId}</td>
-                          <td colSpan="2"></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                  <tr>
-                    <th className="bg-primary">B. Company Details</th>
-                  </tr>
-                  <table className="table table-bordered mb-0">
-                    <tbody>
-                      <tr>
-                        <td>Company Name</td>
-                        <td colSpan="2">{company}</td>
-                        <td>Job Title</td>
-                        <td colSpan="2">{jobTitle}</td>
-                      </tr>
-                      <tr>
-                        <td>Duty Duration</td>
-                        <td colSpan="2">{dutyDuration}</td>
-                        <td>Salary</td>
-                        <td colSpan="2">{salary}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  <tr>
-                    <th className="bg-primary">C. Passport Details</th>
-                  </tr>
-
-                  <table className="table table-bordered mb-0">
-                    <tbody>
-                      <tr>
-                        <td>Passport No</td>
-                        <td>{passport}</td>
-                        <td>Issued Country</td>
-                        <td>{issuedCountry}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  <tr>
-                    <th className="bg-primary">
-                      D. Applicant's Contact Details
-                    </th>
-                  </tr>
-
-                  <table className="table table-bordered">
-                    <tbody>
-                      <tr>
-                        <td>Phone</td>
-                        <td>{phone}</td>
-                        <td>Email</td>
-                        <td>{email}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </React.Fragment>
-              );
-            })}
-            ;
+                return (
+                  <React.Fragment key={_id}>
+                    <tr>
+                      <th className="fst-italic text-black fw-bold text-center text-bg-light ">
+                        {surname}
+                      </th>
+                    </tr>
+                    <tr>
+                      <th className="bg-primary">A. Personal Particulars</th>
+                    </tr>
+                    <tr>
+                      <td colSpan="3">
+                        <table className="table table-bordered mb-0">
+                          <tbody>
+                            <tr>
+                              <td>Surname</td>
+                              <td>{surname}</td>
+                            </tr>
+                            <tr>
+                              <td>Given Name</td>
+                              <td>{givenN}</td>
+                            </tr>
+                            <tr>
+                              <td>Sex</td>
+                              <td colSpan="2">{sex}</td>
+                              <td>Date of Birth</td>
+                              <td colSpan="2">{dob}</td>
+                            </tr>
+                            <tr>
+                              <td>Place of Birth Town/City</td>
+                              <td colSpan="2">{birthCity}</td>
+                              <td>Visible Identification Marks</td>
+                              <td colSpan="2">{identification}</td>
+                            </tr>
+                            <tr>
+                              <td>Current Nationality</td>
+                              <td colSpan="2">{currentN}</td>
+                              <td>National ID No</td>
+                              <td colSpan="2">{nationalId}</td>
+                              <td colSpan="2"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="bg-primary">B. Company Details</th>
+                    </tr>
+                    <tr>
+                      <td colSpan="3">
+                        <table className="table table-bordered mb-0">
+                          <tbody>
+                            <tr>
+                              <td>Company Name</td>
+                              <td colSpan="2">{company}</td>
+                              <td>Job Title</td>
+                              <td colSpan="2">{jobTitle}</td>
+                            </tr>
+                            <tr>
+                              <td>Duty Duration</td>
+                              <td colSpan="2">{dutyDuration}</td>
+                              <td>Salary</td>
+                              <td colSpan="2">{salary}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="bg-primary">C. Passport Details</th>
+                    </tr>
+                    <tr>
+                      <td colSpan="3">
+                        <table className="table table-bordered mb-0">
+                          <tbody>
+                            <tr>
+                              <td>Passport No</td>
+                              <td>{passport}</td>
+                              <td>Issued Country</td>
+                              <td>{issuedCountry}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="bg-primary">
+                        D. Applicant's Contact Details
+                      </th>
+                    </tr>
+                    <tr>
+                      <td colSpan="3">
+                        <table className="table table-bordered">
+                          <tbody>
+                            <tr>
+                              <td>Phone</td>
+                              <td>{phone}</td>
+                              <td>Email</td>
+                              <td>{email}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </React.Fragment>
+                );
+              })}
           </tbody>
         </table>
-      </main>{" "}
+      </main>
     </React.Fragment>
   );
 };

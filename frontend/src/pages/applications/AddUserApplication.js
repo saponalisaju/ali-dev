@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Common from "../../layouts/Common";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addApplication } from "./applicationSlice";
 import "../../assets/styles/main.css";
@@ -27,6 +27,8 @@ const AddUserApplication = () => {
     issuedCountry: " ",
   });
 
+  const { users } = useSelector((state) => state.applications);
+
   const onChangeHandler = (e) => {
     const { name, value, type, files } = e.target;
 
@@ -50,7 +52,12 @@ const AddUserApplication = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const existUser = users.some((u) => u.email === formData.email);
 
+    if (existUser) {
+      setError("User already exists. Please try another...");
+      return;
+    }
     const formDataToSend = new FormData();
     Object.keys(formData).forEach((key) => {
       formDataToSend.append(key, formData[key]);
@@ -69,14 +76,14 @@ const AddUserApplication = () => {
         data-bs-spy="scroll"
         data-bs-target="#navbar-example2"
         data-bs-offset="0"
-        className="scrollspy-example me-5"
+        className="scrollspy-example add_user me-5"
         tabIndex="0"
-        style={{ overflowY: "scroll", maxHeight: "80vh" }}
+        style={{ overflowY: "scroll", maxHeight: "100vh" }}
       >
         <h2>Visa Application Form</h2>
         <p>Personal Particulars</p>
-        <hr />
-
+        <hr className="user_manage_hr" />
+        {error && <div style={{ color: "red" }}>{error}</div>}
         <form
           onSubmit={handleSubmit}
           className="me-5 absolute"

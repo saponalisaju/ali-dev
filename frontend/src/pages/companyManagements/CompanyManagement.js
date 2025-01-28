@@ -7,10 +7,7 @@ import { deleteCompany, fetchCompany } from "./companySlice";
 
 const CompanyManagement = () => {
   const dispatch = useDispatch();
-
-  const users = useSelector((state) => state.company.users);
-  const status = useSelector((state) => state.company.status);
-  //const error = useSelector((state) => state.designations.error);
+  const { users, status } = useSelector((state) => state.company);
 
   useEffect(() => {
     if (status === "idle") {
@@ -35,19 +32,20 @@ const CompanyManagement = () => {
         data-bs-spy="scroll"
         data-bs-target="#example6"
         data-bs-offset="0"
-        className="scrollspy-example me-5"
+        className="scrollspy-example user_manage me-5"
         tabIndex="0"
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
-        <div className="heading-management p-2 d-flex">
-          <h2 className="me-auto ">Company Management</h2>
-          <Link to="/addNewCompany">
+        <div className="user_manage_head d-flex">
+          <h2 className="me-auto">Company Management</h2>
+          <Link to="/addCompany">
             <button className="btn btn-primary" type="submit">
               Add New Company
             </button>
           </Link>
         </div>
-        <table className="table table-sriped-column">
+        <hr />
+        <table className="table table-striped-column table-bordered">
           <thead className="">
             <tr>
               <th scope="col" className="bg-light">
@@ -59,7 +57,7 @@ const CompanyManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {users &&
+            {Array.isArray(users) ? (
               users.map((user) => {
                 const { _id, name } = user;
                 return (
@@ -82,7 +80,12 @@ const CompanyManagement = () => {
                     </td>
                   </tr>
                 );
-              })}
+              })
+            ) : (
+              <tr>
+                <td colSpan="2">No users found.</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </main>

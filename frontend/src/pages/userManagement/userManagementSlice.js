@@ -2,29 +2,22 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import apiUrl from "../../secret";
 
 const api = axios.create({
-  baseURL: "https://travel-app-mern.onrender.com/api/userManagement",
+  baseURL: `${apiUrl}/api/userManagement`,
   headers: {
     "Content-Type": "application/json",
   },
+  timeout: 5000,
   withCredentials: true,
 });
 
 export const fetchUserManagement = createAsyncThunk(
   "users/fetchUserManagement",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await api.get("/fetchUserManagement");
-      if (response.status === 404) {
-        return rejectWithValue("Resource not found");
-      }
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(
-        error.response ? error.response.data : "An unexpected error occurred"
-      );
-    }
+  async () => {
+    const response = await api.get("/fetchUserManagement");
+    return response.data;
   }
 );
 
@@ -76,7 +69,7 @@ export const deleteUserManagement = createAsyncThunk(
 );
 
 const userManagementSlice = createSlice({
-  name: "users",
+  name: "userManagement",
   initialState: { users: [], status: "idle", error: null },
   reducers: {},
   extraReducers: (builder) => {

@@ -5,7 +5,7 @@ exports.validateDesignation = [
     .trim()
     .notEmpty()
     .withMessage("Designation name is required.")
-    .isLength({ min: 4, max: 31 })
+    .isLength({ min: 3, max: 31 })
     .withMessage("Name should be at least 4-24 character long"),
 ];
 
@@ -14,7 +14,7 @@ exports.validateCompany = [
     .trim()
     .notEmpty()
     .withMessage("Company name is required. Enter your fullname")
-    .isLength({ min: 4, max: 31 })
+    .isLength({ min: 3, max: 31 })
     .withMessage("Name should be at least 4-24 character long"),
 ];
 
@@ -23,19 +23,26 @@ exports.validatePage = [
     .trim()
     .notEmpty()
     .withMessage("Page is required.")
-    .isLength({ min: 4, max: 31 })
-    .withMessage("Name should be at least 4-24 character long"),
+    .isLength({ min: 3, max: 31 })
+    .withMessage("Title should be at least 3-24 character long"),
 
   body("content")
     .trim()
     .notEmpty()
     .withMessage("Content is required.")
-    .isLength({ min: 4, max: 31 })
-    .withMessage("Name should be at least 4-24 character long"),
+    .isLength({ min: 3, max: 31 })
+    .withMessage("Content should be at least 3-24 character long"),
+  body("link").trim().notEmpty(),
 ];
 
 exports.validateSalary = [
-  body("name").trim().notEmpty().withMessage("Salary is required."),
+  body("name")
+    .trim()
+    .notEmpty()
+    .withMessage("Salary is required.")
+    .isLength({ min: 3, max: 31 })
+    .withMessage("Name should be at least 3-24 character long"),
+
   // .isFloat({ gt: 0 })
   // .withMessage("Salary must be greater than 0"),
 ];
@@ -45,26 +52,20 @@ exports.validateSlider = [
     .trim()
     .notEmpty()
     .withMessage("Thumbnail is required. ")
-    .isLength({ min: 4, max: 31 })
+    .isLength({ min: 3, max: 31 })
     .withMessage("Thumbnail should be at least 4-24 character long"),
 
   body("title")
     .trim()
     .notEmpty()
     .withMessage("Title is required. ")
-    .isLength({ min: 4, max: 31 })
+    .isLength({ min: 3, max: 31 })
     .withMessage("Title should be at least 4-24 character long"),
 
-  body("image")
-    .optional()
-    .custom((value, { req }) => {
-      if (!req.file) {
-        throw new Error("Slider image is required");
-      }
-      return true;
-    }),
-
-  // body("status")
-  //   .isIn(["published", "unpublished"])
-  //   .withMessage("Status must be either 'published' or 'unpublished'."),
+  body("image").custom((value, { req }) => {
+    if (!req.file) {
+      throw new Error("Slider image is required");
+    }
+    return true;
+  }),
 ];

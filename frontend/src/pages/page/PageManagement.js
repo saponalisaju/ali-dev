@@ -16,6 +16,12 @@ const PageManagement = () => {
     }
   }, [status, dispatch]);
 
+  useEffect(() => {
+    if (status === "succeeded") {
+      console.log("Data fetched successfully:", users);
+    }
+  }, [status, users]);
+
   const deleteHandler = (id) => {
     dispatch(deletePage(id));
   };
@@ -28,11 +34,11 @@ const PageManagement = () => {
         data-bs-spy="scroll"
         data-bs-target="#example5"
         data-bs-offset="0"
-        className="scrollspy-example me-5"
+        className="scrollspy-example user_manage me-5"
         tabIndex="0"
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
-        <div className="heading-management p-2 d-flex">
+        <div className="user_manage_head  d-flex">
           <h2 className="me-auto">Page Management</h2>
           <Link className="" to="/addNewPage">
             <button className="btn btn-primary " type="submit">
@@ -40,7 +46,8 @@ const PageManagement = () => {
             </button>
           </Link>
         </div>
-        <table className="table table-sriped-column">
+        <hr />
+        <table className="table table-striped-column table-bordered">
           <thead className="">
             <tr>
               <th scope="col" className="bg-light">
@@ -62,21 +69,23 @@ const PageManagement = () => {
           </thead>
           <tbody>
             {users &&
-              users.map((user) => {
-                console.log(user);
-                const { _id, title, content, url } = user;
+              users?.map((user) => {
+                const { _id, title, content, link } = user;
                 return (
                   <tr key={_id}>
                     <td>{title}</td>
                     <td> {status ? "Published" : "Pending"}</td>
                     <td>{content}</td>
                     <td>
-                      <a href={url} target="_blank" rel="noopener noreferrer">
-                        {url}
+                      <a href={link} target="_blank" rel="noopener noreferrer">
+                        {link}
                       </a>
                     </td>
                     <td>
-                      <Link to="/editPage" state={{ _id, title, content, url }}>
+                      <Link
+                        to="/editPage"
+                        state={{ _id, title, content, link }}
+                      >
                         <button className="btn btn-white text-primary p-1">
                           Edit
                         </button>

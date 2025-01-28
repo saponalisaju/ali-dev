@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateUserManagement } from "./userManagementSlice";
 import Common from "../../layouts/Common";
+import "../../assets/styles/main.css";
 
 const EditUserManagement = () => {
   const location = useLocation();
@@ -31,7 +32,7 @@ const EditUserManagement = () => {
   return (
     <>
       <Common />
-      <main className="me-5 w-100">
+      <main className="user_manage">
         <h2>Create New User</h2>
         <hr />
         <form onSubmit={handleSubmit}>

@@ -7,8 +7,7 @@ const { runValidation } = require("../validate");
 router.get("/fetchCompany", companyController.fetchCompany);
 router.post(
   "/addCompany",
-  validateCompany,
-  runValidation,
+
   companyController.addCompany
 );
 router.put("/updateCompany/:id", companyController.updateCompany);

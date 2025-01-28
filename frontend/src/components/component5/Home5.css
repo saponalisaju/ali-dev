@@ -1,16 +1,22 @@
-.cocacola_image {
-  width: 50px;
-  height: 50px;
+.home-five-a {
+  width: 50%;
+  margin: 1.5rem 0 0 2rem;
+  padding: 1rem;
 }
-
-.nestle_image {
-  width: 50px;
-  height: 50px;
+.home-five-b {
+  width: 50%;
+  margin: 1.5rem 2rem 0 1rem;
+  padding: 1rem;
 }
-@media (max-width: 992px) {
-  .home_five {
-    margin: 2rem -1rem 0 1rem;
-  }
+.text-warning {
+  margin: 1rem;
+}
+.home-heading-one,
+.home-five-heading {
+  padding-left: 3rem;
+}
+.home-five-heading .home-heading-two {
+  padding-left: 1rem;
 }
 
 @media (max-width: 412px) {
@@ -22,9 +28,4 @@
 }
 
 @media (max-width: 360px) {
-  .home_five {
-    display: flex;
-    flex-direction: column;
-    margin: 0 -4rem 0 2rem;
-  }
 }

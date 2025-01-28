@@ -58,13 +58,13 @@ const EditApplication = () => {
         data-bs-spy="scroll"
         data-bs-target="#navbar-example2"
         data-bs-offset="0"
-        className="scrollspy-example me-5"
+        className="scrollspy-example me-5 user_manage"
         tabIndex="0"
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
         <h2>Application Form</h2>
         <p>Personal Particulars</p>
-        <hr />
+        <hr className="user_manage_hr" />
 
         <form
           onSubmit={handleSubmit}

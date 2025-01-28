@@ -31,9 +31,9 @@ const EditDesignation = () => {
   return (
     <>
       <Common />
-      <main className="me-5">
+      <main className="user_manage">
         <h2>Create New Salary</h2>
-        <hr />
+        <hr className="user_manage_hr" />
         <form onSubmit={handleSubmit}>
           <div className="form-field">
             <label className="form-label" htmlFor="name">

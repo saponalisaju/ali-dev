@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import "../assets/styles/main.css";
+import "./auth.css";
+import apiUrl from "../secret";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,6 +11,17 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const setCookie = (name, value, days) => {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=None; Secure`;
+  };
+
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,13 +34,20 @@ const Login = () => {
     setError("");
     const formData = { email, password };
     try {
-      const response = await axios.post(
-        `https://travel-app-mern.onrender.com/api/users/login`,
-        formData,
-        { headers: { "Content-Type": "application/json" }, timeout: 5000 }
-      );
-      console.log("Login successful:", response.data);
-      navigate("/dashboard");
+      const response = await axios.post(`${apiUrl}/api/users/login`, formData, {
+        headers: { "Content-Type": "application/json" },
+        timeout: 5000,
+      });
+
+      if (response.data.token) {
+        console.log("Login successful:", response.data);
+        setCookie("refreshToken", response.data.refreshToken, 7);
+        localStorage.setItem("token", response.data.token);
+        navigate("/dashboard");
+      } else {
+        console.error("Login failed: No token received");
+        setError("Login failed. No token received.");
+      }
     } catch (error) {
       setIsLoading(false);
       if (error.response) {
@@ -50,7 +69,21 @@ const Login = () => {
         setError("An error occurred during login. Please try again.");
       }
     }
+    setIsLoading(false);
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const refreshToken = getCookie("refreshToken");
+      if (!refreshToken) {
+        console.log("Cookie expired. Logging out...");
+        localStorage.removeItem("token");
+        navigate("/login");
+      }
+    }, 1000 * 60); // Check every minute
+
+    return () => clearInterval(interval);
+  }, [navigate]);
 
   return (
     <div className="register">
@@ -84,12 +117,12 @@ const Login = () => {
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
-        <div className="fs-6 text-center text-muted">
+        {/* <div className="fs-6 text-center text-muted">
           Admin not registered ?
           <a className="fst-italic text-decoration-none" href="/register">
             &nbsp;Click here
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );

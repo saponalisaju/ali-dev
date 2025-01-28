@@ -4,9 +4,9 @@ const { deleteImage } = require("../helpers/deleteFileImage");
 const Application = require("../models/applicationModel");
 const { error } = require("console");
 
-exports.serveApplicationPage = (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-};
+// exports.serveApplicationPage = (req, res) => {
+//   res.sendFile(path.join(__dirname, "public", "index.html"));
+// };
 
 exports.fetchApplication = async (req, res) => {
   try {
@@ -20,13 +20,17 @@ exports.fetchApplication = async (req, res) => {
   }
 };
 exports.addApplication = async (req, res) => {
-  const image = req.file?.path;
+  const image = req.file?.filename;
+  const path = req.file?.path;
   try {
     if (!req.file || !req.body.email) {
       return res.status(400).json({ message: "File and email are required." });
     }
-
-    const newApplication = new Application({ ...req.body, image: image });
+    const newApplication = new Application({
+      ...req.body,
+      image: image,
+      path: path,
+    });
     await newApplication.save();
     console.log(newApplication);
     res.status(201).json(newApplication);
@@ -55,8 +59,8 @@ exports.deleteApplication = async (req, res) => {
     if (!application) {
       return res.status(404).json({ message: "Application not found" });
     }
-    if (application || application.image) {
-      await deleteImage(application.image);
+    if (application || application.path) {
+      await deleteImage(application.path);
     }
     res.json({ message: "Application deleted" });
   } catch (error) {

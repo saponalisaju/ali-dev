@@ -1,25 +1,17 @@
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
-const SLIDER_FILE_DIR = "public/images/sliderUsers";
-const APPLICATION_FILE_DIR = "public/images/applicationUsers";
+const SLIDER_FILE_DIR = "../frontend/public/slider";
+const APPLICATION_FILE_DIR = "../frontend/public/application";
 const MAX_FILE_SIZE = 2097152;
-// const ALLOWED_FILE_TYPES = [
-//   "image/jpeg",
-//   "image/png",
-//   "image/jpg",
-//   "image/webp",
-// ];
+const ALLOWED_FILE_TYPES = ["image/jpeg", "image/png", "image/jpg"];
 
 const sliderStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, SLIDER_FILE_DIR);
   },
   filename: (req, file, cb) => {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
+    cb(null, Date.now() + file.originalname);
   },
 });
 
@@ -28,23 +20,15 @@ const applicationStorage = multer.diskStorage({
     cb(null, APPLICATION_FILE_DIR);
   },
   filename: (req, file, cb) => {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
+    cb(null, Date.now() + file.originalname);
   },
 });
 
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png/;
-  const mimeType = allowedTypes.test(file.mimetype);
-  const extName = allowedTypes.test(
-    path.extname(file.originalname).toLowerCase()
-  );
-  if (mimeType && extName) {
-    return cb(null, true);
+  if (ALLOWED_FILE_TYPES.includes(file.mimetype)) {
+    cb(null, true);
   } else {
-    cb("Error: File type not supported");
+    cb(new Error("Invalid file type. Only JPEG, JPG and PNG are allowed"));
   }
 };
 

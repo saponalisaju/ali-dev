@@ -2,9 +2,10 @@ const Company = require("../models/companyModel");
 
 exports.fetchCompany = async (req, res) => {
   try {
-    const companies = await Company.find();
-    res.json(companies);
+    const companies = await Company.find({});
+    res.status(200).json(companies);
   } catch (error) {
+    console.error("Error fetching companies:", error.message);
     res.status(500).json({
       message: "An error occurred while fetching companies.",
       error: error.message,
@@ -15,11 +16,6 @@ exports.fetchCompany = async (req, res) => {
 exports.addCompany = async (req, res) => {
   try {
     const { name } = req.body;
-    const existingCompany = await Company.findOne({ name });
-    if (existingCompany) {
-      return res.status(400).json({ message: "Company already exists" });
-    }
-
     const newCompany = new Company({ name });
     await newCompany.save();
 

@@ -1,9 +1,7 @@
-const { createToken } = require("../helpers/jsonwebtoken");
 const User = require("../models/userModel");
-const bcrypt = require("bcryptjs");
-const { jwtActivationKey } = require("../secret");
+const createError = require("http-errors");
 
-exports.createProfile = async (req, res, next) => {
+exports.profile = async (req, res, next) => {
   const { name, email, password, confirmPassword } = req.body;
   if (password !== confirmPassword) {
     return res
@@ -11,27 +9,27 @@ exports.createProfile = async (req, res, next) => {
       .json({ success: false, message: "Passwords do not match" });
   }
   try {
-    const user = await User.exists({ email });
-    if (!user) throw createError(409, "User all ready exist : Please sign in");
+    const existUser = await User.exists({ email });
+    if (!existUser)
+      throw createError(409, "User all ready exist : Please sign in");
 
-    const salt = bcrypt.genSalt(10);
-    const hashedPassword = bcrypt.hash(password, salt);
-    const newUser = new User({
+    const user = new User({
       name,
       email,
-      password: hashedPassword,
-      isAdmin: true,
+      password,
     });
-    await newUser.save();
+    const saveUser = await user.save();
     res.status(201).json({
       success: true,
       message: "Admin created successfully",
-      user: newUser,
+      user: {
+        id: saveUser._id,
+        email: saveUser.email,
+      },
     });
   } catch (error) {
-    console.error("Error creating admin user:", error);
-    res
+    return res
       .status(500)
-      .json({ success: false, message: "Error creating admin user" });
+      .json({ success: false, message: "Server error", error: error.message });
   }
 };

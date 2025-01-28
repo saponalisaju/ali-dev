@@ -1,5 +1,4 @@
 .content_component_twelve {
-  position: relative;
   width: 100%;
   height: 20rem;
 }
@@ -9,35 +8,56 @@
   height: 20rem;
 }
 .content_check {
-  position: absolute;
   margin: -12rem 6rem;
   color: white;
 }
 
 .btn_check {
+  padding: 1rem;
   position: absolute;
   color: white;
-  transform: translate(-15rem, 10rem);
+  transform: translate(80rem, 6rem);
   cursor: pointer;
+}
+@media (max-width: 1400px) {
+  .btn_check {
+    transform: translate(70rem, 6rem);
+  }
+}
+@media (max-width: 1200px) {
+  .btn_check {
+    transform: translate(60rem, 6rem);
+  }
+}
+
+@media (max-width: 992px) {
+  .btn_check {
+    transform: translate(50rem, 6rem);
+  }
+}
+
+@media (max-width: 810px) {
+  .btn_check {
+    transform: translate(38rem, 6rem);
+  }
+}
+
+@media (max-width: 576px) {
+  .btn_check {
+    transform: translate(26rem, 13rem);
+    padding: 0.7rem;
+  }
 }
 
 @media (max-width: 412px) {
-  .content_component_twelve {
-    margin-top: 55rem;
-    width: 100%;
-  }
   .btn_check {
-    transform: translate(-6rem, 16rem);
-    cursor: pointer;
+    transform: translate(17rem, 13rem);
+    padding: 0.7rem;
   }
 }
 @media (max-width: 360px) {
-  .content_component_twelve {
-    margin-top: 55rem;
-    width: 100%;
-  }
   .btn_check {
-    transform: translate(-6rem, 16rem);
-    cursor: pointer;
+    transform: translate(14rem, 12rem);
+    padding: 0.3rem;
   }
 }

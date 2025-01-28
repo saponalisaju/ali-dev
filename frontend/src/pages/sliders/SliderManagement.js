@@ -19,7 +19,7 @@ const SliderManagement = () => {
     if (typeof id === "string" && id.length === 24) {
       dispatch(deleteSlider(id));
     } else {
-      console.error("Invalid ID format:", id);
+      console.error("Invalid ID format: " + id);
     }
   };
   return (
@@ -31,11 +31,11 @@ const SliderManagement = () => {
         data-bs-spy="scroll"
         data-bs-target="#example3"
         data-bs-offset="0"
-        className="scrollspy-example me-5"
+        className="scrollspy-example user_manage me-5"
         tabIndex="0"
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
-        <div className="heading-management p-2 d-flex">
+        <div className="user_manage_head  d-flex">
           <h2 className="me-auto">Slider Management</h2>
           <Link to="/addSliders">
             <button className="btn btn-primary p-2" type="submit">
@@ -43,8 +43,8 @@ const SliderManagement = () => {
             </button>
           </Link>
         </div>
-        <hr />
-        <table className="table table-sriped-column">
+        <hr className="slider_manage_hr" />
+        <table className="table table-striped-column table-bordered">
           <thead className="">
             <tr>
               <th scope="col" className="bg-light">
@@ -63,8 +63,9 @@ const SliderManagement = () => {
           </thead>
           <tbody>
             {users &&
-              users.map((user) => {
-                const { _id, thumbnail, title, status } = user;
+              users?.map((user) => {
+                const { _id, thumbnail, title, image, status } = user;
+                console.log(user);
                 return (
                   <tr key={_id}>
                     <td>{thumbnail}</td>
@@ -73,7 +74,7 @@ const SliderManagement = () => {
                     <td>
                       <Link
                         to="/editSlider"
-                        state={{ _id, thumbnail, title, status }}
+                        state={{ _id, thumbnail, title, image, status }}
                       >
                         <button className="btn btn-white text-primary p-1">
                           Edit
@@ -93,8 +94,6 @@ const SliderManagement = () => {
               })}
           </tbody>
         </table>
-        {/* {status === "loading" && <div>Loading...</div>}{" "}
-        {status === "failed" && <div>Error: {error}</div>} */}
       </main>
     </>
   );

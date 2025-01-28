@@ -6,36 +6,28 @@ import Imag3 from "../../assets/images/gear.png";
 
 const Component3 = () => {
   return (
-    <div className="section-two">
-      <div className="main-two p-5">
-        <h1 className="text-center p-4 m-3">HOW DO WE WORK? </h1>
-        <h4 className="text-center p-5 m-3">
+    <div className="section-two ">
+      <div className="main-two ">
+        <h1 className="text-center ">HOW DO WE WORK? </h1>
+        <h4 className="text-center ">
           Research, plan, execute tasks, communicate effectively, adapt, and
           continuously improve processes?
         </h4>
       </div>
       <div className="section-two-a d-flex bg-light pb-5">
-        <div className="para1 text-center p-5">
-          <img
-            className="border rounded-circle p-3"
-            src={Imag1}
-            alt="loading"
-          />
-          <h4 className="p-3">ASSESSMENT</h4>
-          <span className="">
+        <div className="para-1 text-center ">
+          <img className="border rounded-circle " src={Imag1} alt="loading" />
+          <h4 className="">ASSESSMENT</h4>
+          <p className="">
             Identify objectives, design tasks, administer assessments, collect
             data, analyze results, provide feedback, and adjust instruction
             based on findings. Bangladesh , we ded this for thousands of our
             valuable clients.
-          </span>
+          </p>
         </div>
-        <div className="para2 text-center p-5">
-          <img
-            className="border rounded-circle p-3"
-            src={Imag2}
-            alt="loading"
-          />
-          <h4 className="p-2">PROCESSING AND COMMUNICATION</h4>
+        <div className="para-2 text-center ">
+          <img className="border rounded-circle " src={Imag2} alt="loading" />
+          <h4 className="">PROCESSING AND COMMUNICATION</h4>
           <p className="">
             Both processing and communication are essential for successful
             interactions, whether in personal, academic, or professional
@@ -43,13 +35,9 @@ const Component3 = () => {
             understood and utilized effectively
           </p>
         </div>
-        <div className="para3 text-center p-5">
-          <img
-            className="border rounded-circle p-3"
-            src={Imag3}
-            alt="loading"
-          />
-          <h4 className="p-3">RESULT</h4>
+        <div className="para-3 text-center ">
+          <img className="border rounded-circle " src={Imag3} alt="loading" />
+          <h4 className="">RESULT</h4>
           <p className="">
             Typically, visa processing takes about 3 to 5 weeks. After
             processing, the consulate will notify you of the decision, and the

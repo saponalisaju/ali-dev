@@ -4,8 +4,8 @@ import HexaImg from "../../assets/images/541384.png";
 
 const Component6 = () => {
   return (
-    <div className="main-six d-flex m-2">
-      <div className="border p-4 m-4">
+    <div className="main-six d-flex ">
+      <div className="border main-six-one">
         <img src={HexaImg} alt="loading" />
         <h4>Flexible Code</h4>
         <p className="">
@@ -14,7 +14,7 @@ const Component6 = () => {
           questions or need further details, feel free to ask!
         </p>
       </div>
-      <div className=" border p-4 m-4">
+      <div className=" border main-six-two">
         <img src={HexaImg} alt="loading" />
         <h4>Flexible Code</h4>
         <p className="">

@@ -8,8 +8,10 @@ import "../../assets/styles/main.css";
 const AddNewPage = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [status, setStatus] = useState(false);
-  const [url, setUrl] = useState("");
+  const [status, setStatus] = useState("Published");
+  const [link, setLink] = useState("");
+  const [error, setError] = useState("");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,24 +20,32 @@ const AddNewPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (
+      title.length < 3 ||
+      title.length > 31 ||
+      content.length < 3 ||
+      content.length > 31
+    ) {
+      setError("Title or Content must be between 3 and 31 characters long.");
+      return;
+    }
     const user = {
       id: numberOfUser + 1,
       title,
       content,
-      url,
+      link,
       status,
     };
     console.log(user);
     dispatch(addPage(user));
     navigate("/page", { replace: true });
   };
-
   return (
     <>
       <Common />
-      <main className="me-5">
+      <main className="add_user">
         <h2>Create New Page</h2>
-        <hr />
+        <hr className="user_manage_hr" />
         <form onSubmit={handleSubmit}>
           <div>
             <label className="form-label" htmlFor="title">
@@ -43,7 +53,6 @@ const AddNewPage = () => {
             </label>
             <input
               className="form-control p-2 mb-3"
-              id="title"
               type="text"
               name="title"
               placeholder="Enter page title"
@@ -56,51 +65,52 @@ const AddNewPage = () => {
             <label className="form-label " htmlFor="content">
               Page Content*
             </label>
-            <input
+            <textarea
               className="form-control p-2 mb-3"
-              id="content"
-              type="text"
               name="content"
-              placeholder=""
+              placeholder="Enter Content"
               value={content}
-              onChange={(e) => setContent(e.target.value)}
+              onChange={(e) => {
+                setContent(e.target.value);
+                setError("");
+              }}
               required
-            />
+            ></textarea>
           </div>
           <div>
-            <label className="form-label " htmlFor="url">
+            <label className="form-label " htmlFor="link">
               Enter your link:
             </label>
             <input
               className="form-control p-2 mb-3"
-              type="url"
-              id="url"
-              name="url"
+              type="text"
+              name="link"
               placeholder="https://example.com"
-              defaultValue={"http://www.jobsvisa.com"}
-              value={url}
+              value={link}
               onChange={(e) => {
-                setUrl(e.target.value);
-                console.log(e.target.value);
+                setLink(e.target.value);
               }}
               required
-            />{" "}
+            />
           </div>
           <div>
-            <input
-              className="form-check-input me-3"
-              type="checkbox"
-              id="check"
-              checked={status}
+            <label className="form-check-label mb-3" htmlFor="status">
+              Status
+            </label>
+            <select
+              className="form-select p-2 mb-3"
+              name="status"
+              value={status}
               onChange={(e) => {
                 setStatus(e.target.checked);
+                setError("");
               }}
-            />
-            <label className="form-check-label mb-3" htmlFor="check">
-              Publish
-            </label>
+            >
+              <option value="Published">Published</option>
+              <option value="Unpublished">Unpublished</option>
+            </select>
           </div>
-
+          {error && <div style={{ color: "red" }}>{error}</div>}
           <button className="btn btn-primary" type="submit">
             Submit
           </button>

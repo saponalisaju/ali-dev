@@ -11,6 +11,7 @@ const EditDesignation = () => {
   const navigate = useNavigate();
   const [_id, setId] = useState("");
   const [name, setName] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (location.state) {
@@ -23,6 +24,11 @@ const EditDesignation = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (name.length < 3 || name.length > 31) {
+      setError("Designation name must be between 3 and 31 characters long.");
+      return;
+    }
     dispatch(editDesignation({ _id, name }));
     navigate("/designation");
   };
@@ -30,7 +36,7 @@ const EditDesignation = () => {
   return (
     <>
       <Common />
-      <main className="me-5">
+      <main className="user_manage">
         <h2>Create New Designation</h2>
         <hr />
         <form onSubmit={handleSubmit}>
@@ -48,6 +54,7 @@ const EditDesignation = () => {
               required
             />
           </div>
+          {error && <div style={{ color: "red" }}>{error}</div>}
           <button className="btn btn-primary" type="submit">
             Update
           </button>

@@ -7,7 +7,7 @@ import Image1 from "../../assets/images/photo-1159947707.jpg";
 const Component11 = () => {
   return (
     <div className="content_eleven bg-secondary">
-      <div className="text-center p-4 text-white">
+      <div className="text-center eleven_head text-white">
         <h1>Client Testimonials</h1>
         <h4>Don't take our word for it -hears what our clients say.</h4>
       </div>
@@ -48,7 +48,7 @@ const Component11 = () => {
             partner for clients by providing operational support and services.
             Here's what they do:
           </p>
-          <img className="mb-5" src={Image1} alt="loading" />
+          <img className="" src={Image1} alt="loading" />
           <h2>Mr. Shafiq A. Patwary </h2>
           <h4 className="">
             <em>Airways, Australia</em>

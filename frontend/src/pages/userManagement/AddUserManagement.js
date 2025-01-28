@@ -3,17 +3,18 @@ import Common from "../../layouts/Common";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserManagement } from "./userManagementSlice";
 import { useNavigate } from "react-router-dom";
+import "../../assets/styles/main.css";
 
 const AddUserManagement = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { users } = useSelector((state) => state.userManagement);
+  const numberOfUser = users.length;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const numberOfUser = useSelector(
-    (state) => state.userManagement.users.length
-  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,6 +24,13 @@ const AddUserManagement = () => {
       email,
       password,
     };
+
+    const userExists = users.some((u) => u.email === user.email);
+    if (userExists) {
+      setError("User already exists. Please try another...");
+      return;
+    }
+
     dispatch(addUserManagement(user));
     navigate("/userManagement", { replace: true });
   };
@@ -30,9 +38,10 @@ const AddUserManagement = () => {
   return (
     <>
       <Common />
-      <main className="me-5">
+      <main className="add_user">
         <h2>Create New User</h2>
-        <hr />
+        <hr className="user_manage_hr" />
+
         <form onSubmit={handleSubmit}>
           <div className="name_input">
             <label htmlFor="name" className="form-label">
@@ -59,7 +68,10 @@ const AddUserManagement = () => {
               name="email"
               placeholder="Enter user email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setError("");
+              }}
               required
             />
           </div>
@@ -78,10 +90,12 @@ const AddUserManagement = () => {
               required
             />
           </div>
+          {error && <div style={{ color: "red" }}>{error}</div>}
           <button className="btn btn-primary" type="submit">
             Submit
           </button>
         </form>
+        {}
       </main>
     </>
   );

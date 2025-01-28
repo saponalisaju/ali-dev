@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import Common from "../../layouts/Common";
 import { useDispatch, useSelector } from "react-redux";
 import { addCompany } from "./companySlice";
-//import { addNewCompany } from "../../services/apiServices";
 import { useNavigate } from "react-router-dom";
 import "../../assets/styles/main.css";
 
 const AddNewCompany = () => {
   const [name, setName] = useState("");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -15,17 +15,26 @@ const AddNewCompany = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (name.length < 3 || name.length > 31) {
+      setError("Company name must be between 3 and 31 characters long.");
+      return;
+    }
     const user = { id: numberOfUser + 1, name };
-    dispatch(addCompany(user));
-    navigate("/company", { replace: true });
+    try {
+      dispatch(addCompany(user));
+      navigate("/company", { replace: true });
+    } catch (error) {
+      console.error("Error handling form submission:", error);
+    }
   };
 
   return (
     <>
       <Common />
-      <main>
+      <main className="add_user">
         <h2>Create New Company</h2>
-        <hr />
+        <hr className="user_manage_hr" />
         <form onSubmit={handleSubmit}>
           <label className="form-label" htmlFor="name">
             Company Name*
@@ -36,9 +45,13 @@ const AddNewCompany = () => {
             placeholder="Enter company name"
             name="name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value);
+              setError("");
+            }}
             required
           />
+          {error && <div style={{ color: "red" }}>{error}</div>}
           <button className="btn btn-primary" type="submit">
             Submit
           </button>

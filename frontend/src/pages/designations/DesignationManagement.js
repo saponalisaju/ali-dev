@@ -9,7 +9,7 @@ import "../../assets/styles/main.css";
 const DesignationManagement = () => {
   const dispatch = useDispatch();
 
-  const { users, status, error } = useSelector((state) => state.designations);
+  const { users, status } = useSelector((state) => state.designations);
 
   useEffect(() => {
     if (status === "idle") {
@@ -34,20 +34,22 @@ const DesignationManagement = () => {
         data-bs-spy="scroll"
         data-bs-target="#example6"
         data-bs-offset="0"
-        className="scrollspy-example me-5"
+        className="scrollspy-example user_manage me-5"
         tabIndex="0"
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
-        <div className="heading-management p-2 d-flex">
-          <h2 className="me-auto">Designation Management</h2>
+        <div className="user_manage_head d-flex">
+          <h2 className="me-auto heading-heading-btn">
+            Designation Management
+          </h2>
           <Link to="/addDesignation">
             <button className="btn btn-primary" type="submit">
               Add New Designation
             </button>
           </Link>
         </div>
-        <hr />
-        <table className="table table-sriped-column">
+        <hr className="user_manage_hr" />
+        <table className="table table-striped-column table-bordered">
           <thead className="">
             <tr className="">
               <th scope="col" className="bg-light">
@@ -60,7 +62,7 @@ const DesignationManagement = () => {
           </thead>
           <tbody>
             {users &&
-              users.map((user) => {
+              users?.map((user) => {
                 const { _id, name } = user;
                 return (
                   <tr key={_id}>
@@ -85,8 +87,6 @@ const DesignationManagement = () => {
               })}
           </tbody>
         </table>
-        {status === "loading" && <div>Loading...</div>}{" "}
-        {status === "failed" && <div>Error: {error}</div>}
       </main>
     </>
   );

@@ -5,9 +5,9 @@ import AssortM from "../../assets/images/assortment_23-21.jpg";
 const Component9 = () => {
   return (
     <div className="main-nine d-flex bg-light ">
-      <div className="nine-one p-5">
+      <div className="nine-one ">
         <div className="nine-one-a">
-          <h1 className="pb-5">To get a work visa in Europe; you need to </h1>
+          <h1 className="">To get a work visa in Europe; you need to </h1>
           <p>
             Start by researching the specific work visa requirements of the
             country where you intend to work. Each country has its own criteria,

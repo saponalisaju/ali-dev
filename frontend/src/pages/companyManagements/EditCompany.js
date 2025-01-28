@@ -11,6 +11,7 @@ const EditCompany = () => {
   const navigate = useNavigate();
   const [_id, setId] = useState("");
   const [name, setName] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (location.state) {
@@ -18,12 +19,17 @@ const EditCompany = () => {
       setName(location.state.name);
     } else {
       // Redirect to a safe page if state is null
-      navigate("/company");
+      navigate("company");
     }
   }, [location.state, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (name.length < 3 || name.length > 31) {
+      setError("Company name must be between 4 and 31 characters long.");
+      return;
+    }
     dispatch(updateCompany({ _id, name }));
     navigate("/company");
   };
@@ -31,7 +37,7 @@ const EditCompany = () => {
   return (
     <>
       <Common />
-      <main>
+      <main className="user_manage">
         <h2>Create New Company</h2>
         <hr />
         <form onSubmit={handleSubmit}>
@@ -49,6 +55,7 @@ const EditCompany = () => {
               required
             />
           </div>
+          {error && <div style={{ color: "red" }}>{error}</div>}
           <button className="btn btn-primary" type="submit">
             Update
           </button>

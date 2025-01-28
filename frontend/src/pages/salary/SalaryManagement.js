@@ -32,11 +32,11 @@ const SalaryManagement = () => {
         data-bs-spy="scroll"
         data-bs-target="#example4"
         data-bs-offset="0"
-        className="scrollspy-example me-5"
+        className="scrollspy-example user_manage me-5"
         tabIndex="0"
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
-        <div className="heading-management p-2 d-flex">
+        <div className="user_manage_head d-flex">
           <h2 className="me-auto">Salary Management</h2>
           <Link to="/addNewSalary">
             <button className="btn btn-primary" type="submit">
@@ -45,7 +45,7 @@ const SalaryManagement = () => {
           </Link>
         </div>
         <hr />
-        <table className="table table-sriped-column">
+        <table className="table table-striped-column table-bordered">
           <thead className="">
             <tr className="">
               <th scope="col" className="bg-light">
@@ -58,7 +58,7 @@ const SalaryManagement = () => {
           </thead>
           <tbody>
             {users &&
-              users.map((user) => {
+              users?.map((user) => {
                 const { _id, name } = user;
                 return (
                   <tr key={_id}>

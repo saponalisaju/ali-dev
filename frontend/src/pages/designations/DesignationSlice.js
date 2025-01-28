@@ -1,11 +1,9 @@
-// /**eslint-disable */
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
 import axios from "axios";
+import apiUrl from "../../secret";
 
 const api = axios.create({
-  baseURL: "https://travel-app-mern.onrender.com/api/designation",
+  baseURL: `${apiUrl}/api/designation`,
   headers: {
     "Content-Type": "application/json",
   },
@@ -14,30 +12,17 @@ const api = axios.create({
 
 export const fetchDesignation = createAsyncThunk(
   "users/fetchDesignation",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await api.get("/fetchDesignation");
-      if (response.status === 404) {
-        return rejectWithValue("Resource not found");
-      }
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(
-        error.response ? error.response.data : "An unexpected error occurred"
-      );
-    }
+  async () => {
+    const response = await api.get("/fetchDesignation");
+    return response.data;
   }
 );
 
 export const addDesignation = createAsyncThunk(
   "users/addDesignation",
-  async (newUser, { rejectWithValue }) => {
-    try {
-      const response = await api.post("/addDesignation", newUser);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
+  async (newUser) => {
+    const response = await api.post("/addDesignation", newUser);
+    return response.data;
   }
 );
 

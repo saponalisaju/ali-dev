@@ -1,13 +1,23 @@
+.thirteen h1 h4 {
+  padding: 2rem;
+}
+
+.section-thr img {
+  margin: 2rem;
+  padding: 2rem;
+  width: 100%;
+}
+.section-thr {
+  padding: 2rem;
+}
+
 @media (max-width: 412px) {
   .section-thr {
     display: flex;
     flex-direction: column;
   }
-}
-
-@media (max-width: 360px) {
-  .section-thr {
-    display: flex;
-    flex-direction: column;
+  .section-thr img {
+    margin: 0.1rem;
+    padding: 2rem;
   }
 }

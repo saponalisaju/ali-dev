@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import apiUrl from "../../secret";
 
 const api = axios.create({
-  baseURL: "https://travel-app-mern.onrender.com/api/salary",
+  baseURL: `${apiUrl}/api/salary`,
   headers: {
     "Content-Type": "application/json",
   },
@@ -10,15 +11,19 @@ const api = axios.create({
 });
 
 export const fetchSalary = createAsyncThunk("users/fetchSalary", async () => {
-  const response = await api.get(`/fetchSalary`);
+  const response = await api.get("/fetchSalary");
   return response.data;
 });
 
 export const addSalary = createAsyncThunk(
   "users/addSalary",
-  async (newUser) => {
-    const response = await api.post(`/addSalary`, newUser); // Include newUser in the request
-    return response.data;
+  async (newUser, { rejectWithValue }) => {
+    try {
+      const response = await api.post(`/addSalary`, newUser);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 
@@ -56,8 +61,10 @@ const salarySlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
-      .addCase(addSalary.fulfilled, (state, action) => {
-        state.users.push(action.payload);
+      .addCase(addSalary.rejected, (state, action) => {
+        state.error = action.payload
+          ? action.payload.message
+          : "Failed to add salary record";
       })
       .addCase(updateSalary.fulfilled, (state, action) => {
         const index = state.users.findIndex(

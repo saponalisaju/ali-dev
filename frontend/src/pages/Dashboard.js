@@ -2,19 +2,19 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faFileCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import Common from "../layouts/Common";
-import "../assets/styles/main.css";
+import "./auth.css";
 
 const Dashboard = () => {
   return (
     <>
       <Common />
-      <main className="relative">
+      <main className="contain">
         <div className="super-admin">
           <h2 className="">Dashboard</h2>
-          <h4 className="">Super Admin | Super admin</h4>
-          <hr />
+          <h4 className="pb-1">Super Admin</h4>
+          <hr className="dashboard_hr" />
         </div>
-        <div className="d-flex">
+        <div className="d-flex dashboard">
           <div className="total_app">
             <FontAwesomeIcon className="icon" icon={faFileCircleCheck} />
             <h2 className=" ">14</h2>

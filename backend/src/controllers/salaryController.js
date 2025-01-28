@@ -2,45 +2,28 @@ const Salary = require("../models/salaryModel");
 
 exports.fetchSalary = async (req, res) => {
   try {
-    console.log("Fetching all salaries...");
-    const allSalary = await Salary.find();
-    console.log("Salary data:", allSalary);
-    res.json(allSalary);
+    const salary = await Salary.find({});
+    res.status(200).json(salary);
   } catch (error) {
-    console.error("Error fetching salaries:", error.message);
-    res
-      .status(500)
-      .json({
-        message: "An error occurred while fetching salaries.",
-        error: error.message,
-      });
+    console.error("Error fetching companies:", error.message);
+    res.status(500).json({
+      message: "An error occurred while fetching companies.",
+      error: error.message,
+    });
   }
 };
 
 exports.addSalary = async (req, res) => {
   try {
-    const { name } = req.body;
-
-    // Check if a salary record with the same name already exists
-    const existingRecord = await Salary.findOne({ name });
-
-    if (existingRecord) {
-      return res.status(400).json({ message: "Salary record already exists" });
-    }
-
-    // If no such record exists, create a new one
-    const newSalary = new Salary({ name });
+    const newSalary = new Salary(req.body);
     await newSalary.save();
-
-    // Respond with the newly created salary record
     res.status(201).json(newSalary);
   } catch (error) {
-    // Log the error for debugging
     console.error("Error adding salary record:", error.message);
-
-    res
-      .status(500)
-      .json({ message: "An error occurred while adding the salary record." });
+    res.status(500).json({
+      message: "An error occurred while adding the salary record.",
+      error: error.message,
+    });
   }
 };
 

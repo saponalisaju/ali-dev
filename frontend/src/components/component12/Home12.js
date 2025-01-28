@@ -13,7 +13,7 @@ const Component12 = () => {
           <h1>Check Your Status Here!</h1>
         </div>
         <Link
-          to="/visaEnquiry"
+          to="/application"
           className="btn btn-warning btn_check"
           type="button"
         >

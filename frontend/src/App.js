@@ -32,44 +32,204 @@ import PageManagement from "./pages/page/PageManagement";
 import AddNewPage from "./pages/page/AddNewPage";
 import EditPage from "./pages/page/EditPage";
 import SliderManagement from "./pages/sliders/SliderManagement";
-import AddSliders from "./pages/sliders/AddSlider";
 import EditSlider from "./pages/sliders/EditSlider";
-//import PrivateRoute from "./pages/PrivateRoute";
-//import AccessRoute from "./pages/AccessProtect";
-//import Admin from "./pages/Admin";
+import PrivateRoute from "./pages/PrivateRoute";
+import AddSlider from "./pages/sliders/AddSlider";
 
 const App = () => {
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/userManagement" element={<UserManagement />} />
-          <Route path="/addUserManagement" element={<AddUserManagement />} />
-          <Route path="/editUserManagement" element={<EditUserManagement />} />
-          <Route path="/application" element={<ApplicationManagement />} />
-          <Route path="/addUserApplication" element={<AddUserApplication />} />
-          <Route path="/editApplication" element={<EditApplication />} />
-          <Route path="/userView" element={<UserView />} />
-          <Route path="/company" element={<CompanyManagement />} />
-          <Route path="/editCompany" element={<EditCompany />} />
-          <Route path="/addNewCompany" element={<AddNewCompany />} />
-          <Route path="/designation" element={<DesignationManagement />} />
-          <Route path="/addDesignation" element={<AddDesignation />} />
-          <Route path="/editDesignation" element={<EditDesignation />} />
-          <Route path="/salary" element={<SalaryManagement />} />
-          <Route path="/addNewSalary" element={<AddNewSalary />} />
-          <Route path="/editSalary" element={<EditSalary />} />
-          <Route path="/page" element={<PageManagement />} />
-          <Route path="/addNewPage" element={<AddNewPage />} />
-          <Route path="/editPage" element={<EditPage />} />
-          <Route path="/slider" element={<SliderManagement />} />
-          <Route path="/addSliders" element={<AddSliders />} />
-          <Route path="/editSlider" element={<EditSlider />} />
+          <Route
+            path="/userManagement"
+            element={
+              <PrivateRoute>
+                <UserManagement />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/addUserManagement"
+            element={
+              <PrivateRoute>
+                <AddUserManagement />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/editUserManagement"
+            element={
+              <PrivateRoute>
+                <EditUserManagement />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/application"
+            element={
+              <PrivateRoute>
+                <ApplicationManagement />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/addUserApplication"
+            element={
+              <PrivateRoute>
+                <AddUserApplication />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/editApplication"
+            element={
+              <PrivateRoute>
+                <EditApplication />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/userView"
+            element={
+              <PrivateRoute>
+                <UserView />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/company"
+            element={
+              <PrivateRoute>
+                <CompanyManagement />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/editCompany"
+            element={
+              <PrivateRoute>
+                <EditCompany />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/addCompany"
+            element={
+              <PrivateRoute>
+                <AddNewCompany />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/designation"
+            element={
+              <PrivateRoute>
+                <DesignationManagement />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/addDesignation"
+            element={
+              <PrivateRoute>
+                <AddDesignation />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/editDesignation"
+            element={
+              <PrivateRoute>
+                <EditDesignation />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/salary"
+            element={
+              <PrivateRoute>
+                <SalaryManagement />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/addNewSalary"
+            element={
+              <PrivateRoute>
+                <AddNewSalary />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/editSalary"
+            element={
+              <PrivateRoute>
+                <EditSalary />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/page"
+            element={
+              <PrivateRoute>
+                <PageManagement />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/addNewPage"
+            element={
+              <PrivateRoute>
+                <AddNewPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/editPage"
+            element={
+              <PrivateRoute>
+                <EditPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/slider"
+            element={
+              <PrivateRoute>
+                <SliderManagement />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/addSliders"
+            element={
+              <PrivateRoute>
+                <AddSlider />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/editSlider"
+            element={
+              <PrivateRoute>
+                <EditSlider />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
           <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

@@ -10,17 +10,17 @@ import {
 
 const Component15 = () => {
   return (
-    <div className="component_fifteen h-100">
-      <h1 className="application_process p-5 text-center bg-tertiary-subtle position-relative">
+    <div className="component_fifteen text-center">
+      <h1 className="application_process  text-center bg-tertiary-subtle ">
         Our Application Process
       </h1>
-      <div className="bacground_page">
-        <div className="main_content_item text-center d-flex  bg-light position-absolute ">
+      <div className="bacground_page ">
+        <div className="main_content_item  d-flex  bg-light  ">
           <div className="main-item-one ">
             <div className="processing_item_one">
-              <FontAwesomeIcon icon={faPaperPlane} className="display-4 p-4" />
+              <FontAwesomeIcon icon={faPaperPlane} className="display-4 icon" />
               <h4 className="">ONLINE APPLICATION</h4>
-              <p className="p-3">
+              <p className="">
                 A visa is an official document issued by a country's government
                 that allows a foreign national to enter, stay, or work within
                 that country for a specific purpose and duration.Emigration
@@ -29,9 +29,12 @@ const Component15 = () => {
               </p>
             </div>
             <div className="processing_item_two ">
-              <FontAwesomeIcon icon={faChartSimple} className="display-4 p-4" />
+              <FontAwesomeIcon
+                icon={faChartSimple}
+                className="display-4 icon"
+              />
               <h4>VISA FEES</h4>
-              <p className="p-3">
+              <p className="">
                 It's like a permission slip for international travel, granting
                 access to a particular country.There are various types of visas,
                 such as tourist visas, work visas, student visas, and
@@ -41,9 +44,9 @@ const Component15 = () => {
           </div>
           <div className="main-item-two">
             <div className="processing_item_three ">
-              <FontAwesomeIcon icon={faCubes} className="display-4 p-4" />
+              <FontAwesomeIcon icon={faCubes} className="display-4 icon" />
               <h4>BIOMETRIC ACCEPT</h4>
-              <p className="p-3">
+              <p className="">
                 {" "}
                 Biometrics refer to objective measurements of physical
                 characteristics unique to an individual. These measurements,
@@ -54,10 +57,10 @@ const Component15 = () => {
             <div className="processing_item_four ">
               <FontAwesomeIcon
                 icon={faChalkboardUser}
-                className="display-4 p-4"
+                className="display-4 icon"
               />
               <h4>VISA DECISION AND VALIDITY</h4>
-              <p className="p-3">
+              <p className="">
                 {" "}
                 While I can't predict the exact outcome, many applicants who
                 receive this letter eventually receive a decision—either
@@ -69,7 +72,7 @@ const Component15 = () => {
           </div>
         </div>
       </div>
-      <p className="copyright p-5">&copy; 2024 job visa Europes.</p>
+      <p className="copyright ">&copy; 2024 job visa Europes.</p>
     </div>
   );
 };

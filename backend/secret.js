@@ -3,6 +3,7 @@ require("dotenv").config();
 const serverPort = process.env.SERVER_PORT || 4000;
 const mongodbURL =
   process.env.MONGO_URL || "http://127.0.0.1:27017/travelMernDb";
+const secretKey = process.env.SECRET_KEY || "amarsonarbangla";
 const jwtActivationKey =
   process.env.JSON_WEB_TOKEN_KEY || "safkeoriweqofdjsf3454350345";
 const jwtAccessKey = process.env.JSON_ACCESS_KEY || "mdsaponalijadurhat";
@@ -19,6 +20,7 @@ module.exports = {
   mongodbURL,
   defaultImagePath,
   defaultPath,
+  secretKey,
   jwtActivationKey,
   jwtRefreshKey,
   jwtResetPasswordKey,

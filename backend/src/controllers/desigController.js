@@ -2,30 +2,21 @@ const Designation = require("../models/designationModel");
 
 exports.fetchDesignation = async (req, res) => {
   try {
-    const usersAll = await Designation.find();
-    if (!usersAll || usersAll.length === 0) {
-      return res.status(404).json({ message: "No designations found" });
-    }
-    res.status(200).json(usersAll);
+    const designations = await Designation.find({});
+    res.status(200).json(designations);
   } catch (error) {
-    console.error("Error fetching designations:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Error fetching designations:", error.message);
+    res.status(500).json({
+      message: "An error occurred while fetching designations.",
+      error: error.message,
+    });
   }
 };
 
 exports.addDesignation = async (req, res) => {
   try {
-    const { name } = req.body;
-
-    const existingDesignation = await Designation.findOne({ name });
-    if (existingDesignation) {
-      return res.status(400).json({ message: "Designation already exists" });
-    }
-
-    const newDesignation = new Designation({ name });
+    const newDesignation = new Designation(req.body);
     await newDesignation.save();
-
-    console.log("New designation added:", newDesignation);
     res.status(201).json(newDesignation);
   } catch (error) {
     console.error("Error adding designation:", error);

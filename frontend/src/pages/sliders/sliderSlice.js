@@ -2,9 +2,10 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import apiUrl from "../../secret";
 
 const api = axios.create({
-  baseURL: "https://travel-app-mern.onrender.com/api/slider",
+  baseURL: `${apiUrl}/api/slider`,
   headers: {
     "Content-Type": "application/json",
   },
@@ -32,10 +33,15 @@ export const addSlider = createAsyncThunk(
   "users/addSlider",
   async (newUser, { rejectWithValue }) => {
     try {
-      const response = await api.post("/addSlider", newUser);
+      const response = await api.post("/addSlider", newUser, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        timeout: 5000,
+      });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );

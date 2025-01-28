@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Common from "../../layouts/Common";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,8 +6,10 @@ import { fetchApplication, deleteApplication } from "./applicationSlice";
 import "../../assets/styles/main.css";
 
 const ApplicationManagement = () => {
+  const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
   const dispatch = useDispatch();
-  const { users, status, error } = useSelector((state) => state.applications);
+  const { users, status } = useSelector((state) => state.applications);
 
   useEffect(() => {
     if (status === "idle") {
@@ -21,6 +23,20 @@ const ApplicationManagement = () => {
     } else {
       console.error("Invalid ID format:", id);
     }
+  };
+
+  useEffect(() => {
+    if (users) {
+      setFilteredData(users);
+    }
+  }, [users]);
+
+  const handleSearch = (e) => {
+    const searchValue = e.target.value;
+    setSearch(searchValue);
+    const searchRegExp = new RegExp(".*" + searchValue + ".*", "i");
+    const filtered = users.filter((item) => searchRegExp.test(item.passportNo));
+    setFilteredData(filtered);
   };
 
   const date = new Date();
@@ -40,52 +56,55 @@ const ApplicationManagement = () => {
         data-bs-spy="scroll"
         data-bs-target="#example2"
         data-bs-offset="0"
-        className=" me-5"
+        className="user_manage"
         tabIndex="0"
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
-        <div className="heading-management p-2 d-flex">
-          <h2 className=" me-auto">Application Management</h2>
+        <div className="user_manage_head d-flex">
+          <h2 className="user_manage_head me-auto">Application Management</h2>
           <Link to="/addUserApplication">
-            <button className="btn btn-primary">Add New Application</button>
+            <button className="btn btn-primary ">Add New Application</button>
           </Link>
         </div>
         <hr />
         <div className="d-flex ">
-          <div className="d-flex me-auto mb-3">
-            <div className="">
-              <label className="form-label" htmlFor="name"></label>
-              <select className="form-select" id="name">
-                <option>Sort by status</option>
-                <option>All</option>
-                <option>Pending</option>
-                <option>Approved</option>
-                <option>Rejected</option>
-              </select>
-            </div>
-            <div>
-              <label className="form-label" htmlFor="admin"></label>
-              <select className="form-select" id="admin">
-                <option>Sort by admin</option>
-                <option>All</option>
-                <option>Rakib</option>
-              </select>
-            </div>
+          <div className="application_fetch">
+            <label className="form-label" htmlFor="name"></label>
+            <select className="form-select" id="name">
+              <option>Sort by status</option>
+              <option>All</option>
+              <option>Pending</option>
+              <option>Approved</option>
+              <option>Rejected</option>
+            </select>
           </div>
-          <div className="search-bar border d-flex border rounded-2">
+          <div className="me-auto ms-1">
+            <label className="form-label" htmlFor="admin"></label>
+            <select className="form-select" id="admin">
+              <option>Sort by admin</option>
+              <option>All</option>
+              <option>Rakib</option>
+            </select>
+          </div>
+          <div className="search-bar">
             <input
-              className="input-search form-control "
+              className="input-search form-control"
+              id="search"
               type="text"
               placeholder="Search by passport no..."
+              value={search}
+              onChange={handleSearch}
             />
-            <button className="btn btn-light" type="submit">
-              Search
-            </button>
           </div>
         </div>
-        <table className="table table-striped-column">
-          <thead className="">
-            <tr>
+        <ul>
+          {filteredData.map((item, index) => (
+            <li key={index}>{item.passportNo}</li>
+          ))}
+        </ul>
+        <table className="table table-striped-column app_table table-bordered">
+          <thead>
+            <tr className="tApp_head">
               <th scope="col" className="bg-light">
                 NAME
               </th>
@@ -107,41 +126,39 @@ const ApplicationManagement = () => {
               <th scope="col" className="bg-light">
                 ACTION
               </th>
-              <th className="visually-hidden"> all</th>
+              <th className="visually-hidden">all</th>
             </tr>
           </thead>
           <tbody>
-            {" "}
-            {users &&
-              users.map((user) => {
-                const {
-                  _id,
-                  surname,
-                  givenN,
-                  email,
-                  phone,
-                  nationalId,
-                  sex,
-                  dob,
-                  birthCity,
-                  currentN,
-                  identification,
-                  company,
-                  dutyDuration,
-                  jobTitle,
-                  salary,
-                  passport,
-                  issuedCountry,
-                } = user;
-                return (
-                  <tr key={_id}>
+            {filteredData.map((user) => {
+              const {
+                _id,
+                surname,
+                givenN,
+                email,
+                phone,
+                nationalId,
+                sex,
+                dob,
+                birthCity,
+                currentN,
+                identification,
+                company,
+                dutyDuration,
+                jobTitle,
+                salary,
+                passport,
+                issuedCountry,
+              } = user;
+              return (
+                <React.Fragment key={_id}>
+                  <tr className="tApp_head">
                     <td>{surname}</td>
                     <td>Admin</td>
                     <td>{passport}</td>
                     <td>Pending</td>
                     <td>{currentDate}</td>
                     <td>{nextCurrentDate}</td>
-
                     <td>
                       <Link
                         to="/userView"
@@ -181,7 +198,6 @@ const ApplicationManagement = () => {
                           sex,
                           dob,
                           birthCity,
-
                           currentN,
                           identification,
                           company,
@@ -198,36 +214,33 @@ const ApplicationManagement = () => {
                       </Link>
                       <button
                         className="btn btn-white text-danger p-1"
-                        onClick={() => {
-                          deleteHandler(_id);
-                        }}
+                        onClick={() => deleteHandler(_id)}
                       >
                         Delete
                       </button>
-                      <td className="visually-hidden">
-                        <span>{givenN}</span>
-                        <span>{email}</span>
-                        <span>{phone}</span>
-                        <span>{nationalId}</span>
-                        <span>{sex}</span>
-                        <span>{dob}</span>
-                        <span>{birthCity}</span>
-                        <span>{currentN}</span>
-                        <span>{identification}</span>
-                        <span>{company}</span>
-                        <span>{dutyDuration}</span>
-                        <span>{jobTitle}</span>
-                        <span>{salary}</span>
-                        <span>{issuedCountry}</span>
-                      </td>
                     </td>
                   </tr>
-                );
-              })}
+                  <tr className="visually-hidden">
+                    <td>{givenN}</td>
+                    <td>{email}</td>
+                    <td>{phone}</td>
+                    <td>{nationalId}</td>
+                    <td>{sex}</td>
+                    <td>{dob}</td>
+                    <td>{birthCity}</td>
+                    <td>{currentN}</td>
+                    <td>{identification}</td>
+                    <td>{company}</td>
+                    <td>{dutyDuration}</td>
+                    <td>{jobTitle}</td>
+                    <td>{salary}</td>
+                    <td>{issuedCountry}</td>
+                  </tr>
+                </React.Fragment>
+              );
+            })}
           </tbody>
         </table>
-        {status === "loading" && <div>Loading...</div>}{" "}
-        {status === "failed" && <div>Error: {error}</div>}
       </main>
     </>
   );

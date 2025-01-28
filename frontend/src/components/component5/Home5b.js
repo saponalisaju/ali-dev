@@ -5,7 +5,7 @@ import { faCubes } from "@fortawesome/free-solid-svg-icons";
 
 const Home5b = () => {
   return (
-    <div className="border me-5 m-4 p-1 w-50 ">
+    <div className="border home-five-b ">
       <div className=" d-flex">
         <FontAwesomeIcon
           icon={faCubes}
@@ -13,7 +13,7 @@ const Home5b = () => {
         />
         <h4 className="text-warning m-3">Coca Cola</h4>
       </div>
-      <div className="ps-5 mb-5 ">
+      <div className="home-five-heading ">
         <p>
           <strong>POSITION:</strong> Pakaging Worker
         </p>
@@ -43,7 +43,7 @@ const Home5b = () => {
           <strong>Compensation: </strong>Salary 1200 USD
         </p>
       </div>
-      <div className=" p-1">
+      <div className=" ">
         <p>
           <strong>POSITION:</strong> Pakaging Worker
         </p>
@@ -73,7 +73,7 @@ const Home5b = () => {
           <strong>Compensation: </strong>Salary 1200 USD
         </p>
       </div>
-      <div className="m-2 text-center">
+      <div className=" text-center">
         <p>
           <strong>POSITION:</strong> Pakaging Worker
         </p>

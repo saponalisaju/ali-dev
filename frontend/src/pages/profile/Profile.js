@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Common from "../../layouts/Common";
 import "../../assets/styles/main.css";
 import axios from "axios";
+import apiUrl from "../../secret";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setError(null); // Reset error before submission
+    setError(null);
 
     const formData = {
       name,
@@ -25,16 +26,12 @@ const Profile = () => {
     };
 
     try {
-      await axios.post(
-        `https://travel-app-mern.onrender.com/api/users/profile`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          timeout: 3000,
-        }
-      );
+      await axios.post(`${apiUrl}/api/users/profile`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        timeout: 5000,
+      });
 
       navigate("/");
     } catch (error) {
@@ -48,9 +45,9 @@ const Profile = () => {
   return (
     <>
       <Common />
-      <main className="me-5">
+      <main className="user_manage">
         <h2>Profile</h2>
-        <hr />
+        <hr className="user_manage_hr" />
         <form onSubmit={handleSubmit}>
           <div className="form-field">
             <label className="form-label" htmlFor="name">
@@ -114,7 +111,7 @@ const Profile = () => {
               type="submit"
               disabled={isLoading}
             >
-              {isLoading ? "Submission..." : "Submit"}
+              {isLoading ? "Updating..." : "Update"}
             </button>
           </div>
         </form>

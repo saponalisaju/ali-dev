@@ -37,7 +37,7 @@ const EditDesignation = () => {
   return (
     <>
       <Common />
-      <main className="me-5">
+      <main className="user_manage">
         <h2>Create New Page</h2>
         <hr />
         <form onSubmit={handleSubmit}>

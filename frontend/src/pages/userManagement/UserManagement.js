@@ -6,6 +6,8 @@ import {
   fetchUserManagement,
   deleteUserManagement,
 } from "./userManagementSlice";
+import "../../assets/styles/main.css";
+import toast, { Toaster } from "react-hot-toast";
 
 const UserManagement = () => {
   const { users, status } = useSelector((state) => state.userManagement);
@@ -20,8 +22,9 @@ const UserManagement = () => {
   const deleteHandler = (id) => {
     if (typeof id === "string" && id.length === 24) {
       dispatch(deleteUserManagement(id));
+      toast.success("User deleted successfully");
     } else {
-      console.error("Invalid ID format:", id);
+      toast.error("Invalid ID format: " + id);
     }
   };
   return (
@@ -29,26 +32,25 @@ const UserManagement = () => {
       <div className="example2 relative">
         <Common />
       </div>
+      <Toaster />
       <main
         data-bs-spy="scroll"
         data-bs-target="#example2"
         data-bs-offset="0"
-        className="scrollspy-example me-5"
+        className="scrollspy-example user_manage me-5"
         tabIndex="0"
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
-        <div className="heading-management p-2 d-flex">
-          <h2 className="me-auto">User Management</h2>
+        <div className="user_manage_head  d-flex">
+          <h2 className="me-auto ">User Management</h2>
           <Link to="/addUserManagement">
-            <button className="btn btn-primary" type="submit">
+            <button className="btn btn-primary  " type="submit">
               Add New User
             </button>
           </Link>
         </div>
-        <hr />
-        {/* {status === "loading" && <p>Loading...</p>}
-        {status === "failed" && <p>{error}</p>} */}
-        <table className="table table-sriped-column">
+        <hr className="user_manage_hr" />
+        <table className="table table-striped-column table-bordered">
           <thead className="">
             <tr className="">
               <th scope="col" className="bg-light">
@@ -67,8 +69,9 @@ const UserManagement = () => {
           </thead>
           <tbody>
             {users &&
-              users.map((user) => {
+              users?.map((user) => {
                 const { _id, name, email, role } = user;
+                console.log(user);
                 return (
                   <tr key={_id}>
                     <td>{name}</td>

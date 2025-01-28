@@ -20,6 +20,7 @@ const applicationSchema = mongoose.Schema(
     jobTitle: { type: String, required: true },
     salary: { type: String, required: true },
     image: { type: String, default: defaultImagePath, required: true },
+    path: { type: String },
     passport: { type: String, required: true },
     issuedCountry: { type: String, required: true },
   },

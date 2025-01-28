@@ -1,16 +1,19 @@
 require("dotenv").config();
 const passport = require("passport");
 const User = require("../models/userModel");
+const { jwtActivationKey } = require("../../secret");
 
-const JwtStrategy = require("passport-jwt").Strategy,
-  ExtractJwt = require("passport-jwt").ExtractJwt;
-var opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = "secret";
+const JwtStrategy = require("passport-jwt").Strategy;
+const ExtractJwt = require("passport-jwt").ExtractJwt;
+var opts = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: jwtActivationKey,
+};
 
 passport.use(
   new JwtStrategy(opts, (jwt_payload, done) => {
-    User.findOne({ id: jwt_payload.id }, (err, user) => {
+    console.log("jwt", jwt_payload);
+    User.findById({ id: jwt_payload.id }, (err, user) => {
       if (err) {
         return done(err, false);
       }

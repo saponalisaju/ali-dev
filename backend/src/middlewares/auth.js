@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 const createError = require("http-errors");
-const { jwtAccessKey } = require("../../secret");
+const { jwtAccessKey, jwtActivationKey } = require("../../secret");
 const User = require("../models/userModel");
+const { createToken } = require("../helpers/jsonwebtoken");
 
 exports.isLoggedIn = (req, res, next) => {
   try {
@@ -36,5 +37,32 @@ exports.isLoggedOut = (req, res, next) => {
     next();
   } catch (error) {
     return next(error);
+  }
+};
+
+// exports.authenticateToken = (req, res, next) => {
+//   const token = req.header("Authorization");
+
+//   if (!token) return res.status(401).send("Access Denied");
+
+//   try {
+//     const verified = jwt.verify(token, jwtActivationKey);
+//     req.user = verified;
+//     next();
+//   } catch (err) {
+//     res.status(400).send("Invalid Token");
+//     res.redirect("/login");
+//   }
+// };
+
+exports.isAuthenticated = (req, res, next) => {
+  const token = req.cookies.accessToken;
+  if (!token) return res.status(401).json("Access Denied");
+  try {
+    const verified = createToken(token, jwtAccessKey);
+    req.user = verified;
+    next();
+  } catch (error) {
+    res.status(400).json("Invalid Token");
   }
 };

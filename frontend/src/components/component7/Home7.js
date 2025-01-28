@@ -5,10 +5,10 @@ import GImag from "../../assets/images/9~mv2.webp";
 const Component7 = () => {
   return (
     <div className="main-seven bg-light d-flex">
-      <div className="image_first p-4  d-flex ">
+      <div className="image_first  d-flex ">
         <img src={GImag} alt="error" />
       </div>
-      <div className="main-seven-one p-3 ">
+      <div className="main-seven-one  ">
         <div className="">
           <p>
             <strong>Job visa</strong>

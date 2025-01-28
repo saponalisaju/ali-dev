@@ -66,43 +66,69 @@ exports.login = async (req, res, next) => {
       return res.status(401).json("Invalid email or password");
     }
 
-    const accessToken = createToken({ user }, jwtAccessKey, "20m");
-    const refreshToken = createToken({ user }, jwtRefreshKey, "1d");
-    const token = createToken({ id: user._id }, jwtActivationKey, "2d");
+    const token = createToken({ id: user._id }, jwtActivationKey, "30m");
+    const refreshToken = createToken({ id: user._id }, jwtActivationKey, "7d");
 
-    res.cookie("accessToken", accessToken, {
-      maxAge: 20 * 60 * 1000, // 20 minutes
+    res.cookie("accessToken", token, {
+      maxAge: 30 * 60 * 1000, // 30 minute
       httpOnly: true,
       secure: true,
-      sameSite: "none",
+      sameSite: "Strict",
     });
 
     res.cookie("refreshToken", refreshToken, {
-      maxAge: 2 * 24 * 60 * 60 * 1000, // 2 days
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       httpOnly: true,
       secure: true,
-      sameSite: "none",
+      sameSite: "Strict",
     });
 
     return res.status(200).json({
       success: true,
       message: "Login successful",
       token: `Bearer ${token}`,
+      refreshToken: refreshToken,
     });
   } catch (error) {
     next(error);
   }
 };
 
+// exports.logout = async (req, res, next) => {
+//   try {
+//     res.clearCookie("token");
+//     res.clearCookie("accessToken");
+//     res.clearCookie("refreshToken");
+//     return successResponse(res, {
+//       statusCode: 200,
+//       message: "User logged out successfully",
+//       payload: {},
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
 exports.logout = async (req, res, next) => {
   try {
-    res.clearCookie("token");
-    res.clearCookie("accessToken");
-    res.clearCookie("refreshToken");
-    return successResponse(res, {
-      statusCode: 200,
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
+    res.clearCookie("accessToken", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
+    res.clearCookie("refreshToken", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
+    return res.status(200).json({
+      success: true,
       message: "User logged out successfully",
-      payload: {},
     });
   } catch (error) {
     next(error);

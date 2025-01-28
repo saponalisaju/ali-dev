@@ -1,10 +1,10 @@
 /**eslint-disable */
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import apiUrl from "../../secret";
 
 const api = axios.create({
-  baseURL: "https://travel-app-mern.onrender.com/api/company",
+  baseURL: `${apiUrl}/api/company`,
   headers: {
     "Content-Type": "application/json",
   },
@@ -51,6 +51,7 @@ const companySlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchCompany.fulfilled, (state, action) => {
+        console.log("fetchCompany fulfilled:", action.payload);
         state.status = "succeeded";
         state.users = action.payload;
       })
@@ -59,7 +60,9 @@ const companySlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(addCompany.fulfilled, (state, action) => {
-        state.users.push(action.payload);
+        if (Array.isArray(state.users)) {
+          state.users.push(action.payload); // Ensure state.users is an array
+        }
       })
       .addCase(updateCompany.fulfilled, (state, action) => {
         const index = state.users.findIndex(

@@ -11,15 +11,15 @@ import flag6 from "../../assets/images/images (1).jpeg";
 const Component4 = () => {
   return (
     <div className="main-three text-center">
-      <div className="w-100 p-2">
-        <h4 className="pt-5"> WE MAXIMIZE YOUR VISA APPROVAL GRANTEE</h4>
-        <p className="p-4">
+      <div className="main-three-head">
+        <h4 className=""> WE MAXIMIZE YOUR VISA APPROVAL GRANTEE</h4>
+        <p className="">
           {" "}
           Provide thorough supporting documents, including financial proof and
           travel itinerary?
         </p>
       </div>
-      <div className="image_1 w-100 d-flex p-5">
+      <div className="image_1 d-flex ">
         <div className="my-image_1">
           <img src={HmImg} alt="error" />
         </div>
@@ -35,8 +35,8 @@ const Component4 = () => {
         </div>
       </div>
       <div className="main-four bg-light text-center ">
-        <h1 className=" p-5">CORPORATE OF YOUR TRAVEL</h1>
-        <p className=" pb-5">
+        <h1 className=" ">CORPORATE OF YOUR TRAVEL</h1>
+        <p className=" ">
           Corporate Travel Management involves planning, booking, and managing
           business trips for a company. It includes creating travel policies.
         </p>

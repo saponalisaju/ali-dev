@@ -1,10 +1,11 @@
 const { deleteImage } = require("../helpers/deleteFileImage");
 const Slider = require("../models/sliderModel");
+const path = require("path");
+const fs = require("fs");
 
 exports.fetchSlider = async (req, res) => {
   try {
-    const usersAll = await Slider.find();
-    console.log(usersAll);
+    const usersAll = await Slider.find({});
     res.json(usersAll);
   } catch (error) {
     console.error("Error fetching sliders:", error);
@@ -13,14 +14,13 @@ exports.fetchSlider = async (req, res) => {
 };
 exports.addSlider = async (req, res) => {
   try {
-    const { thumbnail, title, status } = req.body;
-    const image = req.file?.path;
-    if (!req.file || !title) {
+    const image = req.file?.filename;
+    const path = req.file?.path;
+    if (!req.file || !req.body.title) {
       return res.status(400).json({ message: "Image and title are required" });
     }
-    const newSlider = new Slider({ thumbnail, title, image, status });
+    const newSlider = new Slider({ ...req.body, image: image, path: path });
     await newSlider.save();
-    console.log("New slider added:", newSlider);
     res.status(201).json(newSlider);
   } catch (error) {
     console.error("Error adding slider:", error);
@@ -53,9 +53,10 @@ exports.deleteSlider = async (req, res) => {
     if (!slider) {
       return res.status(404).json({ message: "Slider not found" });
     }
-    if (slider.image) {
+
+    if (slider.path) {
       try {
-        await deleteImage(slider.image);
+        await deleteImage(slider.path);
       } catch (error) {
         console.error("Error deleting image:", error);
       }

@@ -9,8 +9,8 @@ router.get("/fetchSlider", sliderController.fetchSlider);
 router.post(
   "/addSlider",
   uploadSlider.single("image"),
-  validateSlider,
-  runValidation,
+  // validateSlider,
+  // runValidation,
   sliderController.addSlider
 );
 router.put("/updateSlider/:id", sliderController.updateSlider);

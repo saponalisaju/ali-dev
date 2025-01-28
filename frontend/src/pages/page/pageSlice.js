@@ -2,9 +2,10 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import apiUrl from "../../secret";
 
 const api = axios.create({
-  baseURL: "https://travel-app-mern.onrender.com/api/page",
+  baseURL: `${apiUrl}/api/page`,
   headers: {
     "Content-Type": "application/json",
   },
@@ -17,7 +18,7 @@ export const fetchPage = createAsyncThunk("users/fetchPage", async () => {
 });
 
 export const addPage = createAsyncThunk("users/addPage", async (newUser) => {
-  const response = await api.post(`/addPage`, newUser); // Include newUser in the request
+  const response = await api.post(`/addPage`, newUser);
   return response.data;
 });
 

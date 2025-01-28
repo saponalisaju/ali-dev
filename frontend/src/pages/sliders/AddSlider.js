@@ -9,7 +9,7 @@ const AddSlider = () => {
   const [thumbnail, setThumbnail] = useState("");
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
-  const [status, setStatus] = useState("Unpublished");
+  const [status, setStatus] = useState("active");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,9 +20,10 @@ const AddSlider = () => {
     const formData = new FormData();
     formData.append("thumbnail", thumbnail);
     formData.append("title", title);
-    formData.append("image", image);
     formData.append("status", status);
-
+    if (image) {
+      formData.append("image", image);
+    }
     dispatch(addSlider(formData));
     navigate("/slider", { replace: true });
   };
@@ -30,9 +31,9 @@ const AddSlider = () => {
   return (
     <>
       <Common />
-      <main>
+      <main className="add_user">
         <h2>Add New Slide</h2>
-        <hr />
+        <hr className="user_manage_hr" />
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div>
             <label className="form-label" htmlFor="thumbnail">

@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const app = express();
 const helmet = require("helmet");
@@ -19,11 +20,7 @@ const applicationRouter = require("./src/routes/applicationRoute");
 const { clientURL } = require("./secret");
 
 //middleware
-const allowedOrigins = [
-  clientURL,
-  "http://localhost:3000",
-  "https://jobsvisa24.netlify.app",
-];
+const allowedOrigins = [clientURL];
 const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
@@ -57,20 +54,37 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.static(path.join(__dirname, "build")));
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
+app.use(express.static(__dirname + "public"));
+app.use("public", express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static("uploads"));
 
-app.use("/public", express.static("public"));
+app.use((req, res, next) => {
+  res.setHeader(
+    "Cross-Origin-Resource-Policy",
+    "same-origin" || "cross-origin"
+  );
+  next();
+});
 app.use(helmet());
 
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
 app.use(limiter);
 
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+});
+
 app.use("/api/users", userRouter);
 app.use("/api/designation", designationRouter);
 app.use("/api/page", pageRouter);

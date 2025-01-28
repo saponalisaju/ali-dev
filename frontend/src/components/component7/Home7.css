@@ -1,11 +1,15 @@
 .main-seven {
-  width: 100vw;
-  height: 30rem;
+  margin-bottom: 2rem;
+}
+.main-seven-one {
+  padding: 0.5rem;
 }
 
 .image_first img {
   width: 35rem;
   height: 25rem;
+  padding: 1rem;
+  margin-top: 3rem;
 }
 
 @media (max-width: 810px) {
@@ -16,27 +20,26 @@
   .main-seven {
     display: flex;
     flex-direction: column;
-    margin-bottom: 25rem;
-  }
-  .main-seven-one {
-    width: 100%;
-    text-align: center;
   }
 }
 
 @media (max-width: 576px) {
   .image_first img {
     width: 30rem;
-    margin: 0 2rem 0 2rem;
+    margin: 0 auto;
   }
   .main-seven {
     display: flex;
     flex-direction: column;
-    margin-bottom: 25rem;
   }
   .main-seven-one {
-    width: 100%;
     text-align: center;
+  }
+}
+
+@media (max-width: 412px) {
+  .image_first img {
+    width: 26rem;
   }
 }
 

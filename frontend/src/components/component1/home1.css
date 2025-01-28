@@ -1,7 +1,29 @@
+.video-container {
+  background-color: rgba(12, 9, 17, 0.842);
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.main_content {
+  background-repeat: no-repeat;
+}
+#video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Ensure the video stays behind all content */
+}
+
 .button .btnCheck {
   background-color: green;
   font-size: 1.5rem;
   border-radius: 5rem;
+  padding: 1rem;
+  margin: 1rem;
 }
 .button .btnCheck:hover,
 .button .btnLogin:hover {
@@ -10,15 +32,6 @@
   cursor: pointer;
 }
 
-.main-one-content {
-  width: 100%;
-  height: 5rem;
-  margin-bottom: 5rem;
-}
-
-.btnCheck {
-  font-size: 3rem;
-}
 .main-one h1 {
   font-family: serif;
   font-weight: bold;
@@ -38,6 +51,10 @@
   margin-bottom: -15rem;
 }
 
+.main_heading {
+  padding-top: 9.6rem;
+}
+
 .main-one .button a {
   text-decoration: none;
   color: #ffffff;
@@ -53,15 +70,36 @@
   padding: 5px;
   border-radius: 10px;
 }
-/* .activenav {
-  background-color: white;
-  box-shadow: 1px 1px 0 grey;
-  top: 0;
-  left: 0;
-  position: fixed;
-  transition: 0.8s;
-  
-} */
+/* max-size 1400px start */
+@media (max-width: 1400px) {
+  .main_content,
+  .video-container {
+    height: 70vh;
+  }
+
+  .main-one h1 {
+    font-size: 2.9rem;
+    margin: 0 0 5% 25%;
+  }
+  .main-one h4 {
+    font-size: 1.8rem;
+  }
+}
+/* max-size 1400px end */
+
+/* max-size 992px start */
+@media (max-width: 992px) {
+  .main-one h4 {
+    font-size: 1.5rem;
+  }
+  .main_heading {
+    padding-top: 10rem;
+  }
+}
+/* max-size 992px end */
+
+/* max-size 576px start */
+
 @media (max-width: 576px) {
   .main-one h1 {
     font-size: 2rem;
@@ -70,18 +108,67 @@
     font-size: 1.3rem;
     text-transform: capitalize;
   }
-  .btnCheck {
-    font-size: 1rem;
+  .main_heading {
+    padding-top: 13rem;
   }
-}
-@media (max-width: 412px) {
-  .main-one h1 {
-    margin: 0 0 5% 25%;
+  .btnCheck {
+    font-size: 1.5rem;
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 480px) {
   .main-one h1 {
-    margin: 0 0 5% 25%;
+    font-size: 2rem;
+  }
+  .main-one h4 {
+    font-size: 1.4rem;
+  }
+  .main_heading {
+    padding-top: 13rem;
+  }
+  .btnCheck {
+    font-size: 1rem;
+  }
+  .button .btnCheck {
+    font-size: 1rem;
+    border-radius: 5rem;
+    padding: 0.5rem;
+    margin: 1rem;
   }
 }
+/* max-size 576px end */
+
+/* max-size 412px start */
+@media (max-width: 412px) {
+  .video-container,
+  .main_content {
+    height: 52vh;
+  }
+  .main-one h1 {
+    font-size: 1.5rem;
+  }
+  .main-one h4 {
+    font-size: 1rem;
+  }
+  .button .btnCheck {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+  .main_heading {
+    padding-top: 10rem;
+  }
+}
+/* max-size 412px end */
+
+/* max-size 360px start */
+
+@media (max-width: 360px) {
+  .button .btnCheck {
+    font-size: 0.8rem;
+    padding: 0.8rem;
+  }
+  .main_heading {
+    padding-top: 8rem;
+  }
+}
+/* max-size 360px end */

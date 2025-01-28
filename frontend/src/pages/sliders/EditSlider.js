@@ -36,7 +36,7 @@ const EditSliders = () => {
   return (
     <>
       <Common />
-      <main className="me-5">
+      <main className=" user_manage">
         <h2>Create New Slide</h2>
         <hr />
         <form onSubmit={handleSubmit}>
