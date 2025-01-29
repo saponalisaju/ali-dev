@@ -1,2 +1,2 @@
-const apiUrl = "https://travel-app-mern.onrender.com";
+const apiUrl = "http://localhost:4001";
 export default apiUrl;

@@ -20,7 +20,11 @@ const applicationRouter = require("./src/routes/applicationRoute");
 const { clientURL } = require("./secret");
 
 //middleware
-const allowedOrigins = [clientURL];
+const allowedOrigins = [
+  clientURL,
+  "https://jobsvisa24.netlify.app",
+  "https://www.jobsvisa24.com",
+];
 const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
