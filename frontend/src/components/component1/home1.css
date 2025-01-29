@@ -2,7 +2,7 @@
   background-color: rgba(12, 9, 17, 0.842);
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 44rem;
 }
 
 .main_content {
@@ -74,7 +74,7 @@
 @media (max-width: 1400px) {
   .main_content,
   .video-container {
-    height: 70vh;
+    height: 43rem;
   }
 
   .main-one h1 {
@@ -98,6 +98,17 @@
 }
 /* max-size 992px end */
 
+/* max-size 810px start */
+@media (max-width: 810px) {
+  .main-one h4 {
+    font-size: 1.3rem;
+  }
+  .main-one h1 {
+    font-size: 2.5rem;
+  }
+}
+/* max-size 810px end */
+
 /* max-size 576px start */
 
 @media (max-width: 576px) {
@@ -109,26 +120,28 @@
     text-transform: capitalize;
   }
   .main_heading {
-    padding-top: 13rem;
+    padding-top: 11rem;
   }
   .btnCheck {
     font-size: 1.5rem;
+  }
+  .button .btnCheck {
+    font-size: 1rem;
+    padding: 0.7rem;
   }
 }
 
 @media (max-width: 480px) {
   .main-one h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   .main-one h4 {
-    font-size: 1.4rem;
+    font-size: 1rem;
   }
   .main_heading {
     padding-top: 13rem;
   }
-  .btnCheck {
-    font-size: 1rem;
-  }
+
   .button .btnCheck {
     font-size: 1rem;
     border-radius: 5rem;
@@ -151,8 +164,8 @@
     font-size: 1rem;
   }
   .button .btnCheck {
-    font-size: 1rem;
-    padding: 1rem;
+    font-size: 0.8rem;
+    padding: 0.5rem;
   }
   .main_heading {
     padding-top: 10rem;
