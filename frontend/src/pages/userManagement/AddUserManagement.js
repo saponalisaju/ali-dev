@@ -31,8 +31,17 @@ const AddUserManagement = () => {
       return;
     }
 
-    dispatch(addUserManagement(user));
-    navigate("/userManagement", { replace: true });
+    if (name.length < 3 || name.length > 31) {
+      setError("User name must be between 3 and 31 characters long.");
+      return;
+    }
+
+    try {
+      dispatch(addUserManagement(user));
+      navigate("/userManagement", { replace: true });
+    } catch (error) {
+      console.error("Error handling form submission:", error);
+    }
   };
 
   return (

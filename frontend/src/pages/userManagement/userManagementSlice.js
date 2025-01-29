@@ -69,7 +69,7 @@ export const deleteUserManagement = createAsyncThunk(
 );
 
 const userManagementSlice = createSlice({
-  name: "userManagement",
+  name: "users",
   initialState: { users: [], status: "idle", error: null },
   reducers: {},
   extraReducers: (builder) => {

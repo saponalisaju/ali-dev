@@ -52,8 +52,18 @@ const AddUserApplication = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const existUser = users.some((u) => u.email === formData.email);
 
+    if (
+      (formData.surname.length < 3 || formData.surname.length > 31) &&
+      (formData.givenN.length < 3 || formData.givenN.length > 31)
+    ) {
+      setError(
+        "Surname and Given name must be between 3 and 31 characters long."
+      );
+      return;
+    }
+
+    const existUser = users.some((u) => u.email === formData.email);
     if (existUser) {
       setError("User already exists. Please try another...");
       return;
@@ -318,7 +328,7 @@ const AddUserApplication = () => {
               onChange={onChangeHandler}
             />
           </div>
-          <div className="id-number w-50 p-1">
+          <div className="id-number p-1">
             <label className="form-label" htmlFor="passport">
               Passport*
             </label>
