@@ -64,7 +64,7 @@ app.use((req, res, next) => {
 //   res.sendFile(path.join(__dirname, "build", "index.html"));
 // });
 app.use(express.static(__dirname + "public"));
-app.use("public", express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use((req, res, next) => {
   res.setHeader(

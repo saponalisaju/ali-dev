@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "../../assets/styles/main.css";
 import { Link } from "react-router-dom";
 import { deleteApplication, fetchApplication } from "./applicationSlice";
+import apiUrl from "../../secret";
 
 const UserView = () => {
   const dispatch = useDispatch();
@@ -41,17 +42,14 @@ const UserView = () => {
           <ul className="align-item-left">
             {users?.map((user) => {
               const { _id, image, surname } = user;
-              console.log(user);
-              //const correctedPath = image.replace(/\\/g, "/");
-              //const imagePath = require(`${apiUrl}/${correctedPath}`);
-
+              const imageUrl = `${apiUrl}/uploads/applicationImages/${image}`;
               return (
                 <li className=" " key={_id}>
                   <div className="text-bg-light d-flex">
                     <div className="d-flex">
                       <img
                         className="application_img"
-                        src={`/application/${image}`}
+                        src={imageUrl}
                         alt="Applicant"
                       />
                     </div>

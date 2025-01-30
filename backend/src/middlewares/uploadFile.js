@@ -1,8 +1,8 @@
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
-const SLIDER_FILE_DIR = "../frontend/public/slider";
-const APPLICATION_FILE_DIR = "../frontend/public/application";
+const SLIDER_FILE_DIR = "uploads/sliderImages";
+const APPLICATION_FILE_DIR = "uploads/applicationImages";
 const MAX_FILE_SIZE = 2097152;
 const ALLOWED_FILE_TYPES = ["image/jpeg", "image/png", "image/jpg"];
 

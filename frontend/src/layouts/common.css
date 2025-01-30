@@ -17,6 +17,11 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.active {
+  font-weight: bold;
+  color: rgb(255, 136, 0);
+}
+
 /* common starts here */
 
 header {

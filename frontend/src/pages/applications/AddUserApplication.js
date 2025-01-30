@@ -53,9 +53,13 @@ const AddUserApplication = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const { surname, givenN } = formData;
+
     if (
-      (formData.surname.length < 3 || formData.surname.length > 31) &&
-      (formData.givenN.length < 3 || formData.givenN.length > 31)
+      surname.length < 3 ||
+      surname.length > 31 ||
+      givenN.length < 3 ||
+      givenN.length > 31
     ) {
       setError(
         "Surname and Given name must be between 3 and 31 characters long."
@@ -93,7 +97,6 @@ const AddUserApplication = () => {
         <h2>Visa Application Form</h2>
         <p>Personal Particulars</p>
         <hr className="user_manage_hr" />
-        {error && <div style={{ color: "red" }}>{error}</div>}
         <form
           onSubmit={handleSubmit}
           className="me-5 absolute"
@@ -236,7 +239,7 @@ const AddUserApplication = () => {
             <textarea
               id="identification"
               name="identification"
-              className="form-control p-4 mb-3"
+              className="form-control mb-3"
               required
               value={formData.identification}
               onChange={onChangeHandler}
@@ -354,12 +357,12 @@ const AddUserApplication = () => {
               value={formData.issuedCountry}
               onChange={onChangeHandler}
             />
+            {error && <span style={{ color: "red" }}>{error}</span>}
           </div>
           <button className="btn btn-primary" type="submit">
             Submit
           </button>
         </form>
-        {error && <span style={{ color: "red" }}>{error}</span>}
       </main>
     </>
   );

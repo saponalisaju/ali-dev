@@ -35,6 +35,8 @@ import SliderManagement from "./pages/sliders/SliderManagement";
 import EditSlider from "./pages/sliders/EditSlider";
 import PrivateRoute from "./pages/PrivateRoute";
 import AddSlider from "./pages/sliders/AddSlider";
+//import imag from "../public/application"
+//import im from "../../backend/uploads/sliderImages"
 
 const App = () => {
   return (

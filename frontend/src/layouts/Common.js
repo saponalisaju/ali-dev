@@ -15,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import React, { useCallback, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./common.css";
 import Img from "../assets/images/avatar.png";
 
@@ -62,18 +62,18 @@ const Common = () => {
               />
             </button>
             <div>
-              <Link to="/dashboard">World Job Visa</Link>
+              <NavLink to="/dashboard">World Job Visa</NavLink>
             </div>
           </div>
           <div className="home-link d-flex">
             <ul className="d-flex">
               <li className="me-4">
-                <Link to="/">Home</Link>
+                <NavLink to="/">Home</NavLink>
               </li>
               <li className="">
-                <Link className="header-image me-4" to="/">
+                <NavLink className="header-image me-4" to="/">
                   <img className="" src={Img} alt="loading"></img>
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -82,65 +82,65 @@ const Common = () => {
           <div className={`d-flex ${isOpen ? "toggled" : ""}`} id="wrapper">
             <aside id="sidebar-wrapper">
               <ul className="">
-                <li className="">
-                  <Link to="/dashboard">
+                <li activeClassName="active">
+                  <NavLink to="/dashboard">
                     <FontAwesomeIcon icon={faHome} />
                     <span className="">Dashboard</span>
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="">
-                  <Link to="/userManagement">
+                <li activeClassName="active">
+                  <NavLink to="/userManagement">
                     <FontAwesomeIcon icon={faUsersViewfinder} />
-                    <span className="">User Management</span>
-                  </Link>
+                    <span>User Management</span>
+                  </NavLink>
                 </li>
-                <li className="">
-                  <Link to="/application">
+                <li activeClassName="active">
+                  <NavLink to="/application">
                     <FontAwesomeIcon icon={faAddressCard} />
                     <span className="">Applications</span>
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="">
-                  <Link to="/company">
+                <li activeClassName="active">
+                  <NavLink to="/company">
                     <FontAwesomeIcon icon={faCube} />
                     <span className="">Company Management</span>
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="">
-                  <Link to="/designation">
+                <li activeClassName="active">
+                  <NavLink to="/designation">
                     <FontAwesomeIcon icon={faMapLocationDot} />
                     <span className="">Designations</span>
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="">
-                  <Link to="/salary">
+                <li activeClassName="active">
+                  <NavLink to="/salary">
                     <FontAwesomeIcon icon={faMoneyBills} />
                     <span className="">Salaries</span>
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="">
-                  <Link to="/page">
+                <li activeClassName="active">
+                  <NavLink to="/page">
                     <FontAwesomeIcon icon={faPaste} />
                     <span className="">Pages</span>
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="">
-                  <Link to="/slider">
+                <li activeClassName="active">
+                  <NavLink to="/slider">
                     <FontAwesomeIcon icon={faSliders} />
                     <span className="">Sliders</span>
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="">
-                  <Link to="/profile">
+                <li activeClassName="active">
+                  <NavLink to="/profile">
                     <FontAwesomeIcon icon={faCircleUser} />
                     <span className="">Profile</span>
-                  </Link>
+                  </NavLink>
                 </li>
-                <li className="">
-                  <Link to="/setting">
+                <li activeClassName="active">
+                  <NavLink to="/setting">
                     <FontAwesomeIcon icon={faGear} />
                     <span className="">Settings</span>
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
                   <button onClick={handleLogout} className="btn btn-secondary ">

@@ -18,7 +18,7 @@ const EditDesignation = () => {
       setName(location.state.name);
     } else {
       // Redirect to a safe page if state is null
-      navigate("/designation");
+      navigate("/salary");
     }
   }, [location.state, navigate]);
 
@@ -41,7 +41,7 @@ const EditDesignation = () => {
             </label>
             <input
               className="form-control p-2 mb-3"
-              type="number"
+              type="name"
               id="name"
               name="name"
               value={name}

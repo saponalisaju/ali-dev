@@ -1,7 +1,7 @@
 
 [build]
   command = "git submodule update --init --recursive && npm install && npm run build"
-  publish = "build"
+  publish = "dist"
 
 [context.production.environment]
   NETLIFY_USE_YARN_CACHE = "true"
@@ -10,5 +10,7 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+  
 
 
