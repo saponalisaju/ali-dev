@@ -1,6 +1,6 @@
 .fixed_image {
   width: 100vw;
-  height: 100vh;
+  height: 45rem;
   overflow: hidden;
 }
 .contact_us_area {
@@ -24,28 +24,29 @@
 }
 
 .contact_us_area {
-  margin: -40rem 0 auto;
+  margin: -38rem 0 auto;
 }
 @media (max-width: 1400px) {
-  .fixed_image {
-    width: 100vw;
-    height: 70vh;
-  }
-  .contact_us_area {
-    margin: -40rem 0 auto;
-  }
-}
-@media (max-width: 1200px) {
-  .fixed_image {
-    width: 100vw;
-    height: 60vh;
-  }
   .contact_us_area {
     margin: -36rem 0 auto;
   }
 }
+@media (max-width: 1200px) {
+  .fixed_image {
+    height: 44rem;
+  }
+  .contact_us_area {
+    margin: -38rem 0 auto;
+  }
+}
 
 @media (max-width: 576px) {
+  .fixed_image {
+    height: 35rem;
+  }
+  .contact_us_area {
+    margin: -35rem 0 auto;
+  }
   .contact_information {
     margin-left: -2rem;
   }

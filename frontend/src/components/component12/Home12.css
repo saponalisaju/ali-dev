@@ -8,7 +8,7 @@
   height: 20rem;
 }
 .content_check {
-  margin: -12rem 6rem;
+  margin: -12rem 7rem;
   color: white;
 }
 
@@ -16,7 +16,7 @@
   padding: 1rem;
   position: absolute;
   color: white;
-  transform: translate(80rem, 6rem);
+  transform: translate(77rem, 6rem);
   cursor: pointer;
 }
 @media (max-width: 1400px) {
@@ -44,20 +44,32 @@
 
 @media (max-width: 576px) {
   .btn_check {
-    transform: translate(26rem, 13rem);
+    transform: translate(24rem, 13rem);
+    padding: 0.7rem;
+  }
+}
+@media (max-width: 480px) {
+  .btn_check {
+    transform: translate(20rem, 11rem);
     padding: 0.7rem;
   }
 }
 
 @media (max-width: 412px) {
+  .content_check {
+    margin: -14rem 7rem;
+  }
   .btn_check {
-    transform: translate(17rem, 13rem);
+    transform: translate(16rem, 14rem);
     padding: 0.7rem;
   }
 }
 @media (max-width: 360px) {
+  .content_check {
+    margin: -16rem 6rem;
+  }
   .btn_check {
-    transform: translate(14rem, 12rem);
+    transform: translate(12rem, 18rem);
     padding: 0.3rem;
   }
 }

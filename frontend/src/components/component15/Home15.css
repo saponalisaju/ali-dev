@@ -1,5 +1,5 @@
 .component_fifteen {
-  margin-top: 14rem;
+  margin-top: 8rem;
 }
 
 .component_fifteen h4,
@@ -14,7 +14,7 @@ p,
 
 .application_process {
   width: 100vw;
-  height: 20vh;
+  height: 10rem;
   font-size: 4rem;
   background-color: rgb(148, 205, 223);
 }
@@ -49,7 +49,7 @@ p,
 }
 @media (max-width: 1400px) {
   .component_fifteen {
-    margin-top: 10rem;
+    margin-top: 6rem;
   }
 }
 @media (max-width: 1200px) {
@@ -77,14 +77,20 @@ p,
 }
 
 @media (max-width: 576px) {
+  .component_fifteen {
+    margin-top: 0rem;
+  }
   .main_content_item {
     margin-left: 4rem;
+  }
+  .application_process {
+    height: 12rem;
   }
 }
 
 @media (max-width: 480px) {
   .main_content_item {
-    margin: 0 auto;
+    margin: -3rem auto 0;
   }
   .component_fifteen {
     margin: 0 auto;
