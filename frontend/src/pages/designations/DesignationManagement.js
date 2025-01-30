@@ -39,13 +39,9 @@ const DesignationManagement = () => {
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
         <div className="user_manage_head d-flex">
-          <h2 className="me-auto heading-heading-btn">
-            Designation Management
-          </h2>
-          <Link to="/addDesignation">
-            <button className="btn btn-primary" type="submit">
-              Add New Designation
-            </button>
+          <h2 className="me-auto user_manage_app">Designation Management</h2>
+          <Link className="btn btn-primary" to="/addDesignation">
+            Add New Designation
           </Link>
         </div>
         <hr className="user_manage_hr" />

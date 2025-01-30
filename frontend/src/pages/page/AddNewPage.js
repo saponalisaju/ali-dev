@@ -44,7 +44,7 @@ const AddNewPage = () => {
     <>
       <Common />
       <main className="add_user">
-        <h2>Create New Page</h2>
+        <h2 className="visa_form">Create New Page</h2>
         <hr className="user_manage_hr" />
         <form onSubmit={handleSubmit}>
           <div>
@@ -66,6 +66,7 @@ const AddNewPage = () => {
               Page Content*
             </label>
             <textarea
+              id="content"
               className="form-control p-2 mb-3"
               name="content"
               placeholder="Enter Content"
@@ -99,6 +100,7 @@ const AddNewPage = () => {
             </label>
             <select
               className="form-select p-2 mb-3"
+              id="status"
               name="status"
               value={status}
               onChange={(e) => {

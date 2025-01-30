@@ -37,11 +37,9 @@ const SalaryManagement = () => {
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
         <div className="user_manage_head d-flex">
-          <h2 className="me-auto">Salary Management</h2>
-          <Link to="/addNewSalary">
-            <button className="btn btn-primary" type="submit">
-              Add New Salary
-            </button>
+          <h2 className="me-auto user_manage_app">Salary Management</h2>
+          <Link className="btn btn-primary" to="/addNewSalary">
+            Add New Salary
           </Link>
         </div>
         <hr />

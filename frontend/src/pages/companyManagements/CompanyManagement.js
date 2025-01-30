@@ -37,11 +37,9 @@ const CompanyManagement = () => {
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
         <div className="user_manage_head d-flex">
-          <h2 className="me-auto">Company Management</h2>
-          <Link to="/addCompany">
-            <button className="btn btn-primary" type="submit">
-              Add New Company
-            </button>
+          <h2 className="me-auto user_manage_app">Company Management</h2>
+          <Link className="btn btn-primary" to="/addCompany">
+            Add New Company
           </Link>
         </div>
         <hr />

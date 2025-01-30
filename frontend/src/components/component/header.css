@@ -29,9 +29,8 @@ nav a:hover {
 }
 
 nav ._img {
-  width: 230px;
-  border-radius: 20%;
-  padding: 1rem;
+  width: 200px;
+  height: 50px;
 }
 
 .active-nav {

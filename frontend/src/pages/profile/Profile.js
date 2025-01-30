@@ -45,7 +45,7 @@ const Profile = () => {
   return (
     <>
       <Common />
-      <main className="user_manage">
+      <main className="add_user">
         <h2>Profile</h2>
         <hr className="user_manage_hr" />
         <form onSubmit={handleSubmit}>
@@ -105,7 +105,7 @@ const Profile = () => {
               required
             />
           </div>
-          <div className="w-full">
+          <div className="w-full pt-2">
             <button
               className="btn btn-primary"
               type="submit"

@@ -39,18 +39,16 @@ const PageManagement = () => {
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
         <div className="user_manage_head  d-flex">
-          <h2 className="me-auto">Page Management</h2>
-          <Link className="" to="/addNewPage">
-            <button className="btn btn-primary " type="submit">
-              Add New Page
-            </button>
+          <h2 className="me-auto user_manage_app">Page Management</h2>
+          <Link className="btn btn-primary " to="/addNewPage">
+            Add New Page
           </Link>
         </div>
         <hr />
         <table className="table table-striped-column table-bordered">
           <thead className="">
             <tr>
-              <th scope="col" className="bg-light">
+              <th scope="col" className="bg-light ">
                 TITLE
               </th>
               <th scope="col" className="bg-light">

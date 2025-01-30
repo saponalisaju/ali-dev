@@ -36,11 +36,9 @@ const SliderManagement = () => {
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
         <div className="user_manage_head  d-flex">
-          <h2 className="me-auto">Slider Management</h2>
-          <Link to="/addSliders">
-            <button className="btn btn-primary p-2" type="submit">
-              Add New Slide
-            </button>
+          <h2 className="me-auto user_manage_app">Slider Management</h2>
+          <Link className="btn btn-primary p-2" to="/addSliders">
+            Add New Slide
           </Link>
         </div>
         <hr className="slider_manage_hr" />

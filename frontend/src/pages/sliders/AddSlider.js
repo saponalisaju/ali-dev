@@ -32,7 +32,7 @@ const AddSlider = () => {
     <>
       <Common />
       <main className="add_user">
-        <h2>Add New Slide</h2>
+        <h2 className="visa_form">Add New Slide</h2>
         <hr className="user_manage_hr" />
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div>
@@ -81,9 +81,12 @@ const AddSlider = () => {
             />
           </div>
           <div>
-            <label htmlFor="status">Status</label>{" "}
+            <label className="form-label" htmlFor="publish">
+              Status
+            </label>{" "}
             <select
-              className="form-select mb-3 p-2"
+              id="publish"
+              className="form-select publish mb-3 p-2"
               name="status"
               value={status}
               onChange={(e) => setStatus(e.target.value)}

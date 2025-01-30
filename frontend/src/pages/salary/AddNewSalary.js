@@ -33,7 +33,7 @@ const AddNewSalary = () => {
     <>
       <Common />
       <main className="add_user">
-        <h2>Create New Salary</h2>
+        <h2 className="visa_form">Create New Salary</h2>
         <hr className="user_manage_hr" />
         <form onSubmit={handleSubmit}>
           <label className="form-label" htmlFor="name">

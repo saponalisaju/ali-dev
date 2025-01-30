@@ -94,9 +94,9 @@ const AddUserApplication = () => {
         tabIndex="0"
         style={{ overflowY: "scroll", maxHeight: "100vh" }}
       >
-        <h2>Visa Application Form</h2>
-        <p>Personal Particulars</p>
-        <hr className="user_manage_hr" />
+        <h2 className="visa_form">Visa Application Form</h2>
+        <p className="particulars">Personal Particulars</p>
+        <hr className="user_manage_hr " />
         <form
           onSubmit={handleSubmit}
           className="me-5 absolute"
@@ -171,12 +171,13 @@ const AddUserApplication = () => {
               />
             </div>
           </div>
-          <div className=" d-flex">
+          <div className="gender_date d-flex">
             <div className="gender w-50 p-1">
               <label className="form-label" htmlFor="sex">
                 Sex*
               </label>
               <select
+                id="sex"
                 className="form-select p-2 mb-3"
                 name="sex"
                 value={formData.sex}
@@ -202,7 +203,7 @@ const AddUserApplication = () => {
               />
             </div>
           </div>
-          <div className=" d-flex">
+          <div className="city_birth d-flex">
             <div className="w-50 p-1">
               <label className="form-label" htmlFor="birthCity">
                 Place of Birth Town/City*
@@ -247,7 +248,7 @@ const AddUserApplication = () => {
               Enter identification marks
             </textarea>
           </div>
-          <div className="d-flex">
+          <div className="company_duration d-flex">
             <div className="phone-no w-50 p-1">
               <label className="form-label" htmlFor="company">
                 Company Name*
@@ -275,7 +276,7 @@ const AddUserApplication = () => {
               />
             </div>
           </div>
-          <div className="d-flex">
+          <div className="d-flex job_title">
             <div className="w-50 p-1">
               <label className="form-label" htmlFor="jobTitle">
                 Job Title*

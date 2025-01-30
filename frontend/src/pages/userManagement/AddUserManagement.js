@@ -48,7 +48,7 @@ const AddUserManagement = () => {
     <>
       <Common />
       <main className="add_user">
-        <h2>Create New User</h2>
+        <h2 className="visa_form">Create New User</h2>
         <hr className="user_manage_hr" />
 
         <form onSubmit={handleSubmit}>

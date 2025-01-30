@@ -61,47 +61,52 @@ const ApplicationManagement = () => {
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
         <div className="user_manage_head d-flex">
-          <h2 className="user_manage_head me-auto">Application Management</h2>
-          <Link to="/addUserApplication">
-            <button className="btn btn-primary ">Add New Application</button>
+          <h2 className="user_manage_app me-auto ">Application Management</h2>
+          <Link className="btn btn-primary " to="/addUserApplication">
+            Add New Application
           </Link>
         </div>
         <hr />
         <div className="d-flex ">
-          <div className="application_fetch">
-            <label className="form-label" htmlFor="name"></label>
-            <select className="form-select" id="name">
-              <option>Sort by status</option>
-              <option>All</option>
-              <option>Pending</option>
-              <option>Approved</option>
-              <option>Rejected</option>
-            </select>
-          </div>
-          <div className="me-auto ms-1">
-            <label className="form-label" htmlFor="admin"></label>
-            <select className="form-select" id="admin">
-              <option>Sort by admin</option>
-              <option>All</option>
-              <option>Rakib</option>
-            </select>
-          </div>
-          <div className="search-bar">
-            <input
-              className="input-search form-control"
-              id="search"
-              type="text"
-              placeholder="Search by passport no..."
-              value={search}
-              onChange={handleSearch}
-            />
+          <div className="search_option d-flex ">
+            <div className="sort_by d-flex gap-2">
+              <div className="application_fetch">
+                <label className="form-label" htmlFor="name"></label>
+                <select className="form-select" id="name">
+                  <option>Sort by status</option>
+                  <option>All</option>
+                  <option>Pending</option>
+                  <option>Approved</option>
+                  <option>Rejected</option>
+                </select>
+              </div>
+              <div className=" ">
+                <label className="form-label" htmlFor="admin"></label>
+                <select className="form-select" id="admin">
+                  <option>Sort by admin</option>
+                  <option>All</option>
+                  <option>Rakib</option>
+                </select>
+              </div>
+            </div>
+            <div className="search-bar">
+              <input
+                className="input-search form-control "
+                id="search"
+                type="text"
+                placeholder="Search by passport no..."
+                value={search}
+                onChange={handleSearch}
+              />
+              <ul>
+                {filteredData.map((item, index) => (
+                  <li key={index}>{item.passportNo}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-        <ul>
-          {filteredData.map((item, index) => (
-            <li key={index}>{item.passportNo}</li>
-          ))}
-        </ul>
+
         <table className="table table-striped-column app_table table-bordered">
           <thead>
             <tr className="tApp_head">

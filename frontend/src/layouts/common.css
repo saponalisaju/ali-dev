@@ -25,7 +25,7 @@ body {
 /* common starts here */
 
 header {
-  max-width: 100vw;
+  width: 100vw;
   height: 5rem;
   display: flex;
   flex-direction: row;
@@ -40,11 +40,6 @@ ul li a {
   font-size: 0.9rem;
 }
 
-.header-icon {
-  margin: 2rem 0 0 2rem;
-  font-size: 0.9rem;
-  font-weight: bold;
-}
 .home-link {
   margin-top: 0.8rem;
   font-size: 1.2rem;
@@ -52,10 +47,7 @@ ul li a {
 ul li {
   padding: 0.8rem;
 }
-ul li.active {
-  background-color: blueviolet;
-  padding: 0.8rem;
-}
+
 /* common ends here */
 
 /* aside starts here */
@@ -64,7 +56,7 @@ aside span {
   padding-left: 1.4rem;
 }
 .main_body {
-  max-width: 100vw;
+  width: 100vw;
   /* max-height: 33vh; */
 }
 aside {
@@ -82,8 +74,17 @@ aside {
   /* margin-left: 60%; */
 }
 
-.image-head {
-  width: 100%;
+.header-image {
+  width: 50px;
+  height: 45px;
+  border-radius: 100%;
+}
+
+.header-icon {
+  margin: 2rem 0 0 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding-left: 2rem;
 }
 
 #wrapper {

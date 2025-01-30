@@ -42,11 +42,9 @@ const UserManagement = () => {
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
         <div className="user_manage_head  d-flex">
-          <h2 className="me-auto ">User Management</h2>
-          <Link to="/addUserManagement">
-            <button className="btn btn-primary  " type="submit">
-              Add New User
-            </button>
+          <h2 className="me-auto user_manage_app">User Management</h2>
+          <Link className="btn btn-primary  " to="/addUserManagement">
+            Add New User
           </Link>
         </div>
         <hr className="user_manage_hr" />

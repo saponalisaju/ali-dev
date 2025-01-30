@@ -1,11 +1,7 @@
 .contain {
   position: absolute;
-  width: 80vw;
   background-color: white;
   margin: 6rem 0 0 17rem;
-}
-.dashboard_hr {
-  width: 80;
 }
 
 .total_app,
@@ -22,6 +18,9 @@
 .total_page {
   background-color: darksalmon;
 }
+.dashboard_hr {
+  width: 33rem;
+}
 
 /* register starts */
 .register {
@@ -37,11 +36,16 @@
 
 /* register ends */
 
+@media (max-width: 1200px) {
+}
 @media (max-width: 768px) {
   .total_app,
   .total_page {
     width: 12rem;
     height: 12rem;
+  }
+  .dashboard_hr {
+    width: 30rem;
   }
 }
 @media (max-width: 576px) {
@@ -54,6 +58,15 @@
   .dashboard {
     flex-direction: column;
   }
+  .dashboard_hr {
+    width: 13rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contain {
+    margin-left: 16rem;
+  }
 }
 
 @media (max-width: 412px) {
@@ -62,13 +75,18 @@
   }
 }
 
-@media (max-width: 412px) {
-  .contain {
-    margin-left: 9.8rem;
-  }
+@media (max-width: 360px) {
   .total_app,
   .total_page {
-    width: 11rem;
-    height: 11rem;
+    width: 10rem;
+    height: 10rem;
+    padding: 0.8rem;
+    margin: 1rem;
+  }
+  .dashboard_hr {
+    width: 10rem;
+  }
+  .contain {
+    margin-left: 10rem;
   }
 }

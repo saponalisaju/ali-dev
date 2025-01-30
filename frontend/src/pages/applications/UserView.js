@@ -46,7 +46,7 @@ const UserView = () => {
               return (
                 <li className=" " key={_id}>
                   <div className="text-bg-light d-flex">
-                    <div className="d-flex">
+                    <div className="d-flex me-auto">
                       <img
                         className="application_img"
                         src={imageUrl}
@@ -57,10 +57,11 @@ const UserView = () => {
                       <h3 className="ms-3 image_heading text-center">
                         {surname}
                       </h3>
-                      <Link to="/editApplication">
-                        <button className="btn btn-primary  btn_approved">
-                          Approve
-                        </button>
+                      <Link
+                        className="btn btn-primary  btn_approved"
+                        to="/editApplication"
+                      >
+                        Approve
                       </Link>
                       <button
                         className="btn btn-danger   btn_approved"
