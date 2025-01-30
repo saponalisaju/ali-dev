@@ -70,6 +70,9 @@
 }
 
 @media (max-width: 412px) {
+  .register-form {
+    width: 20rem;
+  }
   .contain {
     margin-left: 11rem;
   }
