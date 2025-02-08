@@ -266,30 +266,30 @@ const UserView = () => {
                     </table>
                   </td>
                 </tr>
-                <div className="file_upload m-3 ">
-                  <h3 className="d-flex job_letter">Job Letter</h3>
-                  <form
-                    onSubmit={handleSubmit}
-                    className="form-control d-flex"
-                    encType="multipart/form-data"
-                  >
-                    <input
-                      className="form-control me-3"
-                      type="file"
-                      multiple
-                      name="file"
-                      onChange={handleChange}
-                    />
-                    <button className="btn btn-primary btn-sm" type="submit">
-                      Upload
-                    </button>
-                  </form>
-                </div>
-                <div className="print_option">
-                  <PrintButton apiUrl={apiUrl} formData={formData} />
-                </div>
               </tbody>
             </table>
+            <div className="file_upload m-3 ">
+              <h3 className="d-flex job_letter">Job Letter</h3>
+              <form
+                onSubmit={handleSubmit}
+                className="form-control d-flex"
+                encType="multipart/form-data"
+              >
+                <input
+                  className="form-control me-3"
+                  type="file"
+                  multiple
+                  name="file"
+                  onChange={handleChange}
+                />
+                <button className="btn btn-primary btn-sm" type="submit">
+                  Upload
+                </button>
+              </form>
+            </div>
+            <div className="print_option">
+              <PrintButton apiUrl={apiUrl} formData={formData} />
+            </div>
             <div className="justify-content-end d-flex theme_description ">
               <Link
                 onClick={() => handlePending(id)}

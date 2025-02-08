@@ -8,30 +8,33 @@ const AddUserApplication = () => {
   const [applications, setApplications] = useState([]);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
-    surname: " ",
-    givenN: " ",
-    email: " ",
-    phone: " ",
-    nationalId: " ",
+    surname: "",
+    givenN: "",
+    email: "",
+    phone: "",
+    nationalId: "",
     sex: "",
-    dob: " ",
-    birthCity: " ",
-    currentN: " ",
+    dob: "",
+    birthCity: "",
+    currentN: "",
     identification: "",
-    company: " ",
-    dutyDuration: " ",
-    jobTitle: " ",
-    salary: " ",
+    company: "",
+    dutyDuration: "",
+    jobTitle: "",
+    salary: "",
     image: null,
-    passport: " ",
-    issuedCountry: " ",
+    passport: "",
+    issuedCountry: "",
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await api.get(`/fetchApplication`);
         setApplications(response.data.applications);
+        console.log(response);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -45,7 +48,7 @@ const AddUserApplication = () => {
 
     if (type === "file") {
       const selectedFile = files[0];
-      const maxSize = 2 * 1024 * 1024;
+      const maxSize = 2 * 1024 * 1024; // 2 MB
       if (selectedFile && selectedFile.size > maxSize) {
         setError("File size exceeds the limit of 2 MB.");
         setFormData((prevData) => ({ ...prevData, image: null }));
@@ -58,13 +61,12 @@ const AddUserApplication = () => {
     }
   };
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { surname, givenN, email } = formData;
+    const { surname, givenN, email, image, ...rest } = formData;
 
+    // Validate surname and given name length
     if (
       surname.trim().length < 3 ||
       surname.trim().length > 31 ||
@@ -77,22 +79,36 @@ const AddUserApplication = () => {
       return;
     }
 
+    // Check if the user already exists
     const userExists = applications.some((u) => u.email === email);
     if (userExists) {
       setError("User already exists. Please try another...");
       return;
     }
+
     try {
       const formDataToSend = new FormData();
-      Object.keys(formData).forEach((key) => {
+      formDataToSend.append("surname", surname.trim());
+      formDataToSend.append("givenN", givenN.trim());
+      formDataToSend.append("email", email.trim());
+
+      // Append the rest of the fields if they are not empty or null
+      Object.keys(rest).forEach((key) => {
         if (formData[key] !== "" && formData[key] !== null) {
           formDataToSend.append(key, formData[key]);
         }
       });
 
-      const response = await api.post(`/addApplication`, formDataToSend);
+      if (image) {
+        formDataToSend.append("image", image);
+      }
+
+      const response = await api.post(`/addApplication`, formDataToSend, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       if (response.status === 201) {
         navigate("/application", { replace: true });
+        setError(""); // Clear error message on success
       } else {
         setError(
           `Failed to add application. Server responded with status: ${response.status}`

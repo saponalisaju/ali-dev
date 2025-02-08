@@ -9,12 +9,15 @@ const sendEmail = require("../helpers/mail");
 exports.fetchApplication = async (req, res) => {
   const { page = 1, limit = 10, search = "" } = req.query;
   try {
+    const app = await Application.find({});
     const applications = await Application.find({
       passport: { $regex: search, $options: "i" },
     })
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec();
+
+    console.log(app);
 
     const count = await Application.countDocuments({
       passport: { $regex: search, $options: "i" },
@@ -110,7 +113,6 @@ exports.addApplication = async (req, res) => {
 exports.updateApplication = async (req, res) => {
   try {
     const { id } = req.params;
-
     const updatedUser = await Application.findByIdAndUpdate(id, req.body, {
       new: true,
     });

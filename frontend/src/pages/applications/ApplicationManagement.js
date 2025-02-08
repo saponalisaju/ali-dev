@@ -13,9 +13,10 @@ const ApplicationManagement = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get("/fetchApplication", {
+        const response = await api.get(`/fetchApplication`, {
           params: { page, limit: 10, search },
         });
+        console.log("hello", response.data.applications);
         setApplications(response.data.applications);
         setTotalPages(response.data.totalPages);
       } catch (error) {

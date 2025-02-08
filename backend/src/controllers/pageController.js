@@ -2,24 +2,8 @@ const Page = require("../models/pageModel");
 
 exports.fetchPage = async (req, res) => {
   try {
-    const search = req.query.search || "";
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const startIndex = (page - 1) * limit;
-
-    const searchRegExp = new RegExp(".*" + search + ".*", "i");
-    const filter = { $or: [{ title: { $regex: searchRegExp } }] };
-
-    const totalCount = await Page.countDocuments(filter);
-    const pages = await Page.find(filter).skip(startIndex).limit(limit);
-
-    res.json({
-      page,
-      limit,
-      totalItems: totalCount,
-      totalPages: Math.ceil(totalCount / limit),
-      items: pages,
-    });
+    const pages = await Page.find({});
+    res.json(pages);
   } catch (error) {
     console.error("Error fetching pages:", error.message);
     res.status(500).json({
