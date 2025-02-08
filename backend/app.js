@@ -21,13 +21,13 @@ const { clientURL } = require("./secret");
 
 //middleware
 const allowedOrigins = [
-  clientURL,
+  "http://localhost:3000",
   "https://jobsvisa24.netlify.app",
   "https://www.jobsvisa24.com",
 ];
 const corsOptions = {
   origin: (origin, callback) => {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+    if (allowedOrigins.includes(origin) || !origin) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
@@ -58,11 +58,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(__dirname, "build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
 app.use(express.static(__dirname + "public"));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
@@ -87,11 +82,15 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+// app.use(express.static(path.join(__dirname, "build")));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "build", "index.html"));
+// });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
-});
+// app.use(express.static(path.join(__dirname, "../frontend/build")));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+// });
 
 app.use("/api/users", userRouter);
 app.use("/api/designation", designationRouter);

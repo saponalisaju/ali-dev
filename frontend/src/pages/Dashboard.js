@@ -6,6 +6,14 @@ import "./auth.css";
 import axios from "axios";
 import apiUrl from "../secret";
 
+const api = axios.create({
+  baseURL: `${apiUrl}/api/application`,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});
+
 const Dashboard = () => {
   const [applications, setApplications] = useState([]);
   const [totalApplication, setTotalApplication] = useState();
@@ -14,14 +22,27 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(
-        `${apiUrl}/api/application/fetchApplication`,
-        { params: { page, limit: 10 } }
-      );
-      console.log(response);
-      setApplications(response.data.applications);
-      setTotalApplication(response.data.totalApplication);
-      setTotalPages(response.data.totalPages);
+      try {
+        const response = await api.get("/fetchApplication", {
+          params: { page, limit: 10 },
+        });
+        console.log(response);
+        setApplications(response.data.applications);
+        setTotalApplication(response.data.totalApplication);
+        setTotalPages(response.data.totalPages);
+      } catch (error) {
+        if (error.response) {
+          console.error("Error response:", error.response.data);
+          console.error("Error status:", error.response.status);
+          console.error("Error headers:", error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.error("Error request:", error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.error("Error message:", error.message);
+        }
+      }
     };
     fetchData();
   }, [page]);
