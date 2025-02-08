@@ -66,10 +66,10 @@ app.get("*", (req, res) => {
 app.use(express.static(__dirname + "public"));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// app.get("/uploads/file/", (req, res) => {
-//   res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
-//   res.sendFile(path.join(__dirname, "uploads", "file"));
-// });
+app.get("/uploads/file/", (req, res) => {
+  res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+  res.sendFile(path.join(__dirname, "uploads", "file"));
+});
 
 app.use((req, res, next) => {
   res.setHeader(
@@ -87,11 +87,11 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+});
 
 app.use("/api/users", userRouter);
 app.use("/api/designation", designationRouter);
