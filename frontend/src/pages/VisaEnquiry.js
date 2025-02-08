@@ -127,9 +127,13 @@ const VisaEnquiry = () => {
   const [currentN, setCurrentN] = useState("");
   const [dob, setDob] = useState("");
   const [passport, setPassport] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
     try {
       const response = await axios.get(
         `${apiUrl}/api/application/fetchApplicationEnquiry`,
@@ -143,10 +147,13 @@ const VisaEnquiry = () => {
         });
       } else {
         console.log("No application found");
+        setError("No application found.");
       }
     } catch (error) {
-      console.error("Error fetching application:", error); // Debugging line
+      console.error("Error fetching application:", error);
+      setError("Error fetching application. Please try again."); // Debugging line
     }
+    setLoading(false);
   };
 
   return (
@@ -204,18 +211,30 @@ const VisaEnquiry = () => {
               id="dob"
             />
 
-            <button type="submit" className="btn btn-success me-1">
-              Submit
+            <button
+              type="submit"
+              className="btn btn-success me-1"
+              disabled={loading}
+            >
+              {loading ? "Submitting..." : "Submit"}
             </button>
             <button type="reset" className="btn btn-danger">
               Clear
             </button>
           </div>
+          {error && <p className="text-danger">{error}</p>}
         </form>
 
         <p className="footer_area text-bg-dark p-4 text-center">
           &copy; 2024 Job Visa All Rights Reserved.
         </p>
+        {application && (
+          <div className="application-details">
+            <h3>Application Details</h3>
+            <p>Name: {application.name}</p>
+            <p>Details: {application.details}</p>
+          </div>
+        )}
       </div>
     </>
   );

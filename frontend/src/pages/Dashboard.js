@@ -46,6 +46,34 @@ const Dashboard = () => {
             <h4 className="">Total Pages</h4>
           </div>
         </div>
+
+        {/* Displaying Applications */}
+        <div className="applications-list">
+          <h3>Applications</h3>
+          {applications.map((app, index) => (
+            <div key={index} className="application-item">
+              <p>{app.name}</p>
+              <p>{app.details}</p>
+            </div>
+          ))}
+        </div>
+        {/* Pagination Controls */}
+        <div className="pagination-controls">
+          <button
+            onClick={() => setPage(page - 1)}
+            disabled={page === 1}
+            className="btn btn-primary me-2"
+          >
+            Previous
+          </button>
+          <button
+            onClick={() => setPage(page + 1)}
+            disabled={page === totalPages}
+            className="btn btn-primary"
+          >
+            Next
+          </button>
+        </div>
       </main>
     </>
   );
