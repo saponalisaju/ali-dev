@@ -29,9 +29,9 @@ table {
 
 .user_manage,
 .add_user {
-  width: 70rem;
+  width: 68rem;
   margin-top: 5rem;
-  padding-top: 0.5rem;
+  padding: 0.5rem 1.5rem 0 0;
   position: absolute;
   margin-left: 17rem;
 }
@@ -48,6 +48,44 @@ table {
 .search-bar {
   margin-left: auto;
 }
+
+.search_box {
+  width: 100%;
+}
+
+.search_box .input-search {
+  width: 15rem;
+  height: 3.5rem;
+}
+
+/* attachment start */
+.print_component {
+  width: 100%;
+}
+
+.attachment {
+  width: 100%;
+}
+/* attachment end */
+
+/* paginated list css start */
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination li {
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.pagination li.active {
+  font-weight: bold;
+}
+
+/* paginated list css end */
 
 @media (max-width: 1400px) {
   .user_manage,
@@ -95,6 +133,9 @@ table {
 }
 
 @media (max-width: 576px) {
+  .theme_description {
+    flex-direction: column;
+  }
   .user_manage,
   .add_user {
     width: 18rem;
@@ -135,6 +176,9 @@ table {
 }
 
 @media (max-width: 480px) {
+  .view_one_head {
+    margin: 0;
+  }
   .user_manage_head {
     flex-direction: column;
   }

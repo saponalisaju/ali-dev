@@ -54,7 +54,9 @@ const pageSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(addPage.fulfilled, (state, action) => {
-        state.users.push(action.payload);
+        if (Array.isArray(state.users)) {
+          state.users.push(action.payload); // Ensure state.users is an array
+        }
       })
       .addCase(updatePage.fulfilled, (state, action) => {
         const index = state.users.findIndex(

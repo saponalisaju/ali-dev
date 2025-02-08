@@ -3,6 +3,14 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const { defaultImagePath } = require("../../secret");
 
+const formatDate = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
 const applicationSchema = mongoose.Schema(
   {
     surname: { type: String, required: true },
@@ -21,8 +29,14 @@ const applicationSchema = mongoose.Schema(
     salary: { type: String, required: true },
     image: { type: String, default: defaultImagePath, required: true },
     path: { type: String },
+    file: { type: String, default: "" },
+    filePath: { type: String, default: "" },
     passport: { type: String, required: true },
     issuedCountry: { type: String, required: true },
+    isStatus: { type: String, default: "pending" },
+    isAdmin: { type: Boolean, default: true },
+    pending: { type: String, default: formatDate },
+    approve: { type: String, default: "" },
   },
   { timestamps: true }
 );

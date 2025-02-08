@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faFileCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import Common from "../layouts/Common";
 import "./auth.css";
+import axios from "axios";
+import apiUrl from "../secret";
 
 const Dashboard = () => {
+  const [applications, setApplications] = useState([]);
+  const [totalApplication, setTotalApplication] = useState();
+  const [totalPages, setTotalPages] = useState(0);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(
+        `${apiUrl}/api/application/fetchApplication`,
+        { params: { page, limit: 10 } }
+      );
+      console.log(response);
+      setApplications(response.data.applications);
+      setTotalApplication(response.data.totalApplication);
+      setTotalPages(response.data.totalPages);
+    };
+    fetchData();
+  }, [page]);
   return (
     <>
       <Common />
@@ -17,12 +37,12 @@ const Dashboard = () => {
         <div className="d-flex dashboard">
           <div className="total_app">
             <FontAwesomeIcon className="icon" icon={faFileCircleCheck} />
-            <h2 className=" ">14</h2>
+            <h2 className=" ">{totalApplication}</h2>
             <h4 className="">Total Application</h4>
           </div>
           <div className="total_page">
             <FontAwesomeIcon className="icon" icon={faCopy} />
-            <h2 className=" ">0</h2>
+            <h2 className=" ">{page}</h2>
             <h4 className="">Total Pages</h4>
           </div>
         </div>

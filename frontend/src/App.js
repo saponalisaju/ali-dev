@@ -35,8 +35,8 @@ import SliderManagement from "./pages/sliders/SliderManagement";
 import EditSlider from "./pages/sliders/EditSlider";
 import PrivateRoute from "./pages/PrivateRoute";
 import AddSlider from "./pages/sliders/AddSlider";
-//import imag from "../public/application"
-//import im from "../../backend/uploads/sliderImages"
+import VisaEnquiry from "./pages/VisaEnquiry";
+import ViewOne from "./pages/applications/ViewOne";
 
 const App = () => {
   return (
@@ -93,6 +93,14 @@ const App = () => {
           />
           <Route
             path="/userView"
+            element={
+              <PrivateRoute>
+                <UserView />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/updateApplicationView/:id"
             element={
               <PrivateRoute>
                 <UserView />
@@ -219,12 +227,35 @@ const App = () => {
               </PrivateRoute>
             }
           />
-
           <Route
             path="/dashboard"
             element={
               <PrivateRoute>
                 <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/enquiry"
+            element={
+              <PrivateRoute>
+                <VisaEnquiry />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/view-one"
+            element={
+              <PrivateRoute>
+                <ViewOne />
               </PrivateRoute>
             }
           />

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { editDesignation } from "./DesignationSlice";
 import Common from "../../layouts/Common";
 import "../../assets/styles/main.css";
+import axios from "axios";
+import apiUrl from "../../secret";
 
 const EditDesignation = () => {
   const location = useLocation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [_id, setId] = useState("");
+  const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
 
@@ -22,15 +21,28 @@ const EditDesignation = () => {
     }
   }, [location.state, navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (name.length < 3 || name.length > 31) {
       setError("Designation name must be between 3 and 31 characters long.");
       return;
     }
-    dispatch(editDesignation({ _id, name }));
-    navigate("/designation");
+
+    try {
+      const response = await axios.put(
+        `${apiUrl}/api/designation/editDesignation/${id}`,
+        { name }
+      );
+      if (response.status === 200) {
+        navigate("/designation", { replace: true });
+      } else {
+        setError("Failed to update designation.");
+      }
+    } catch (error) {
+      console.error("Error updating designation:", error);
+      setError("Error updating designation. Please try again.");
+    }
   };
 
   return (

@@ -4,6 +4,7 @@ import Common from "../../layouts/Common";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePage, fetchPage } from "./pageSlice";
 import "../../assets/styles/main.css";
+//import PagesList from "../../components/PagesList";
 
 const PageManagement = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const PageManagement = () => {
       <div className="example5">
         <Common />
       </div>
+
       <main
         data-bs-spy="scroll"
         data-bs-target="#example5"
@@ -49,6 +51,9 @@ const PageManagement = () => {
           <thead className="">
             <tr>
               <th scope="col" className="bg-light ">
+                SL No.
+              </th>
+              <th scope="col" className="bg-light ">
                 TITLE
               </th>
               <th scope="col" className="bg-light">
@@ -66,13 +71,13 @@ const PageManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {users &&
+            {Array.isArray(users) ? (
               users?.map((user) => {
                 const { _id, title, content, link } = user;
                 return (
                   <tr key={_id}>
                     <td>{title}</td>
-                    <td> {status ? "Published" : "Pending"}</td>
+                    <td>{status ? "Published" : "Pending"}</td>
                     <td>{content}</td>
                     <td>
                       <a href={link} target="_blank" rel="noopener noreferrer">
@@ -99,9 +104,15 @@ const PageManagement = () => {
                     </td>
                   </tr>
                 );
-              })}
+              })
+            ) : (
+              <tr>
+                <td colSpan="2">No users found.</td>
+              </tr>
+            )}
           </tbody>
         </table>
+        {/* <PagesList /> */}
       </main>
     </>
   );

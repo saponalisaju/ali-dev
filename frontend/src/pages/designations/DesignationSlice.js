@@ -11,15 +11,17 @@ const api = axios.create({
 });
 
 export const fetchDesignation = createAsyncThunk(
-  "users/fetchDesignation",
-  async () => {
-    const response = await api.get("/fetchDesignation");
+  "designations/fetchDesignation",
+  async ({ page, limit, search }) => {
+    const response = await api.get(`/fetchDesignation`, {
+      params: { page, limit, search },
+    });
     return response.data;
   }
 );
 
 export const addDesignation = createAsyncThunk(
-  "users/addDesignation",
+  "designations/addDesignation",
   async (newUser) => {
     const response = await api.post("/addDesignation", newUser);
     return response.data;
@@ -27,7 +29,7 @@ export const addDesignation = createAsyncThunk(
 );
 
 export const editDesignation = createAsyncThunk(
-  "users/editDesignation",
+  "designations/editDesignation",
   async (editDesignation, { rejectWithValue }) => {
     const { _id, ...userData } = editDesignation;
     try {
@@ -45,7 +47,7 @@ export const editDesignation = createAsyncThunk(
 );
 
 export const deleteDesignation = createAsyncThunk(
-  "users/deleteDesignation",
+  "designations/deleteDesignation",
   async (id, { rejectWithValue }) => {
     try {
       const response = await api.delete(`/deleteDesignation/${id}`);
@@ -62,8 +64,13 @@ export const deleteDesignation = createAsyncThunk(
 );
 
 export const designationSlice = createSlice({
-  name: "users",
-  initialState: { users: [], status: "idle", error: null },
+  name: "designations",
+  initialState: {
+    users: [],
+    status: "idle",
+    error: null,
+    totalPages: 1,
+  },
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -72,25 +79,30 @@ export const designationSlice = createSlice({
       })
       .addCase(fetchDesignation.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.users = action.payload;
+        state.designations = action.payload.designations;
+        state.totalPages = action.payload.totalPages;
       })
       .addCase(fetchDesignation.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       })
       .addCase(addDesignation.fulfilled, (state, action) => {
-        state.users.push(action.payload);
+        if (Array.isArray(state.designations)) {
+          state.designations.push(action.payload);
+        }
       })
       .addCase(editDesignation.fulfilled, (state, action) => {
-        const index = state.users.findIndex(
+        const index = state.designations.findIndex(
           (user) => user._id === action.payload._id
         );
         if (index !== -1) {
-          state.users[index] = action.payload;
+          state.designations[index] = action.payload;
         }
       })
       .addCase(deleteDesignation.fulfilled, (state, action) => {
-        state.users = state.users.filter((user) => user._id !== action.payload);
+        state.designations = state.designations.filter(
+          (user) => user._id !== action.payload
+        );
       });
   },
 });

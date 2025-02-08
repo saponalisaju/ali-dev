@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Common from "../../layouts/Common";
-
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import "../../assets/styles/main.css";
-import { updateApplication } from "./applicationSlice";
+import axios from "axios";
+import apiUrl from "../../secret";
 
 const EditApplication = () => {
-  const [_id, setId] = useState(" ");
+  const [error, setError] = useState("");
+  const [id, setId] = useState(" ");
   const [formData, setFormData] = useState({
     surname: " ",
     givenN: " ",
@@ -22,6 +22,8 @@ const EditApplication = () => {
     company: " ",
     dutyDuration: " ",
     jobTitle: " ",
+    image: null,
+    file: null,
     salary: " ",
     passport: " ",
     issuedCountry: " ",
@@ -32,7 +34,6 @@ const EditApplication = () => {
   };
 
   const location = useLocation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,10 +45,35 @@ const EditApplication = () => {
     }
   }, [location.state, navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(updateApplication({ ...formData, _id }));
-    navigate("/application");
+    const { surname, givenN } = formData;
+
+    if (
+      surname.trim().length < 3 ||
+      surname.trim().length > 31 ||
+      givenN.trim().length < 3 ||
+      givenN.trim().length > 31
+    ) {
+      setError(
+        "Surname and Given name must be between 3 and 31 characters long."
+      );
+      return;
+    }
+    try {
+      const response = await axios.put(
+        `${apiUrl}/api/application/updateApplication/${id}`,
+        { ...formData, id }
+      );
+      if (response.status === 200) {
+        navigate("/application", { replace: true });
+      } else {
+        setError("Failed to update application.");
+      }
+    } catch (error) {
+      console.error("Error updating application:", error);
+      setError("Error updating application. Please try again.");
+    }
   };
   return (
     <>
@@ -300,7 +326,7 @@ const EditApplication = () => {
                     onChange={onChangeHandler}
                   />
                 </div> */}
-          <div className="id-number w-50 p-1">
+          <div className="id-number  p-1">
             <label className="form-label" htmlFor="passport">
               Passport*
             </label>
@@ -327,7 +353,7 @@ const EditApplication = () => {
               onChange={onChangeHandler}
             />
           </div>
-
+          {error && <div style={{ color: "red" }}>{error}</div>}
           <button className="btn btn-primary" type="submit">
             Submit
           </button>

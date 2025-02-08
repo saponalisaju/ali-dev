@@ -83,61 +83,91 @@ const Common = () => {
             <aside id="sidebar-wrapper">
               <ul className="">
                 <li>
-                  <NavLink activeClassName="active" to="/dashboard">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                    to="/dashboard"
+                  >
                     <FontAwesomeIcon icon={faHome} />
                     <span className="">Dashboard</span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink activeClassName="active" to="/userManagement">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                    to="/userManagement"
+                  >
                     <FontAwesomeIcon icon={faUsersViewfinder} />
                     <span>User Management</span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink activeClassName="active" to="/application">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                    to="/application"
+                  >
                     <FontAwesomeIcon icon={faAddressCard} />
                     <span className="">Applications</span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink activeClassName="active" to="/company">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                    to="/company"
+                  >
                     <FontAwesomeIcon icon={faCube} />
                     <span className="">Company Management</span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink activeClassName="active" to="/designation">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                    to="/designation"
+                  >
                     <FontAwesomeIcon icon={faMapLocationDot} />
                     <span className="">Designations</span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink activeClassName="active" to="/salary">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                    to="/salary"
+                  >
                     <FontAwesomeIcon icon={faMoneyBills} />
                     <span className="">Salaries</span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink activeClassName="active" to="/page">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                    to="/page"
+                  >
                     <FontAwesomeIcon icon={faPaste} />
                     <span className="">Pages</span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink activeClassName="active" to="/slider">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                    to="/slider"
+                  >
                     <FontAwesomeIcon icon={faSliders} />
                     <span className="">Sliders</span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink activeClassName="active" to="/profile">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                    to="/profile"
+                  >
                     <FontAwesomeIcon icon={faCircleUser} />
                     <span className="">Profile</span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink activeClassName="active" to="/setting">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                    to="/setting"
+                  >
                     <FontAwesomeIcon icon={faGear} />
                     <span className="">Settings</span>
                   </NavLink>

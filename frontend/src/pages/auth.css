@@ -21,6 +21,24 @@
 .dashboard_hr {
   width: 33rem;
 }
+/* ------visa enquiry starts here----- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.enquiry_image {
+  width: 50px;
+  height: 50px;
+}
+.formWhatsUp {
+  max-width: 100vw;
+  height: 10vh;
+  margin-left: 60rem;
+}
+
+/* ------visa enquiry ends here----- */
 
 /* register starts */
 .register {

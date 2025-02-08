@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Common from "../../layouts/Common";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addApplication } from "./applicationSlice";
 import "../../assets/styles/main.css";
+import apiUrl from "../../secret";
+import axios from "axios";
 
 const AddUserApplication = () => {
+  const [applications, setApplications] = useState([]);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     surname: " ",
@@ -27,7 +28,20 @@ const AddUserApplication = () => {
     issuedCountry: " ",
   });
 
-  const { users } = useSelector((state) => state.applications);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(
+          `${apiUrl}/api/application/fetchApplication`
+        );
+        setApplications(response.data.applications);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const onChangeHandler = (e) => {
     const { name, value, type, files } = e.target;
@@ -47,19 +61,18 @@ const AddUserApplication = () => {
     }
   };
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { surname, givenN } = formData;
+    const { surname, givenN, email } = formData;
 
     if (
-      surname.length < 3 ||
-      surname.length > 31 ||
-      givenN.length < 3 ||
-      givenN.length > 31
+      surname.trim().length < 3 ||
+      surname.trim().length > 31 ||
+      givenN.trim().length < 3 ||
+      givenN.trim().length > 31
     ) {
       setError(
         "Surname and Given name must be between 3 and 31 characters long."
@@ -67,18 +80,34 @@ const AddUserApplication = () => {
       return;
     }
 
-    const existUser = users.some((u) => u.email === formData.email);
-    if (existUser) {
+    const userExists = applications.some((u) => u.email === email);
+    if (userExists) {
       setError("User already exists. Please try another...");
       return;
     }
-    const formDataToSend = new FormData();
-    Object.keys(formData).forEach((key) => {
-      formDataToSend.append(key, formData[key]);
-    });
+    try {
+      const formDataToSend = new FormData();
+      Object.keys(formData).forEach((key) => {
+        if (formData[key] !== "" && formData[key] !== null) {
+          formDataToSend.append(key, formData[key]);
+        }
+      });
 
-    dispatch(addApplication(formDataToSend));
-    navigate("/application", { replace: true });
+      const response = await axios.post(
+        `${apiUrl}/api/application/addApplication`,
+        formDataToSend
+      );
+      if (response.status === 201) {
+        navigate("/application", { replace: true });
+      } else {
+        setError(
+          `Failed to add application. Server responded with status: ${response.status}`
+        );
+      }
+    } catch (error) {
+      console.error("Error adding application:", error);
+      setError("Error adding application. Please try again.");
+    }
   };
 
   return (

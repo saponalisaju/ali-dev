@@ -6,7 +6,6 @@ import companyReducer from "../pages/companyManagements/companySlice";
 import pageReducer from "../pages/page/pageSlice";
 import salaryReducer from "../pages/salary/salarySlice";
 import slidersReducer from "../pages/sliders/sliderSlice";
-import applicationReducer from "../pages/applications/applicationSlice";
 
 const store = configureStore({
   reducer: {
@@ -16,7 +15,6 @@ const store = configureStore({
     page: pageReducer,
     salary: salaryReducer,
     slider: slidersReducer,
-    applications: applicationReducer,
   },
 });
 

@@ -28,11 +28,7 @@ const Component1 = () => {
                 </h4>
               </div>
               <div className="button">
-                <Link
-                  to="/application"
-                  type="button"
-                  className="btnCheck btn   "
-                >
+                <Link to="/enquiry" type="button" className="btnCheck btn   ">
                   CHECK YOUR APPLICATION STATUS
                 </Link>
               </div>

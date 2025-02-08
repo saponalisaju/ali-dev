@@ -66,6 +66,11 @@ app.use((req, res, next) => {
 app.use(express.static(__dirname + "public"));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+// app.get("/uploads/file/", (req, res) => {
+//   res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+//   res.sendFile(path.join(__dirname, "uploads", "file"));
+// });
+
 app.use((req, res, next) => {
   res.setHeader(
     "Cross-Origin-Resource-Policy",

@@ -14,6 +14,8 @@ const defaultImagePath = process.env.DEFAULT_PATH_APPLICATION_DIRECTORY || "";
 const defaultPath = process.env.DEFAULT_PATH_SLIDER_DIRECTORY || "";
 
 const clientURL = process.env.CLIENT_URL || "http://localhost:3000";
+const smtpEmail = process.env.SMTP_USERNAME;
+const smtpPass = process.env.SMTP_PASSWORD;
 
 module.exports = {
   serverPort,
@@ -26,4 +28,6 @@ module.exports = {
   jwtResetPasswordKey,
   jwtAccessKey,
   clientURL,
+  smtpEmail,
+  smtpPass,
 };

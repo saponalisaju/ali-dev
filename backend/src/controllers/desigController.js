@@ -1,21 +1,37 @@
 const Designation = require("../models/designationModel");
 
 exports.fetchDesignation = async (req, res) => {
+  const { page = 1, limit = 5, search = "" } = req.query;
   try {
-    const designations = await Designation.find({});
-    res.status(200).json(designations);
+    const designations = await Designation.find({
+      name: { $regex: search, $options: "i" },
+    })
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec();
+
+    const count = await Designation.countDocuments({
+      name: { $regex: search, $options: "i" },
+    });
+
+    res.json({
+      designations,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page,
+    });
   } catch (error) {
-    console.error("Error fetching designations:", error.message);
+    console.error("Error fetching pages:", error.message);
     res.status(500).json({
-      message: "An error occurred while fetching designations.",
+      message: "An error occurred while fetching pages.",
       error: error.message,
     });
   }
 };
 
 exports.addDesignation = async (req, res) => {
+  const { name } = req.body;
   try {
-    const newDesignation = new Designation(req.body);
+    const newDesignation = new Designation({ name });
     await newDesignation.save();
     res.status(201).json(newDesignation);
   } catch (error) {
@@ -25,16 +41,21 @@ exports.addDesignation = async (req, res) => {
 };
 
 exports.editDesignation = async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
   try {
-    const { id } = req.params;
-    const updatedUser = await Designation.findByIdAndUpdate(id, req.body, {
-      new: true,
-    });
-
-    await updatedUser.save();
-    res.json(updatedUser);
+    const updatedDesignation = await Designation.findByIdAndUpdate(
+      id,
+      { name },
+      { new: true }
+    );
+    if (!updatedDesignation) {
+      return res.status(404).json({ message: "Designation not found" });
+    }
+    res.status(200).json(updatedDesignation);
   } catch (error) {
-    res.status(500).send(error.message);
+    console.error("Error updating designation:", error);
+    res.status(500).json({ message: error.message });
   }
 };
 
