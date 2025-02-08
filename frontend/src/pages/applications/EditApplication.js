@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Common from "../../layouts/Common";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../../assets/styles/main.css";
-import axios from "axios";
-import apiUrl from "../../secret";
+import api from "./api";
 
 const EditApplication = () => {
   const [error, setError] = useState("");
@@ -61,10 +60,10 @@ const EditApplication = () => {
       return;
     }
     try {
-      const response = await axios.put(
-        `${apiUrl}/api/application/updateApplication/${id}`,
-        { ...formData, id }
-      );
+      const response = await api.put(`/updateApplication/${id}`, {
+        ...formData,
+        id,
+      });
       if (response.status === 200) {
         navigate("/application", { replace: true });
       } else {

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Common from "../../layouts/Common";
 import "../../assets/styles/main.css";
-import axios from "axios";
-import apiUrl from "../../secret";
+import api from "./api";
 
 const EditDesignation = () => {
   const location = useLocation();
@@ -30,10 +29,7 @@ const EditDesignation = () => {
     }
 
     try {
-      const response = await axios.put(
-        `${apiUrl}/api/designation/editDesignation/${id}`,
-        { name }
-      );
+      const response = await api.put(`/editDesignation/${id}`, { name });
       if (response.status === 200) {
         navigate("/designation", { replace: true });
       } else {

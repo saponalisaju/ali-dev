@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Common from "../../layouts/Common";
 import "../../assets/styles/main.css";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import apiUrl from "../../secret";
-import axios from "axios";
 import PrintButton from "./PrintButton";
+import api from "./api";
+import apiUrl from "../../secret";
 
 const UserView = () => {
   const [error, setError] = useState("");
@@ -67,11 +67,9 @@ const UserView = () => {
     });
 
     try {
-      const response = await axios.put(
-        `${apiUrl}/api/application/updateApplicationAdd/${id}`,
-        data,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
+      const response = await api.put(`/updateApplicationAdd/${id}`, data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       if (response.status === 200) {
         navigate("/application", { replace: true });
       } else {
@@ -85,9 +83,7 @@ const UserView = () => {
 
   const handleApprove = async (id) => {
     try {
-      const response = await axios.put(
-        `${apiUrl}/api/application/updateApplicationApprove/${id}`
-      );
+      const response = await api.put(`/updateApplicationApprove/${id}`);
       if (response.status === 200) {
         navigate("/userView", { replace: true });
       } else {
@@ -107,9 +103,7 @@ const UserView = () => {
 
   const handlePending = async (id) => {
     try {
-      const response = await axios.put(
-        `${apiUrl}/api/application/updateApplicationPending/${id}`
-      );
+      const response = await api.put(`/updateApplicationPending/${id}`);
       if (response.status === 200) {
         navigate("/userView", { replace: true });
       } else {
@@ -129,9 +123,7 @@ const UserView = () => {
 
   const handleReject = async (id) => {
     try {
-      const response = await axios.put(
-        `${apiUrl}/api/application/updateApplicationReject/${id}`
-      );
+      const response = await api.put(`/updateApplicationReject/${id}`);
       if (response.status === 200) {
         navigate("/userView", { replace: true });
       } else {

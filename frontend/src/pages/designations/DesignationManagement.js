@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Common from "../../layouts/Common";
 import { Link } from "react-router-dom";
-
-import axios from "axios";
-import apiUrl from "../../secret";
+import api from "./api";
 
 const DesignationManagement = () => {
   const [designations, setDesignations] = useState([]);
@@ -13,12 +11,26 @@ const DesignationManagement = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(
-        `${apiUrl}/api/designation/fetchDesignation`,
-        { params: { page, limit: 5, search } }
-      );
-      setDesignations(response.data.designations);
-      setTotalPages(response.data.totalPages);
+      try {
+        const response = await api.get("/fetchDesignation", {
+          params: { page, limit: 5, search },
+        });
+        setDesignations(response.data.designations);
+        setTotalPages(response.data.totalPages);
+      } catch (error) {
+        if (error.response) {
+          // The request was made, and the server responded with a status code that falls out of the range of 2xx
+          console.error("Error response:", error.response.data);
+          console.error("Error status:", error.response.status);
+          console.error("Error headers:", error.response.headers);
+        } else if (error.request) {
+          // The request was made, but no response was received
+          console.error("Error request:", error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.error("Error message:", error.message);
+        }
+      }
     };
     fetchData();
   }, [page, search]);
@@ -26,14 +38,11 @@ const DesignationManagement = () => {
   const deleteHandler = async (id) => {
     if (typeof id === "string" && id.length === 24) {
       try {
-        const response = await axios.delete(
-          `${apiUrl}/api/designation/deleteDesignation/${id}`
-        );
+        const response = await api.delete(`/deleteDesignation/${id}`);
         if (response.status === 200) {
-          const updatedResponse = await axios.get(
-            `${apiUrl}/api/designation/fetchDesignation`,
-            { params: { page, limit: 5, search } }
-          );
+          const updatedResponse = await api.get(`/fetchDesignation`, {
+            params: { page, limit: 5, search },
+          });
           setDesignations(updatedResponse.data.designations);
           setTotalPages(updatedResponse.data.totalPages);
         } else {

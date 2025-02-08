@@ -2,8 +2,7 @@ import "../../assets/styles/main.css";
 import { useState } from "react";
 import Common from "../../layouts/Common";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import apiUrl from "../../secret";
+import api from "./api";
 
 const AddDesignation = () => {
   const [name, setName] = useState("");
@@ -19,10 +18,7 @@ const AddDesignation = () => {
     }
 
     try {
-      const response = await axios.post(
-        `${apiUrl}/api/designation/addDesignation`,
-        { name }
-      );
+      const response = await api.post(`/addDesignation`, { name });
       if (response.status === 201) {
         navigate("/designation", { replace: true });
       } else {

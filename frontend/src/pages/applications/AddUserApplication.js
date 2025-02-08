@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Common from "../../layouts/Common";
 import { useNavigate } from "react-router-dom";
 import "../../assets/styles/main.css";
-import apiUrl from "../../secret";
-import axios from "axios";
+import api from "./api";
 
 const AddUserApplication = () => {
   const [applications, setApplications] = useState([]);
@@ -31,9 +30,7 @@ const AddUserApplication = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(
-          `${apiUrl}/api/application/fetchApplication`
-        );
+        const response = await api.get(`/fetchApplication`);
         setApplications(response.data.applications);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -93,10 +90,7 @@ const AddUserApplication = () => {
         }
       });
 
-      const response = await axios.post(
-        `${apiUrl}/api/application/addApplication`,
-        formDataToSend
-      );
+      const response = await api.post(`/addApplication`, formDataToSend);
       if (response.status === 201) {
         navigate("/application", { replace: true });
       } else {

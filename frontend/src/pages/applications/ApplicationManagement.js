@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Common from "../../layouts/Common";
 import "../../assets/styles/main.css";
-import apiUrl from "../../secret";
-import axios from "axios";
+import api from "./api";
 
 const ApplicationManagement = () => {
   const [applications, setApplications] = useState([]);
@@ -13,12 +12,26 @@ const ApplicationManagement = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(
-        `${apiUrl}/api/application/fetchApplication`,
-        { params: { page, limit: 10, search } }
-      );
-      setApplications(response.data.applications);
-      setTotalPages(response.data.totalPages);
+      try {
+        const response = await api.get("/fetchApplication", {
+          params: { page, limit: 10, search },
+        });
+        setApplications(response.data.applications);
+        setTotalPages(response.data.totalPages);
+      } catch (error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code that falls out of the range of 2xx
+          console.error("Error response:", error.response.data);
+          console.error("Error status:", error.response.status);
+          console.error("Error headers:", error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.error("Error request:", error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.error("Error message:", error.message);
+        }
+      }
     };
     fetchData();
   }, [page, search]);
@@ -26,14 +39,11 @@ const ApplicationManagement = () => {
   const deleteHandler = async (id) => {
     if (typeof id === "string" && id.length === 24) {
       try {
-        const response = await axios.delete(
-          `${apiUrl}/api/application/deleteApplication/${id}`
-        );
+        const response = await api.delete(`/deleteApplication/${id}`);
         if (response.status === 200) {
-          const updatedResponse = await axios.get(
-            `${apiUrl}/api/application/fetchApplication`,
-            { params: { page, limit: 5, search } }
-          );
+          const updatedResponse = await api.get(`/fetchApplication`, {
+            params: { page, limit: 5, search },
+          });
           setApplications(updatedResponse.data.applications);
           setTotalPages(updatedResponse.data.totalPages);
         } else {
