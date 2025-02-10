@@ -109,6 +109,9 @@ table {
 }
 
 @media (max-width: 810px) {
+  .upload_head {
+    width: 36rem;
+  }
   .user_manage,
   .add_user {
     width: 29rem;
@@ -133,6 +136,9 @@ table {
 }
 
 @media (max-width: 576px) {
+  .upload_head {
+    width: 36rem;
+  }
   .theme_description {
     flex-direction: column;
   }
