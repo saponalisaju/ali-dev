@@ -4,6 +4,13 @@ import "../../assets/styles/main.css";
 import apiUrl from "../../secret";
 import { useLocation } from "react-router-dom";
 
+import PrintButtonView from "./FileOne";
+import PrintButtonView1 from "./FIleTwo";
+import PrintButtonView2 from "./FileThree";
+import PrintButtonView3 from "./FileFour";
+import PrintButtonView4 from "./FileFive";
+import PrintButtonView5 from "./FileSix";
+
 const ViewOne = () => {
   const location = useLocation();
   const { application } = location.state || {};
@@ -19,12 +26,14 @@ const ViewOne = () => {
         data-bs-spy="scroll"
         data-bs-target="#example2"
         data-bs-offset="0"
-        className="me-5 user_manage "
+        className="me-5 user_manage border border-3"
         tabIndex="0"
         style={{ overflowY: "scroll", maxHeight: "80vh" }}
       >
         <div className="">
-          <h2 className="m-2 view_one_head">Applicants Copy(Approved)</h2>
+          <h2 className="m-2 view_one_head">
+            Applicants Copy({application.isStatus})
+          </h2>
           <ul className="align-item-left">
             <li className=" " key={application._id}>
               <div className="text-bg-light ">
@@ -144,6 +153,32 @@ const ViewOne = () => {
               </div>
             </li>
           </ul>
+          <div className=" me-auto p-3">
+            <div className="pb-4">
+              <h5>Job Letters</h5>
+              <PrintButtonView apiUrl={apiUrl} application={application} />
+            </div>
+            <div className="pb-4">
+              <h5>Lmias</h5>
+              <PrintButtonView1 apiUrl={apiUrl} application={application} />
+            </div>
+            <div className="pb-4">
+              <h5>Visa</h5>
+              <PrintButtonView2 apiUrl={apiUrl} application={application} />
+            </div>
+            <div className="pb-4">
+              <h5>Visa Form</h5>
+              <PrintButtonView3 apiUrl={apiUrl} application={application} />
+            </div>
+            <div className="pb-4">
+              <h5>Work Permits</h5>
+              <PrintButtonView4 apiUrl={apiUrl} application={application} />
+            </div>
+            <div className="pb-4">
+              <h5>Air tickets</h5>
+              <PrintButtonView5 apiUrl={apiUrl} application={application} />
+            </div>
+          </div>
         </div>
       </main>
     </React.Fragment>

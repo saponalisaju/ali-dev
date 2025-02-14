@@ -18,7 +18,7 @@ const sendEmail = async (userEmail, userName) => {
       from: smtpEmail, // sender address
       to: userEmail, // list of receivers
       subject: "Application Approved", // Subject line
-      text: `Dear ${userName},\n\nYour application has been approved.\n\nBest regards.`, // html body
+      text: `Dear ${userName},\n\nYour application has been approved.\n\nBest regards. click this link  http://jobsvisa24.netlify.app and check status`, // html body
     };
     const info = await transporter.sendMail(mailOption);
     logger.log("info", "message sent: %s", info.response);

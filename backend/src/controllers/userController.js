@@ -55,6 +55,42 @@ exports.register = async (req, res, next) => {
   }
 };
 
+exports.addUser = async (req, res, next) => {
+  const { name, email, password } = req.body;
+  if (!name || !email || !password) {
+    return res
+      .status(400)
+      .json({ success: false, msg: "All fields are required" });
+  }
+  try {
+    // const existingUser = await User.exists({ email });
+    // if (existingUser) {
+    //   return res
+    //     .status(400)
+    //     .json({ success: false, msg: "User already exists" });
+    // }
+    const user = new User({
+      isAdmin: true,
+      name,
+      email,
+      password,
+    });
+    const savedUser = await user.save();
+    return res.status(201).json({
+      success: true,
+      message: "User created successfully",
+      user: {
+        id: savedUser._id,
+        email: savedUser.email,
+      },
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
+  }
+};
+
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
@@ -95,20 +131,18 @@ exports.login = async (req, res, next) => {
   }
 };
 
-// exports.logout = async (req, res, next) => {
-//   try {
-//     res.clearCookie("token");
-//     res.clearCookie("accessToken");
-//     res.clearCookie("refreshToken");
-//     return successResponse(res, {
-//       statusCode: 200,
-//       message: "User logged out successfully",
-//       payload: {},
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+exports.getUsers = async (req, res, next) => {
+  try {
+    const superEmail = "manikkibrya@gmail.com";
+    const users = await User.find({ email: { $ne: superEmail } });
+    if (!users) {
+      res.status(404).json("users not found");
+    }
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
+};
 
 exports.logout = async (req, res, next) => {
   try {
@@ -170,3 +204,32 @@ exports.getDashboardData = [
     }
   },
 ];
+
+exports.deleteUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findByIdAndDelete({ _id: id });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json("user deleted successfully");
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.updateUser = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    await updatedUser.save();
+    res.json(updatedUser);
+  } catch (error) {
+    if (error instanceof mongoose.Error.CastError) {
+      throw createError(400, "Invalid Id");
+    }
+    throw error;
+  }
+};

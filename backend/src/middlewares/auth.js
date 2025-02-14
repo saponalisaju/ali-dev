@@ -3,6 +3,7 @@ const createError = require("http-errors");
 const { jwtAccessKey, jwtActivationKey } = require("../../secret");
 const User = require("../models/userModel");
 const { createToken } = require("../helpers/jsonwebtoken");
+const UserAuth = require("../models/userAuthModel");
 
 exports.isLoggedIn = (req, res, next) => {
   try {

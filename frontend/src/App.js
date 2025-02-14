@@ -251,14 +251,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
-          <Route
-            path="/view-one"
-            element={
-              <PrivateRoute>
-                <ViewOne />
-              </PrivateRoute>
-            }
-          />
+          <Route path="/view-one" element={<ViewOne />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />

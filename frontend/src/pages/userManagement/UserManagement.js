@@ -1,30 +1,52 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Common from "../../layouts/Common";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchUserManagement,
-  deleteUserManagement,
-} from "./userManagementSlice";
+
 import "../../assets/styles/main.css";
-import toast, { Toaster } from "react-hot-toast";
+
+import api from "./userApi";
 
 const UserManagement = () => {
-  const { users, status } = useSelector((state) => state.userManagement);
-  const dispatch = useDispatch();
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    if (status === "idle") {
-      dispatch(fetchUserManagement());
-    }
-  }, [status, dispatch]);
+    const fetchData = async () => {
+      try {
+        const response = await api.get(`/get_users`);
+        console.log("hello user", response);
+        setUsers(response.data);
+      } catch (error) {
+        if (error.response) {
+          console.error("Error response:", error.response.data);
+          console.error("Error status:", error.response.status);
+          console.error("Error headers:", error.response.headers);
+        } else if (error.request) {
+          console.error("Error request:", error.request);
+        } else {
+          console.error("Error message:", error.message);
+        }
+      }
+    };
+    fetchData();
+  }, []);
 
-  const deleteHandler = (id) => {
+  const deleteHandler = async (id) => {
     if (typeof id === "string" && id.length === 24) {
-      dispatch(deleteUserManagement(id));
-      toast.success("User deleted successfully");
+      try {
+        const response = await api.delete(`/delete_user/${id}`);
+        console.log("Hi", response);
+        if (response.status === 200) {
+          const updatedResponse = await api.get(`/get_users`);
+          setUsers(updatedResponse.data);
+          console.log("del", updatedResponse.data);
+        } else {
+          console.error("Failed to delete user:", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error deleting user:", error);
+      }
     } else {
-      toast.error("Invalid ID format: " + id);
+      console.error("Invalid ID format:", id);
     }
   };
   return (
@@ -32,7 +54,7 @@ const UserManagement = () => {
       <div className="example2 relative">
         <Common />
       </div>
-      <Toaster />
+
       <main
         data-bs-spy="scroll"
         data-bs-target="#example2"

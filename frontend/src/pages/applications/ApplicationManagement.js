@@ -16,7 +16,7 @@ const ApplicationManagement = () => {
         const response = await api.get(`/fetchApplication`, {
           params: { page, limit: 10, search },
         });
-        console.log("hello", response.data.applications);
+        console.log("hello", response);
         setApplications(response.data.applications);
         setTotalPages(response.data.totalPages);
       } catch (error) {
@@ -45,6 +45,7 @@ const ApplicationManagement = () => {
           const updatedResponse = await api.get(`/fetchApplication`, {
             params: { page, limit: 5, search },
           });
+
           setApplications(updatedResponse.data.applications);
           setTotalPages(updatedResponse.data.totalPages);
         } else {
@@ -122,6 +123,11 @@ const ApplicationManagement = () => {
                   _id,
                   image,
                   file,
+                  file1,
+                  file2,
+                  file3,
+                  file4,
+                  file5,
                   surname,
                   givenN,
                   sex,
@@ -160,6 +166,11 @@ const ApplicationManagement = () => {
                             _id,
                             image,
                             file,
+                            file1,
+                            file2,
+                            file3,
+                            file4,
+                            file5,
                             surname,
                             givenN,
                             sex,

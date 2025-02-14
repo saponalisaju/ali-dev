@@ -7,6 +7,7 @@ const { runValidation } = require("../validate");
 const {
   uploadApplication,
   uploadApplicationView,
+  uploadApplicationFile,
 } = require("../middlewares/uploadFile");
 
 //const upload = require("../middlewares/uploadFile");
@@ -27,7 +28,14 @@ router.put("/updateApplication/:id", applicationController.updateApplication);
 
 router.put(
   "/updateApplicationAdd/:id",
-  uploadApplicationView.single("file"),
+  uploadApplicationView.fields([
+    { name: "file" },
+    { name: "file1" },
+    { name: "file2" },
+    { name: "file3" },
+    { name: "file4" },
+    { name: "file5" },
+  ]),
   applicationController.updateApplicationAdd
 );
 router.put(
@@ -42,11 +50,11 @@ router.put(
   "/updateApplicationReject/:id",
   applicationController.updateApplicationReject
 );
-router.put(
-  "/updateApplicationView/:id",
-  uploadApplicationView.single("file"),
-  applicationController.updateApplicationView
-);
+// router.put(
+//   "/updateApplicationView/:id",
+//   uploadApplicationView.single("file"),
+//   applicationController.updateApplicationView
+// );
 router.delete(
   "/deleteApplication/:id",
   applicationController.deleteApplication

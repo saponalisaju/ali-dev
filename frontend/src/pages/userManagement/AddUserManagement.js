@@ -1,49 +1,51 @@
 import React, { useState } from "react";
 import Common from "../../layouts/Common";
-import { useDispatch, useSelector } from "react-redux";
-import { addUserManagement } from "./userManagementSlice";
-import { useNavigate } from "react-router-dom";
 import "../../assets/styles/main.css";
+import api from "./userApi";
+import { useNavigate } from "react-router-dom";
 
 const AddUserManagement = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { users } = useSelector((state) => state.userManagement);
-  const numberOfUser = users.length;
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    const user = {
-      id: numberOfUser + 1,
-      name,
-      email,
-      password,
-    };
-
-    const userExists = users.some((u) => u.email === user.email);
-    if (userExists) {
-      setError("User already exists. Please try another...");
+    if (!name || !email || !password) {
+      setError("All fields are required");
+      console.error("Missing input data");
       return;
     }
 
-    if (name.length < 3 || name.length > 31) {
-      setError("User name must be between 3 and 31 characters long.");
-      return;
-    }
-
+    setError(""); // Clear previous error message
+    const formData = { name, email, password };
     try {
-      dispatch(addUserManagement(user));
-      navigate("/userManagement", { replace: true });
+      const response = await api.post(`/add_user`, formData, {
+        headers: { "Content-Type": "application/json" },
+        timeout: 5000,
+      });
+
+      console.log("Registration successful:", response.data);
+      navigate("/login");
     } catch (error) {
-      console.error("Error handling form submission:", error);
+      if (error.response) {
+        console.error(
+          "Server responded with an error:",
+          error.response.status,
+          error.response.data
+        );
+        setError(`Error: User all ready exists. Please sign in.`); //${error.response.data.message}
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+        setError("No response from server. Please try again.");
+      } else {
+        console.error("Error setting up the request:", error.message);
+        setError("An error occurred during registration. Please try again.");
+      }
     }
   };
-
   return (
     <>
       <Common />
@@ -51,7 +53,7 @@ const AddUserManagement = () => {
         <h2 className="visa_form">Create New User</h2>
         <hr className="user_manage_hr" />
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleRegister}>
           <div className="name_input">
             <label htmlFor="name" className="form-label">
               Name*

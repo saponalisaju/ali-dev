@@ -5,11 +5,23 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import PrintButton from "./PrintButton";
 import api from "./api";
 import apiUrl from "../../secret";
+import PrintButton1 from "./PrintButton1";
+import PrintButton2 from "./PrintButton2";
+import PrintButton5 from "./PrintButton5";
+import PrintButton4 from "./PrintButton4";
+import PrintButton3 from "./PrintButton3";
 
 const UserView = () => {
   const [error, setError] = useState("");
   const [id, setId] = useState(" ");
-  const [newData, setNewData] = useState({ file: null });
+  const [selectedFiles, setSelectedFiles] = useState({
+    file: null,
+    file1: null,
+    file2: null,
+    file3: null,
+    file4: null,
+    file5: null,
+  });
   const [formData, setFormData] = useState({
     surname: " ",
     givenN: " ",
@@ -30,18 +42,6 @@ const UserView = () => {
     issuedCountry: " ",
   });
 
-  // const onChangeHandler = (event) => {
-  //   setFormData({ ...formData, [event.target.name]: event.target.value });
-  // };
-
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    setNewData((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
-  };
-
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -54,12 +54,20 @@ const UserView = () => {
     }
   }, [location.state, navigate]);
 
+  const handleChange = (event) => {
+    const { name, files } = event.target;
+    setSelectedFiles((prevState) => ({
+      ...prevState,
+      [name]: files[0],
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = new FormData();
-    Object.keys(newData).forEach((key) => {
-      data.append(key, newData[key]);
+    Object.keys(selectedFiles).forEach((key) => {
+      data.append(key, selectedFiles[key]);
     });
 
     Object.keys(formData).forEach((key) => {
@@ -164,15 +172,15 @@ const UserView = () => {
                 alt="Applicant"
               />
             </div>
-            <table className="table table-bordered">
+            <table className="table table-bordered ">
               <tbody>
                 <tr>
-                  <th className="fst-italic text-success fw-bold fs-3 text-bg-light ">
+                  <th className="text-uppercase text-center text-success fw-bold fs-3 text-bg-light ">
                     {formData.surname}
                   </th>
                 </tr>
                 <tr>
-                  <th className="bg-primary">A. Personal Particulars</th>
+                  <th className="bg-secondary">A. Personal Particulars</th>
                 </tr>
                 <tr>
                   <td colSpan="3">
@@ -210,7 +218,7 @@ const UserView = () => {
                   </td>
                 </tr>
                 <tr>
-                  <th className="bg-primary">B. Company Details</th>
+                  <th className="bg-secondary">B. Company Details</th>
                 </tr>
                 <tr>
                   <td colSpan="3">
@@ -233,7 +241,7 @@ const UserView = () => {
                   </td>
                 </tr>
                 <tr>
-                  <th className="bg-primary">C. Passport Details</th>
+                  <th className="bg-secondary">C. Passport Details</th>
                 </tr>
                 <tr>
                   <td colSpan="3">
@@ -250,7 +258,9 @@ const UserView = () => {
                   </td>
                 </tr>
                 <tr>
-                  <th className="bg-primary">D. Applicant's Contact Details</th>
+                  <th className="bg-secondary">
+                    D. Applicant's Contact Details
+                  </th>
                 </tr>
                 <tr>
                   <td colSpan="3">
@@ -268,32 +278,128 @@ const UserView = () => {
                 </tr>
               </tbody>
             </table>
-            <div className="upload_head">
+            <div className="upload_head pb-2">
               <div className="file_upload m-3 ">
-                <h3 className="d-flex job_letter">Job Letter</h3>
                 <form
                   onSubmit={handleSubmit}
-                  className="form-control d-flex"
+                  className="form-control "
                   encType="multipart/form-data"
                 >
-                  <input
-                    className="form-control me-3"
-                    type="file"
-                    multiple
-                    name="file"
-                    onChange={handleChange}
-                  />
-
-                  <button className="btn btn-primary btn-sm mt-1" type="submit">
-                    Upload
-                  </button>
+                  <div className=" pb-4">
+                    <h4 className="fw-bold">JOB LETTERS</h4>
+                    <div className="d-flex pb-3  ">
+                      <input
+                        id="file"
+                        className="form-control ms-auto"
+                        type="file"
+                        name="file"
+                        onChange={handleChange}
+                      />
+                      <button
+                        className="btn btn-secondary btn-sm ms-auto"
+                        type="submit"
+                      >
+                        Upload
+                      </button>
+                    </div>
+                    <PrintButton apiUrl={apiUrl} formData={formData} />
+                  </div>
+                  <div className=" pb-4">
+                    <h4 className="fw-bold">LMIAS</h4>
+                    <div className="d-flex pb-3  ">
+                      <input
+                        className="form-control ms-auto"
+                        type="file"
+                        name="file1"
+                        onChange={handleChange}
+                      />
+                      <button
+                        className="btn btn-secondary btn-sm ms-auto"
+                        type="submit"
+                      >
+                        Upload
+                      </button>
+                    </div>
+                    <PrintButton1 apiUrl={apiUrl} formData={formData} />
+                  </div>
+                  <div className="pb-4 ">
+                    <h4 className="fw-bold">VISA</h4>
+                    <div className="d-flex pb-3  ">
+                      <input
+                        className="form-control ms-auto"
+                        type="file"
+                        name="file2"
+                        onChange={handleChange}
+                      />
+                      <button
+                        className="btn btn-secondary btn-sm ms-auto"
+                        type="submit"
+                      >
+                        Upload
+                      </button>
+                    </div>
+                    <PrintButton2 apiUrl={apiUrl} formData={formData} />
+                  </div>
+                  <div className="pb-4 ">
+                    <h4 className="fw-bold">VISA FORM</h4>
+                    <div className="d-flex pb-3  ">
+                      <input
+                        id="file"
+                        className="form-control ms-auto"
+                        type="file"
+                        name="file3"
+                        onChange={handleChange}
+                      />
+                      <button
+                        className="btn btn-secondary btn-sm ms-auto"
+                        type="submit"
+                      >
+                        Upload
+                      </button>
+                    </div>
+                    <PrintButton3 apiUrl={apiUrl} formData={formData} />
+                  </div>
+                  <div className=" pb-4">
+                    <h4 className="fw-bold">WORK PERMITS</h4>
+                    <div className="d-flex pb-3  ">
+                      <input
+                        id="file"
+                        className="form-control ms-auto"
+                        type="file"
+                        name="file4"
+                        onChange={handleChange}
+                      />
+                      <button
+                        className="btn btn-secondary btn-sm ms-auto"
+                        type="submit"
+                      >
+                        Upload
+                      </button>
+                    </div>
+                    <PrintButton4 apiUrl={apiUrl} formData={formData} />
+                  </div>
+                  <div className=" pb-4">
+                    <h4 className="fw-bold">AIR TICKETS</h4>
+                    <div className="d-flex pb-3  ">
+                      <input
+                        id="file"
+                        className="form-control ms-auto"
+                        type="file"
+                        name="file5"
+                        onChange={handleChange}
+                      />
+                      <button
+                        className="btn btn-secondary btn-sm ms-auto"
+                        type="submit"
+                      >
+                        Upload
+                      </button>
+                    </div>
+                    <PrintButton5 apiUrl={apiUrl} formData={formData} />
+                  </div>
                 </form>
               </div>
-              <div className="print_option">
-                <PrintButton apiUrl={apiUrl} formData={formData} />
-              </div>
             </div>
-
             <div className="justify-content-end d-flex theme_description ">
               <Link
                 onClick={() => handlePending(id)}

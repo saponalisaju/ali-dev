@@ -1,14 +1,14 @@
 import React, { useRef } from "react";
-//import { useReactToPrint } from "react-to-print";
+import { useReactToPrint } from "react-to-print";
 
 class ComponentToPrint extends React.Component {
   render() {
-    const { apiUrl, formData, innerRef } = this.props;
-    const fileExtension = formData?.file?.split(".").pop().toLowerCase();
+    const { apiUrl, application, innerRef } = this.props;
+    const fileExtension = application?.file?.split(".").pop().toLowerCase();
 
-    const fileURL = `${apiUrl}/uploads/job_letters/${formData.file}`;
+    const fileURL = `${apiUrl}/uploads/job_letters/${application.file}`;
 
-    if (!formData) {
+    if (!application) {
       return <div ref={innerRef}>File data is missing or undefined.</div>;
     }
 
@@ -32,24 +32,24 @@ class ComponentToPrint extends React.Component {
   }
 }
 
-const PrintButton = ({ apiUrl, formData }) => {
+const PrintButtonView = ({ apiUrl, application }) => {
   const contentRef = useRef(null);
-  //const handlePrint = useReactToPrint({ contentRef });
+  const handlePrint = useReactToPrint({ contentRef });
 
   return (
     <div>
-      {/* <button className="btn btn-outline-dark" onClick={handlePrint}>
+      <button className="btn btn-outline-dark" onClick={handlePrint}>
         Print
-      </button> */}
+      </button>
       <div ref={contentRef}>
         <ComponentToPrint
           innerRef={contentRef}
           apiUrl={apiUrl}
-          formData={formData}
+          application={application}
         />
       </div>
     </div>
   );
 };
 
-export default PrintButton;
+export default PrintButtonView;

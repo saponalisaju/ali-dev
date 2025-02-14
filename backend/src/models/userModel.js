@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
       minLength: [6, "The length of user password can be 6 character"],
       set: (v) => bcrypt.hashSync(v, bcrypt.genSaltSync(10)),
     },
-    // isAdmin: { type: Boolean, default: false },
+    isAdmin: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

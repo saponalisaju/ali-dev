@@ -37,7 +37,7 @@ const corsOptions = {
   allowedHeaders:
     "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   credentials: true,
-  optionsSuccessStatus: 200,
+  optionsSuccessStatus: 204,
 };
 app.use(cors(corsOptions));
 
@@ -61,21 +61,29 @@ app.use((req, res, next) => {
 app.use(express.static(__dirname + "public"));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.get("/uploads/file/", (req, res) => {
-  res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
-  res.sendFile(path.join(__dirname, "uploads", "file"));
-});
+app.use("/uploads", express.static("uploads"));
+
+app.use(
+  "/uploads/documents",
+  express.static(path.join(__dirname, "uploads/documents"))
+);
+
+app.use(
+  "/uploads",
+  express.static("uploads", {
+    setHeaders: (res, path) => {
+      res.set("Cross-Origin-Resource-Policy", "cross-origin");
+    },
+  })
+);
 
 app.use((req, res, next) => {
-  res.setHeader(
-    "Cross-Origin-Resource-Policy",
-    "same-origin" || "cross-origin"
-  );
+  res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
   next();
 });
 app.use(helmet());
 
-const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
+const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 200 });
 app.use(limiter);
 
 app.use(cookieParser());

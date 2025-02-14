@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { updateUserManagement } from "./userManagementSlice";
 import Common from "../../layouts/Common";
 import "../../assets/styles/main.css";
+import api from "./userApi";
 
 const EditUserManagement = () => {
   const location = useLocation();
-  const dispatch = useDispatch();
+  const [error, setError] = useState("");
   const navigate = useNavigate();
-  const [_id, setId] = useState("");
+  const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
@@ -23,10 +22,23 @@ const EditUserManagement = () => {
     }
   }, [location.state, navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(updateUserManagement({ _id, name, email }));
-    navigate("/userManagement");
+
+    try {
+      const response = await api.put(`/update_user/${id}`, {
+        name,
+        email,
+      });
+      if (response.status === 200) {
+        navigate("/userManagement", { replace: true });
+      } else {
+        setError(response.data.message || "Failed to update user.");
+      }
+    } catch (error) {
+      console.error("Error updating user:", error);
+      setError("Error updating user. Please try again.");
+    }
   };
 
   return (
@@ -64,6 +76,7 @@ const EditUserManagement = () => {
               required
             />
           </div>
+          {error && <div style={{ color: "red" }}>{error}</div>}
           <button className="btn btn-primary" type="submit">
             Update
           </button>

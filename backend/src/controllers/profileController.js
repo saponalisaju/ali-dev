@@ -9,9 +9,9 @@ exports.profile = async (req, res, next) => {
       .json({ success: false, message: "Passwords do not match" });
   }
   try {
-    const existUser = await User.exists({ email });
-    if (!existUser)
-      throw createError(409, "User all ready exist : Please sign in");
+    // const existUser = await User.exists({ email });
+    // if (!existUser)
+    //   throw createError(409, "User all ready exist : Please sign in");
 
     const user = new User({
       name,
@@ -25,6 +25,7 @@ exports.profile = async (req, res, next) => {
       user: {
         id: saveUser._id,
         email: saveUser.email,
+        isAdmin: true,
       },
     });
   } catch (error) {
