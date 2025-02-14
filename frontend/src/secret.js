@@ -1,2 +1,2 @@
-const apiUrl = "http://localhost:4001"; // "https://travel-app-mern.onrender.com"
+const apiUrl = "https://ali-dev.onrender.com"; // "https://ali-dev.onrender.com"
 export default apiUrl;
