@@ -3,12 +3,12 @@ import { useReactToPrint } from "react-to-print";
 
 class ComponentToPrint extends React.Component {
   render() {
-    const { apiUrl, application, innerRef } = this.props;
-    const fileExtension = application?.file5?.split(".").pop().toLowerCase();
+    const { apiUrl, file5, innerRef } = this.props;
+    const fileExtension = file5?.split(".").pop().toLowerCase();
 
-    const fileURL = `${apiUrl}/uploads/air_tickets/${application.file5}`;
+    const fileURL = `${apiUrl}/uploads/air_tickets/${file5}`;
 
-    if (!application) {
+    if (!file5) {
       return <div ref={innerRef}>File data is missing or undefined.</div>;
     }
 
@@ -21,32 +21,24 @@ class ComponentToPrint extends React.Component {
             title="PDF viewer"
           />
         ) : (
-          <img
-            style={{ width: "100%", height: window.innerHeight }}
-            src={fileURL}
-            alt="attachment"
-          />
+          <img style={{ width: "100%" }} src={fileURL} alt="attachment" />
         )}
       </div>
     );
   }
 }
 
-const PrintButtonView5 = ({ apiUrl, application }) => {
+const PrintButtonView5 = ({ apiUrl, file5 }) => {
   const contentRef = useRef(null);
   const handlePrint = useReactToPrint({ contentRef });
 
   return (
-    <div>
-      <button className="btn btn-outline-dark " onClick={handlePrint}>
+    <div className="">
+      <button className="btn btn-secondary btn-sm " onClick={handlePrint}>
         Print
       </button>
       <div ref={contentRef}>
-        <ComponentToPrint
-          innerRef={contentRef}
-          apiUrl={apiUrl}
-          application={application}
-        />
+        <ComponentToPrint innerRef={contentRef} apiUrl={apiUrl} file5={file5} />
       </div>
     </div>
   );

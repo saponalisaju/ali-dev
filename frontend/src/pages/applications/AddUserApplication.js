@@ -64,7 +64,7 @@ const AddUserApplication = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { surname, givenN, email, image, ...rest } = formData;
+    const { surname, givenN, email, image, passport, ...rest } = formData;
 
     // Validate surname and given name length
     if (
@@ -81,6 +81,7 @@ const AddUserApplication = () => {
 
     // Check if the user already exists
     const userExists = applications.some((u) => u.email === email);
+    applications.some((u) => u.passport === passport);
     if (userExists) {
       setError("User already exists. Please try another...");
       return;

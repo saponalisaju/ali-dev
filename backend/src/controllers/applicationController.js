@@ -5,6 +5,7 @@ const Application = require("../models/applicationModel");
 const { error } = require("console");
 const moment = require("moment");
 const sendEmail = require("../helpers/mail");
+const passport = require("passport");
 
 exports.fetchApplication = async (req, res) => {
   const { page = 1, limit = 10, search = "" } = req.query;
@@ -54,12 +55,18 @@ exports.fetchApplicationById = async (req, res) => {
 };
 
 exports.fetchApplicationEnquiry = async (req, res) => {
-  const { page = 1, limit = 10, search = "" } = req.query;
+  const {
+    page = 1,
+    limit = 10,
+    search = "",
+    search1 = "",
+    search2 = "",
+  } = req.query;
   try {
     const applications = await Application.find({
       passport: { $regex: search, $options: "i" },
-      currentN: { $regex: search, $options: "i" },
-      dob: { $regex: search, $options: "i" },
+      currentN: { $regex: search1, $options: "i" },
+      dob: { $regex: search2, $options: "i" },
     })
       .limit(limit * 1)
       .skip((page - 1) * limit)
@@ -67,8 +74,8 @@ exports.fetchApplicationEnquiry = async (req, res) => {
 
     const count = await Application.countDocuments({
       passport: { $regex: search, $options: "i" },
-      currentN: { $regex: search, $options: "i" },
-      dob: { $regex: search, $options: "i" },
+      currentN: { $regex: search1, $options: "i" },
+      dob: { $regex: search2, $options: "i" },
     });
 
     res.json({
@@ -89,7 +96,9 @@ exports.addApplication = async (req, res) => {
   const image = req.file?.filename;
   const path = req.file?.path;
   try {
-    const existingUser = await Application.findOne({ email: req.body.email });
+    const existingUser = await Application.findOne({
+      $or: [{ email: req.body.email }, { passport: req.body.passport }],
+    });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }

@@ -1,5 +1,4 @@
 import React from "react";
-import Common from "../../layouts/Common";
 import "../../assets/styles/main.css";
 import apiUrl from "../../secret";
 import { useLocation } from "react-router-dom";
@@ -21,7 +20,6 @@ const ViewOne = () => {
 
   return (
     <React.Fragment>
-      <Common />
       <main
         data-bs-spy="scroll"
         data-bs-target="#example2"
