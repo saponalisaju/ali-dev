@@ -21,6 +21,7 @@ const { clientURL } = require("./secret");
 
 //middleware
 const allowedOrigins = [
+  clientURL,
   "http://localhost:3000",
   "https://jobsvisaonline.netlify.app",
   "https://jobsvisaonline.com",
