@@ -22,8 +22,8 @@ const { clientURL } = require("./secret");
 //middleware
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://jobsvisa24.netlify.app",
-  "https://www.jobsvisaonline.com",
+  "https://jobsvisaonline.netlify.app",
+  "https://jobsvisaonline.com",
 ];
 const corsOptions = {
   origin: (origin, callback) => {
