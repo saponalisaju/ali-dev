@@ -135,20 +135,20 @@ exports.updateApplication = async (req, res) => {
 exports.updateApplicationAdd = async (req, res) => {
   try {
     const { id } = req.params;
-
     const files = req.files;
-    const file = files["file"] ? files["file"][0].filename : "";
-    const filePath = files["file"] ? files["file"][0].path : "";
-    const file1 = files["file1"] ? files["file1"][0].filename : "";
-    const filePath1 = files["file1"] ? files["file1"][0].path : "";
-    const file2 = files["file2"] ? files["file2"][0].filename : "";
-    const filePath2 = files["file2"] ? files["file2"][0].path : "";
-    const file3 = files["file3"] ? files["file3"][0].filename : "";
-    const filePath3 = files["file3"] ? files["file3"][0].path : "";
-    const file4 = files["file4"] ? files["file4"][0].filename : "";
-    const filePath4 = files["file4"] ? files["file4"][0].path : "";
-    const file5 = files["file5"] ? files["file5"][0].filename : "";
-    const filePath5 = files["file5"] ? files["file5"][0].path : "";
+
+    const file = files && files["file"] ? files["file"][0].filename : "";
+    const filePath = files && files["file"] ? files["file"][0].path : "";
+    const file1 = files && files["file1"] ? files["file1"][0].filename : "";
+    const filePath1 = files && files["file1"] ? files["file1"][0].path : "";
+    const file2 = files && files["file2"] ? files["file2"][0].filename : "";
+    const filePath2 = files && files["file2"] ? files["file2"][0].path : "";
+    const file3 = files && files["file3"] ? files["file3"][0].filename : "";
+    const filePath3 = files && files["file3"] ? files["file3"][0].path : "";
+    const file4 = files && files["file4"] ? files["file4"][0].filename : "";
+    const filePath4 = files && files["file4"] ? files["file4"][0].path : "";
+    const file5 = files && files["file5"] ? files["file5"][0].filename : "";
+    const filePath5 = files && files["file5"] ? files["file5"][0].path : "";
 
     const existingUser = await Application.findById(id);
     if (!existingUser) {
@@ -255,28 +255,6 @@ exports.updateApplicationReject = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
-
-// exports.updateApplicationView = async (req, res) => {
-//   const { id } = req.params;
-//   const file = req.file?.filename;
-//   const filePath = req.file?.path;
-
-//   try {
-//     if (!id) {
-//       throw new Error("No ID provided");
-//     }
-
-//     const updatedUser = await Application.findByIdAndUpdate(
-//       id,
-//       { ...req.body, file: file, filePath: filePath },
-//       { new: true }
-//     );
-//     console.log("hello", updatedUser);
-//     res.json(updatedUser);
-//   } catch (error) {
-//     res.status(500).send(error.message);
-//   }
-// };
 
 exports.deleteApplication = async (req, res) => {
   const { id } = req.params;

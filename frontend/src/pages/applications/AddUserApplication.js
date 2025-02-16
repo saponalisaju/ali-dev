@@ -27,6 +27,8 @@ const AddUserApplication = () => {
     issuedCountry: "",
   });
 
+  const [imagePreview, setImagePreview] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -52,9 +54,15 @@ const AddUserApplication = () => {
       if (selectedFile && selectedFile.size > maxSize) {
         setError("File size exceeds the limit of 2 MB.");
         setFormData((prevData) => ({ ...prevData, image: null }));
+        setImagePreview(null);
       } else {
         setError("");
         setFormData((prevData) => ({ ...prevData, image: selectedFile }));
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImagePreview(reader.result);
+        };
+        reader.readAsDataURL(selectedFile);
       }
     } else {
       setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -64,7 +72,7 @@ const AddUserApplication = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { surname, givenN, email, image, passport, ...rest } = formData;
+    const { surname, givenN, email, image, ...rest } = formData;
 
     // Validate surname and given name length
     if (
@@ -81,7 +89,7 @@ const AddUserApplication = () => {
 
     // Check if the user already exists
     const userExists = applications.some((u) => u.email === email);
-    applications.some((u) => u.passport === passport);
+
     if (userExists) {
       setError("User already exists. Please try another...");
       return;
@@ -371,6 +379,14 @@ const AddUserApplication = () => {
               required
               onChange={onChangeHandler}
             />
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Selected"
+                style={{ width: "100px", height: "100px" }}
+              />
+            )}
+            {error && <p>{error}</p>}
           </div>
           <div className="id-number p-1">
             <label className="form-label" htmlFor="passport">

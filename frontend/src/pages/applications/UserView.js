@@ -14,6 +14,7 @@ import PrintButton3 from "./PrintButton3";
 const UserView = () => {
   const [error, setError] = useState("");
   const [id, setId] = useState(" ");
+  const [loading, setLoading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState({
     file: null,
     file1: null,
@@ -86,6 +87,8 @@ const UserView = () => {
     } catch (error) {
       console.error("Error updating application:", error);
       setError("Error updating application. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -153,7 +156,8 @@ const UserView = () => {
     <>
       <React.Fragment>
         <Common />
-
+        {loading && <p>Loading...</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
         <main
           data-bs-spy="scroll"
           data-bs-target="#example2"
