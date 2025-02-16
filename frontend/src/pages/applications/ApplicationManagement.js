@@ -79,7 +79,7 @@ const ApplicationManagement = () => {
           </Link>
         </div>
         <hr />
-        <div className="d-flex search_box">
+        <div className="d-flex search_box pb-2">
           <p>Show 1 to 10 entries</p>
           <input
             className="ms-auto input-search form-control"
@@ -236,7 +236,7 @@ const ApplicationManagement = () => {
             </tbody>
           </table>
         </div>
-        <div className="pagination justify-content-end">
+        <div className="pagination justify-content-end pt-2 mb-3">
           <button
             className="btn btn-secondary btn-sm"
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
@@ -250,7 +250,7 @@ const ApplicationManagement = () => {
           </span>
 
           <button
-            className="btn btn-secondary btn-sm"
+            className="btn btn-secondary btn-sm "
             onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={page === totalPages}
           >

@@ -263,15 +263,20 @@ exports.deleteApplication = async (req, res) => {
     if (!application) {
       return res.status(404).json({ message: "Application not found" });
     }
-    if (application.path) {
-      await deleteImage(application.path);
-    }
+    const filePaths = [
+      application.path,
+      application.filePath,
+      application.filePath1,
+      application.filePath2,
+      application.filePath3,
+      application.filePath4,
+      application.filePath5,
+    ];
 
-    if (application.filePath) {
-      await deleteImage(application.filePath);
-    }
-    if (application.filePath1) {
-      await deleteImage(application.filePath1);
+    for (const filePath of filePaths) {
+      if (filePath) {
+        await deleteImage(filePath);
+      }
     }
 
     res.json({ message: "Application deleted" });

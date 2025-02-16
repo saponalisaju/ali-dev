@@ -84,6 +84,13 @@ table {
 .pagination li.active {
   font-weight: bold;
 }
+.surname_edit {
+  width: 50%;
+}
+.surname_edit input {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
 
 /* paginated list css end */
 
@@ -123,7 +130,7 @@ table {
     gap: 1rem;
   }
   .user_manage_hr {
-    width: 29rem;
+    width: 27rem;
   }
 }
 
@@ -133,22 +140,29 @@ table {
     width: 29rem;
     margin-left: 16.5rem;
   }
+  .user_manage_hr {
+    width: 20rem;
+  }
 }
 
 @media (max-width: 576px) {
+  .birth_date,
+  .search_box,
+  .theme_description,
+  .search_option {
+    flex-direction: column;
+  }
+  .surname_edit {
+    width: 100%;
+  }
   .upload_head {
     width: 36rem;
   }
-  .theme_description {
-    flex-direction: column;
-  }
+
   .user_manage,
   .add_user {
     width: 18rem;
     padding-top: 1rem;
-  }
-  .search_option {
-    flex-direction: column;
   }
 
   .search-bar {
@@ -176,8 +190,10 @@ table {
   }
 
   .add_user input,
-  .user_manage_hr {
-    width: 17rem;
+  .user_manage_hr,
+  #sex,
+  #jobTitle {
+    width: 16rem;
   }
 }
 
@@ -197,13 +213,13 @@ table {
   }
   .add_user input,
   .user_manage_hr {
-    width: 12rem;
+    width: 11rem;
   }
   #publish {
     width: 12rem;
   }
   #identification {
-    width: 12.2rem;
+    width: 10rem;
   }
   .application_img {
     width: 160px;
@@ -213,17 +229,18 @@ table {
   .particulars {
     width: 12rem;
   }
-  #sex,
-  #jobTitle {
-    width: 12rem;
+  #sex {
+    width: 10rem;
   }
 }
 
 @media (max-width: 412px) {
   #content,
   #status,
-  #publish {
-    width: 11rem;
+  #publish,
+  .user_manage_hr,
+  #sex {
+    width: 10rem;
   }
 
   .user_manage_head .btn {
@@ -237,30 +254,18 @@ table {
   }
   .user_manage,
   .add_user {
-    width: 12rem;
     padding-top: 0;
     margin-left: 12rem;
   }
-  .add_user input,
-  .user_manage_hr {
-    width: 11rem;
-  }
-  #search {
-    width: 12rem;
-  }
-  #sex,
-  #jobTitle {
-    width: 11rem;
-  }
 
-  #identification {
-    width: 11.2rem;
+  #search,
+  #jobTitle {
+    width: 12rem;
   }
 }
 @media (max-width: 360px) {
   .user_manage,
   .add_user {
-    width: 12rem;
     padding-top: 1rem;
     margin-left: 10rem;
   }
@@ -271,19 +276,12 @@ table {
   }
 
   .add_user input,
-  .user_manage_hr {
-    width: 11rem;
+  .user_manage_hr,
+  #jobTitle {
+    width: 10rem;
   }
   .search-bar {
     display: flex;
     flex-direction: column;
-  }
-  #sex,
-  #jobTitle {
-    width: 11rem;
-  }
-
-  #identification {
-    width: 11rem;
   }
 }

@@ -21,8 +21,6 @@ const EditApplication = () => {
     company: " ",
     dutyDuration: " ",
     jobTitle: " ",
-    image: null,
-    file: null,
     salary: " ",
     passport: " ",
     issuedCountry: " ",
@@ -93,16 +91,16 @@ const EditApplication = () => {
 
         <form
           onSubmit={handleSubmit}
-          className="me-5 absolute"
+          className=""
           encType="multipart/form-data"
         >
           <div className="name-details d-flex">
-            <div className="surname w-50 p-1">
+            <div className="surname_edit ">
               <label className="form-label" htmlFor="surname">
                 Surname*
               </label>
               <input
-                className="form-control p-2 mb-3"
+                className="form-control "
                 type="text"
                 name="surname"
                 required
@@ -110,12 +108,12 @@ const EditApplication = () => {
                 onChange={onChangeHandler}
               />
             </div>
-            <div className="w-50 p-1">
+            <div className="surname_edit ms-1">
               <label className="form-label" htmlFor="givenN">
                 Given Name*
               </label>
               <input
-                className="form-control p-2 mb-3"
+                className="form-control"
                 type="text"
                 name="givenN"
                 required
@@ -138,12 +136,12 @@ const EditApplication = () => {
             />
           </div>
           <div className="identification d-flex">
-            <div className="phone-no w-50 p-1">
+            <div className="phone-no surname_edit">
               <label className="form-label" htmlFor="phone">
                 Phone*
               </label>
               <input
-                className="form-control p-2 mb-3"
+                className="form-control"
                 type="text"
                 name="phone"
                 required
@@ -151,12 +149,12 @@ const EditApplication = () => {
                 onChange={onChangeHandler}
               />
             </div>
-            <div className="id-number w-50 p-1">
+            <div className="id-number surname_edit ms-1">
               <label className="form-label" htmlFor="nationalId">
                 National ID*
               </label>
               <input
-                className="form-control p-2 mb-3"
+                className="form-control "
                 type="text"
                 name="nationalId"
                 required
@@ -165,13 +163,13 @@ const EditApplication = () => {
               />
             </div>
           </div>
-          <div className=" d-flex">
-            <div className="gender w-50 p-1">
+          <div className="birth_date d-flex">
+            <div className=" surname_edit ms-1">
               <label className="form-label" htmlFor="sex">
                 Sex*
               </label>
               <select
-                className="form-select p-2 mb-3"
+                className="form-select"
                 name="sex"
                 value={formData.sex}
                 required
@@ -182,12 +180,12 @@ const EditApplication = () => {
                 <option>Female</option>
               </select>
             </div>
-            <div className="dob w-50 p-1">
+            <div className=" surname_edit ms-1">
               <label className="form-label" htmlFor="dob">
                 Date of Birth*
               </label>
               <input
-                className="form-control p-2 mb-3"
+                className="form-control "
                 type="date"
                 name="dob"
                 required
@@ -196,13 +194,13 @@ const EditApplication = () => {
               />
             </div>
           </div>
-          <div className=" d-flex">
-            <div className="w-50 p-1">
+          <div className="birth_date d-flex">
+            <div className="surname_edit ms-1">
               <label className="form-label" htmlFor="birthCity">
                 Place of Birth Town/City*
               </label>
               <input
-                className="form-control p-2 mb-3"
+                className="form-control "
                 type="text"
                 name="birthCity"
                 required
@@ -210,12 +208,12 @@ const EditApplication = () => {
                 onChange={onChangeHandler}
               />
             </div>
-            <div className="id-number w-50 p-1">
+            <div className=" surname_edit ms-1">
               <label className="form-label" htmlFor="currentN">
                 Current Nationality*
               </label>
               <input
-                className="form-control p-2 mb-3"
+                className="form-control"
                 type="text"
                 name="currentN"
                 required
@@ -233,7 +231,7 @@ const EditApplication = () => {
             <textarea
               id="identification"
               name="identification"
-              className="form-control p-4 mb-3"
+              className="form-control p-2 mb-3"
               required
               value={formData.identification}
               onChange={onChangeHandler}
@@ -241,13 +239,13 @@ const EditApplication = () => {
               Enter identification marks
             </textarea>
           </div>
-          <div className="d-flex">
-            <div className="phone-no w-50 p-1">
+          <div className="birth_date d-flex">
+            <div className="surname_edit ">
               <label className="form-label" htmlFor="company">
                 Company Name*
               </label>
               <input
-                className="form-control p-2 mb-3"
+                className="form-control "
                 type="text"
                 name="company"
                 required
@@ -255,12 +253,12 @@ const EditApplication = () => {
                 onChange={onChangeHandler}
               />
             </div>
-            <div className="id-number w-50 p-1">
+            <div className="surname_edit ">
               <label className="form-label" htmlFor="dutyDuration">
                 Duty Duration*
               </label>
               <input
-                className="form-control p-2 mb-3"
+                className="form-control "
                 type="text"
                 name="dutyDuration"
                 required
@@ -269,15 +267,15 @@ const EditApplication = () => {
               />
             </div>
           </div>
-          <div className="d-flex">
-            <div className="w-50 p-1">
+          <div className="birth_date d-flex">
+            <div className="surname_edit">
               <label className="form-label" htmlFor="jobTitle">
                 Job Title*
               </label>
               <select
                 id="jobTitle"
                 name="jobTitle"
-                className="form-select p-2 mb-3"
+                className="form-select "
                 value={formData.jobTitle}
                 onChange={onChangeHandler}
               >
@@ -298,12 +296,12 @@ const EditApplication = () => {
                 <option>Caring Operator</option>
               </select>
             </div>
-            <div className="id-number w-50 p-1">
+            <div className="surname_edit">
               <label className="form-label" htmlFor="salary">
                 Salary*
               </label>
               <input
-                className="form-control p-2 mb-3"
+                className="form-control "
                 type="text"
                 name="salary"
                 required
@@ -338,7 +336,7 @@ const EditApplication = () => {
               onChange={onChangeHandler}
             />
           </div>
-          <div>
+          <div className="pb-2">
             <label className="form-label" htmlFor="issuedCountry">
               Issued Country
             </label>
@@ -353,7 +351,7 @@ const EditApplication = () => {
             />
           </div>
           {error && <div style={{ color: "red" }}>{error}</div>}
-          <button className="btn btn-primary" type="submit">
+          <button className="btn btn-primary mb-3" type="submit">
             Submit
           </button>
         </form>
