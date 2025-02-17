@@ -125,7 +125,7 @@ const AddUserApplication = () => {
 
       if (response.status === 201) {
         navigate("/application", { replace: true });
-        setError(""); // Clear error message on success
+        setError("");
       } else {
         setError(
           `Failed to add application. Server responded with status: ${response.status}`
