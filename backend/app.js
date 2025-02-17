@@ -131,9 +131,7 @@ app.use(
     },
   })
 );
-app.use((req, res, next) => {
-  res.status(404).sendFile(path.join(__dirname, "public", "default-image.jpg"));
-});
+
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static("uploads"));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
