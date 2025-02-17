@@ -9,6 +9,8 @@ const path = require("path");
 
 const app = express();
 
+console.log("Starting server...");
+
 require("./src/config/database");
 const userRouter = require("./src/routes/userRoute");
 const designationRouter = require("./src/routes/desigRoute");
@@ -19,12 +21,14 @@ const sliderRouter = require("./src/routes/sliderRoute");
 const companyRouter = require("./src/routes/companyRoute");
 const applicationRouter = require("./src/routes/applicationRoute");
 
-//middleware
+// Middleware
 const allowedOrigins = [
+  "https://ali-dev.onrender.com",
   "http://localhost:3000",
   "https://jobsvisaonline.netlify.app",
   "https://www.jobsvisaonline.com",
 ];
+
 const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.includes(origin) || !origin) {
@@ -39,6 +43,8 @@ const corsOptions = {
   credentials: true,
   optionsSuccessStatus: 204,
 };
+
+console.log("CORS options: ", corsOptions);
 app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
@@ -46,6 +52,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.options("*", cors());
 app.use(helmet());
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 200 });
 app.use(limiter);
@@ -55,7 +62,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
-
 app.use(express.static(__dirname + "public"));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
@@ -98,7 +104,6 @@ app.use(
 );
 
 app.use("/uploads", express.static("uploads"));
-
 app.use(
   "/uploads/documents",
   express.static(path.join(__dirname, "uploads/documents"))
@@ -120,5 +125,11 @@ app.use("/api/application", applicationRouter);
 
 app.use(passport.initialize());
 require("./src/config/passport");
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
 
 module.exports = app;
