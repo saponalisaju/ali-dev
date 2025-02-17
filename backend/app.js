@@ -9,8 +9,6 @@ const path = require("path");
 
 const app = express();
 
-console.log("Starting server...");
-
 require("./src/config/database");
 const userRouter = require("./src/routes/userRoute");
 const designationRouter = require("./src/routes/desigRoute");
@@ -23,6 +21,7 @@ const applicationRouter = require("./src/routes/applicationRoute");
 
 // Middleware
 const allowedOrigins = [
+  "http://localhost:4001",
   "https://ali-dev.onrender.com",
   "http://localhost:3000",
   "https://jobsvisaonline.netlify.app",
@@ -31,31 +30,17 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin) || !origin) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
   },
-  methods: "GET,POST,PUT,DELETE,PATCH,OPTIONS",
-  allowedHeaders:
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+  methods: "GET,POST,PUT,DELETE,OPTIONS",
+  allowedHeaders: " Content-Type, Accept, Authorization",
   credentials: true,
   optionsSuccessStatus: 204,
 };
-
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // Replace "*" with your specific domain if needed
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
-  );
-  next();
-});
 
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
@@ -68,57 +53,106 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static("public"));
-app.use(express.static(__dirname + "public"));
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
 app.use(
-  "/public/slider",
-  express.static(path.join(__dirname, "../frontend/public/slider"))
+  "/uploads/sliderImages",
+  express.static(path.join(__dirname, "uploads/sliderImages"), {
+    setHeaders: (res, path) => {
+      res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    },
+  })
 );
 
 app.use(
-  "/public/application",
-  express.static(path.join(__dirname, "../frontend/public/application"))
-);
-app.use(
-  "/public/job_letter",
-  express.static(path.join(__dirname, "../frontend/public/job_letter"))
-);
-app.use(
-  "/public/visa",
-  express.static(path.join(__dirname, "../frontend/public/visa"))
-);
-app.use(
-  "/public/visa_form",
-  express.static(path.join(__dirname, "../frontend/public/visa_form"))
-);
-app.use(
-  "/public/lmia",
-  express.static(path.join(__dirname, "../frontend/public/lmia"))
-);
-app.use(
-  "/public/work_permit",
-  express.static(path.join(__dirname, "../frontend/public/work_permit"))
-);
-app.use(
-  "/public/air_ticket",
-  express.static(path.join(__dirname, "../frontend/public/air_ticket"))
-);
-app.use(
-  "/public/document",
-  express.static(path.join(__dirname, "../frontend/public/document"))
+  "/uploads/applicationImages",
+  express.static(path.join(__dirname, "uploads/applicationImages"), {
+    setHeaders: (res, path) => {
+      res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    },
+  })
 );
 
-app.use("/uploads", express.static("uploads"));
+app.use(
+  "/uploads/job_letters",
+  express.static(path.join(__dirname, "uploads/job_letters"), {
+    setHeaders: (res, path) => {
+      res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    },
+  })
+);
+
+app.use(
+  "/uploads/lmias",
+  express.static(path.join(__dirname, "uploads/lmias"), {
+    setHeaders: (res, path) => {
+      res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    },
+  })
+);
+app.use(
+  "/uploads/visa",
+  express.static(path.join(__dirname, "uploads/visa"), {
+    setHeaders: (res, path) => {
+      res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    },
+  })
+);
+app.use(
+  "/uploads/visa_form",
+  express.static(path.join(__dirname, "uploads/visa_form"), {
+    setHeaders: (res, path) => {
+      res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    },
+  })
+);
+
+app.use(
+  "/uploads/work_permits",
+  express.static(path.join(__dirname, "uploads/work_permits"), {
+    setHeaders: (res, path) => {
+      res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    },
+  })
+);
+
+app.use(
+  "/uploads/air_tickets",
+  express.static(path.join(__dirname, "uploads/air_tickets"), {
+    setHeaders: (res, path) => {
+      res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    },
+  })
+);
+
 app.use(
   "/uploads/documents",
-  express.static(path.join(__dirname, "uploads/documents"))
+  express.static(path.join(__dirname, "uploads/documents"), {
+    setHeaders: (res, path) => {
+      res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    },
+  })
 );
+app.use((req, res, next) => {
+  res.status(404).sendFile(path.join(__dirname, "public", "default-image.jpg"));
+});
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.get("/uploads/slide/", (req, res) => {
+// Add Cross-Origin-Resource-Policy header
+app.use((req, res, next) => {
   res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
-  res.sendFile(path.join(__dirname, "uploads/slider", req.params.image));
+  next();
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send({ error: err.message });
+});
+
+app.get("/uploads/sliderImages/:image", (req, res) => {
+  res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+  res.sendFile(path.join(__dirname, "uploads/sliderImages", req.params.image));
 });
 
 app.use("/api/users", userRouter);
@@ -132,11 +166,5 @@ app.use("/api/application", applicationRouter);
 
 app.use(passport.initialize());
 require("./src/config/passport");
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Something broke!");
-});
 
 module.exports = app;

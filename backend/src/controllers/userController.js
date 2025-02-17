@@ -17,7 +17,6 @@ const {
   jwtRefreshKey,
 } = require("../../secret");
 const { createToken } = require("../helpers/jsonwebtoken");
-const data = require("../../data");
 const Application = require("../models/applicationModel");
 
 exports.register = async (req, res, next) => {

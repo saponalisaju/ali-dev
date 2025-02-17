@@ -64,6 +64,7 @@ const SliderManagement = () => {
             {users && users.length > 0 ? (
               users?.map((user) => {
                 const { _id, thumbnail, title, image, status } = user;
+                console.log(image);
                 return (
                   <tr key={_id}>
                     <td>{thumbnail}</td>

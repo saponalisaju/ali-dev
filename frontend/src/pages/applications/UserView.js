@@ -167,7 +167,7 @@ const UserView = () => {
             <div className="d-flex me-auto">
               <img
                 className="application_img p-2"
-                src={`/public/application/${formData.image}`}
+                src={`${apiUrl}/uploads/applicationImages/${formData.image}`}
                 alt="Applicant"
               />
             </div>
@@ -327,7 +327,7 @@ const UserView = () => {
                     <div className="w-100">
                       <img
                         className="view_image"
-                        src={`/public/job_letter/${formData.file}`}
+                        src={`${apiUrl}/uploads/job_letters/${formData.file}`}
                         alt="Attachment"
                       />
                     </div>
@@ -345,7 +345,7 @@ const UserView = () => {
                     <div className="w-100">
                       <img
                         className="view_image"
-                        src={`/public/lmia/${formData.file1}`}
+                        src={`${apiUrl}/uploads/lmias/${formData.file1}`}
                         alt="Attachment"
                       />
                     </div>
@@ -363,7 +363,7 @@ const UserView = () => {
                     <div className="w-100">
                       <img
                         className="view_image"
-                        src={`/public/visa/${formData.file2}`}
+                        src={`${apiUrl}/uploads/visa/${formData.file2}`}
                         alt="Attachment"
                       />
                     </div>
@@ -381,7 +381,7 @@ const UserView = () => {
                     <div className="w-100">
                       <img
                         className="view_image"
-                        src={`/public/visa_form/${formData.file3}`}
+                        src={`${apiUrl}/uploads/visa_form/${formData.file3}`}
                         alt="Attachment"
                       />
                     </div>
@@ -399,7 +399,7 @@ const UserView = () => {
                     <div className="w-100">
                       <img
                         className="view_image"
-                        src={`/public/work_permit/${formData.file4}`}
+                        src={`${apiUrl}/uploads/work_permits/${formData.file4}`}
                         alt="Attachment"
                       />
                     </div>
@@ -417,7 +417,7 @@ const UserView = () => {
                     <div className="w-100">
                       <img
                         className="view_image"
-                        src={`/public/air_ticket/${formData.file5}`}
+                        src={`${apiUrl}/uploads/air_tickets/${formData.file5}`}
                         alt="Attachment"
                       />
                     </div>
