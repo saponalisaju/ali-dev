@@ -44,19 +44,26 @@ const corsOptions = {
   optionsSuccessStatus: 204,
 };
 
-console.log("CORS options: ", corsOptions);
-app.use(cors(corsOptions));
-
 app.use((req, res, next) => {
-  res.setHeader("Cross-Origin-Resource-Policy", "same-site");
+  res.header("Access-Control-Allow-Origin", "*"); // Replace "*" with your specific domain if needed
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
   next();
 });
 
-app.options("*", cors());
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+
 app.use(helmet());
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 200 });
 app.use(limiter);
-
+app.set("trust proxy", 1);
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
