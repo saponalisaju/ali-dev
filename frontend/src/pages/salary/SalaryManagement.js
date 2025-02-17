@@ -38,11 +38,11 @@ const SalaryManagement = () => {
       >
         <div className="user_manage_head d-flex">
           <h2 className="me-auto user_manage_app">Salary Management</h2>
-          <Link className="btn btn-primary" to="/addNewSalary">
+          <Link className="btn btn-primary btn-sm" to="/addNewSalary">
             Add New Salary
           </Link>
         </div>
-        <hr />
+        <hr className="user_manage_hr" />
         <table className="table table-striped-column table-bordered">
           <thead className="">
             <tr className="">

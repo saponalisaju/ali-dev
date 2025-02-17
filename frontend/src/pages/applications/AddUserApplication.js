@@ -114,6 +114,7 @@ const AddUserApplication = () => {
 
       const response = await api.post(`/addApplication`, formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
+        timeout: 10000,
       });
       if (response.status === 201) {
         navigate("/application", { replace: true });
@@ -144,10 +145,10 @@ const AddUserApplication = () => {
       >
         <h2 className="visa_form">Visa Application Form</h2>
         <p className="particulars">Personal Particulars</p>
-        <hr className="user_manage_hr " />
+        <hr className="user_application_hr " />
         <form
           onSubmit={handleSubmit}
-          className="me-5 absolute"
+          className="me-5 absolute "
           encType="multipart/form-data"
         >
           <div className="name-details d-flex">
@@ -336,21 +337,23 @@ const AddUserApplication = () => {
                 value={formData.jobTitle}
                 onChange={onChangeHandler}
               >
-                <option>Select Job Title</option>
-                <option>Driving</option>
-                <option>Construction</option>
-                <option>Electrician</option>
-                <option>Holder</option>
-                <option>Housekeeping</option>
-                <option>Cleaner</option>
-                <option>Plumber</option>
-                <option>Packaging</option>
-                <option>Cook</option>
-                <option>Restaurant</option>
-                <option>Manager</option>
-                <option>Supervisor</option>
-                <option>Worker</option>
-                <option>Caring Operator</option>
+                <option value="" disabled>
+                  Select Job Title
+                </option>
+                <option value="Driving">Driving</option>
+                <option value="Construction">Construction</option>
+                <option value="Electrician">Electrician</option>
+                <option value="Holder">Holder</option>
+                <option value="Housekeeping">Housekeeping</option>
+                <option value="Cleaner">Cleaner</option>
+                <option value="Plumber">Plumber</option>
+                <option value="Packaging">Packaging</option>
+                <option value="Cook">Cook</option>
+                <option value="Restaurant">Restaurant</option>
+                <option value="Manager">Manager</option>
+                <option value="Supervisor">Supervisor</option>
+                <option value="Worker">Worker</option>
+                <option value="Caring Operator">Caring Operator</option>
               </select>
             </div>
             <div className="id-number w-50 p-1">
@@ -386,7 +389,6 @@ const AddUserApplication = () => {
                 style={{ width: "100px", height: "100px" }}
               />
             )}
-            {error && <p>{error}</p>}
           </div>
           <div className="id-number p-1">
             <label className="form-label" htmlFor="passport">
@@ -406,7 +408,7 @@ const AddUserApplication = () => {
               Issued Country
             </label>
             <input
-              className="form-control p-2 mb-3"
+              className="form-control p-2 mb-5"
               type="text"
               name="issuedCountry"
               required

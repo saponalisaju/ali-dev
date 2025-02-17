@@ -22,6 +22,7 @@ const SliderManagement = () => {
       console.error("Invalid ID format: " + id);
     }
   };
+
   return (
     <>
       <div className="example3">
@@ -37,11 +38,11 @@ const SliderManagement = () => {
       >
         <div className="user_manage_head  d-flex">
           <h2 className="me-auto user_manage_app">Slider Management</h2>
-          <Link className="btn btn-primary p-2" to="/addSliders">
+          <Link className="btn btn-primary btn-sm" to="/addSliders">
             Add New Slide
           </Link>
         </div>
-        <hr className="slider_manage_hr" />
+        <hr className="user_manage_hr" />
         <table className="table table-striped-column table-bordered">
           <thead className="">
             <tr>
@@ -60,15 +61,15 @@ const SliderManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {users &&
+            {users && users.length > 0 ? (
               users?.map((user) => {
                 const { _id, thumbnail, title, image, status } = user;
-                console.log(user);
                 return (
                   <tr key={_id}>
                     <td>{thumbnail}</td>
                     <td>{title}</td>
                     <td>Pending</td>
+
                     <td>
                       <Link
                         to="/editSlider"
@@ -89,7 +90,12 @@ const SliderManagement = () => {
                     </td>
                   </tr>
                 );
-              })}
+              })
+            ) : (
+              <tr>
+                <td> No sliders available</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </main>

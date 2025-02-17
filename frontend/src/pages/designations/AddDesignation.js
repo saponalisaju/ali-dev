@@ -39,7 +39,7 @@ const AddDesignation = () => {
         <form onSubmit={handleSubmit}>
           <label className="form-label">Designation Name*</label>
           <input
-            className="form-control p-2 mb-3"
+            className="form-control p-2 mb-5"
             type="text"
             placeholder="Enter designation name"
             value={name}

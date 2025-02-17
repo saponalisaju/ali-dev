@@ -3,6 +3,8 @@ const Slider = require("../models/sliderModel");
 const path = require("path");
 const fs = require("fs");
 
+const SLIDER_DIR = path.resolve(__dirname, "../../frontend/public/slider");
+
 exports.fetchSlider = async (req, res) => {
   try {
     const usersAll = await Slider.find({});
@@ -14,11 +16,11 @@ exports.fetchSlider = async (req, res) => {
 };
 exports.addSlider = async (req, res) => {
   try {
-    const image = req.file?.filename;
-    const path = req.file?.path;
     if (!req.file || !req.body.title) {
       return res.status(400).json({ message: "Image and title are required" });
     }
+    const image = req.file.filename;
+    const path = req.file.path;
     const newSlider = new Slider({ ...req.body, image: image, path: path });
     await newSlider.save();
     res.status(201).json(newSlider);

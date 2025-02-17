@@ -38,11 +38,11 @@ const CompanyManagement = () => {
       >
         <div className="user_manage_head d-flex">
           <h2 className="me-auto user_manage_app">Company Management</h2>
-          <Link className="btn btn-primary" to="/addCompany">
+          <Link className="btn btn-primary btn-sm" to="/addCompany">
             Add New Company
           </Link>
         </div>
-        <hr />
+        <hr className="user_manage_hr" />
         <table className="table table-striped-column table-bordered">
           <thead className="">
             <tr>

@@ -40,7 +40,7 @@ const AddNewSalary = () => {
             Salary Name*
           </label>
           <input
-            className="form-control p-2 mb-3"
+            className="form-control p-2 mb-5"
             type="text"
             placeholder="Enter salary name"
             name="name"

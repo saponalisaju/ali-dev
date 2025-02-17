@@ -46,7 +46,7 @@ const EditDesignation = () => {
               Page Title*
             </label>
             <input
-              className="form-control p-2 mb-3"
+              className="form-control p-2 mb-5s"
               type="text"
               id="title"
               name="title"

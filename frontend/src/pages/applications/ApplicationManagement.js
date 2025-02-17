@@ -21,15 +21,12 @@ const ApplicationManagement = () => {
         setTotalPages(response.data.totalPages);
       } catch (error) {
         if (error.response) {
-          // The request was made and the server responded with a status code that falls out of the range of 2xx
           console.error("Error response:", error.response.data);
           console.error("Error status:", error.response.status);
           console.error("Error headers:", error.response.headers);
         } else if (error.request) {
-          // The request was made but no response was received
           console.error("Error request:", error.request);
         } else {
-          // Something happened in setting up the request that triggered an Error
           console.error("Error message:", error.message);
         }
       }
@@ -74,15 +71,15 @@ const ApplicationManagement = () => {
       >
         <div className="user_manage_head d-flex">
           <h2 className="user_manage_app me-auto">Application Management</h2>
-          <Link className="btn btn-primary" to="/addUserApplication">
+          <Link className="btn btn-primary btn-sm" to="/addUserApplication">
             Add New Application
           </Link>
         </div>
-        <hr />
+        <hr className="user_manage_hr" />
         <div className="d-flex search_box pb-2">
-          <p>Show 1 to 10 entries</p>
+          <p className="">Show 1 to 10 entries</p>
           <input
-            className="ms-auto input-search form-control"
+            className=" input-search form-control"
             type="text"
             placeholder="Passport search ..."
             value={search}
@@ -149,6 +146,7 @@ const ApplicationManagement = () => {
                   pending,
                   approve,
                 } = user;
+
                 return (
                   <React.Fragment key={_id}>
                     <tr className="tApp_head">
@@ -159,8 +157,9 @@ const ApplicationManagement = () => {
                       <td>{pending}</td>
                       <td>{approve}</td>
 
-                      <td>
+                      <td className="edit_delete">
                         <Link
+                          className="btn btn-white text-primary p-1"
                           to="/userView"
                           state={{
                             _id,
@@ -190,10 +189,9 @@ const ApplicationManagement = () => {
                             email,
                           }}
                         >
-                          <button className="btn btn-white text-primary p-1">
-                            View
-                          </button>
+                          View
                         </Link>
+
                         <Link
                           className="btn btn-white text-primary p-1"
                           to="/editApplication"
@@ -222,6 +220,7 @@ const ApplicationManagement = () => {
                         >
                           Edit
                         </Link>
+
                         <button
                           className="btn btn-white text-danger p-1"
                           onClick={() => deleteHandler(_id)}
@@ -236,9 +235,9 @@ const ApplicationManagement = () => {
             </tbody>
           </table>
         </div>
-        <div className="pagination justify-content-end pt-2 mb-3">
+        <div className="pagination justify-content-end mb-3 ">
           <button
-            className="btn btn-secondary btn-sm"
+            className="btn btn-secondary btn-sm p-1"
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
             disabled={page === 1}
           >
@@ -250,7 +249,7 @@ const ApplicationManagement = () => {
           </span>
 
           <button
-            className="btn btn-secondary btn-sm "
+            className="btn btn-secondary btn-sm p-1"
             onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={page === totalPages}
           >

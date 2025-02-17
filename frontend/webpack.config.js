@@ -24,3 +24,20 @@ module.exports = {
   plugins: [isDevelopment && new ReactRefreshWebpackPlugin()].filter(Boolean),
   stats: { children: true },
 };
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[path][name].[ext]",
+            },
+          },
+        ],
+      },
+    ],
+  },
+};

@@ -2,14 +2,8 @@ import React, { useEffect, useState } from "react";
 import Common from "../../layouts/Common";
 import "../../assets/styles/main.css";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import PrintButton from "./PrintButton";
+
 import api from "./api";
-import apiUrl from "../../secret";
-import PrintButton1 from "./PrintButton1";
-import PrintButton2 from "./PrintButton2";
-import PrintButton5 from "./PrintButton5";
-import PrintButton4 from "./PrintButton4";
-import PrintButton3 from "./PrintButton3";
 
 const UserView = () => {
   const [error, setError] = useState("");
@@ -168,118 +162,148 @@ const UserView = () => {
             <div className="d-flex me-auto">
               <img
                 className="application_img p-2"
-                src={`${apiUrl}/uploads/applicationImages/${formData.image}`}
+                src={`/public/application/${formData.image}`}
                 alt="Applicant"
               />
             </div>
-            <table className="table table-bordered ">
-              <tbody>
-                <tr>
-                  <th className="text-uppercase text-center text-success fw-bold fs-3 text-bg-light ">
+            <div className="border border-2 view_one mb-3">
+              <h2 className="fst-italic text-black fw-bold text-center text-bg-light ">
+                {formData.surname}
+              </h2>
+
+              <div>
+                <h4 className="bg-secondary p-2">A. Personal Particulars</h4>
+              </div>
+              <div className="surname_given">
+                <div className="d-flex surname_head_one">
+                  <strong className="border surname_one">Surname</strong>
+                  <span className="border surname_result_one">
                     {formData.surname}
-                  </th>
-                </tr>
-                <tr>
-                  <th className="bg-secondary">A. Personal Particulars</th>
-                </tr>
-                <tr>
-                  <td colSpan="3">
-                    <table className="table table-bordered mb-0">
-                      <tbody>
-                        <tr>
-                          <td>Surname</td>
-                          <td>{formData.surname}</td>
-                        </tr>
-                        <tr>
-                          <td>Given Name</td>
-                          <td>{formData.givenN}</td>
-                        </tr>
-                        <tr>
-                          <td>Sex</td>
-                          <td colSpan="2">{formData.sex}</td>
-                          <td>Date of Birth</td>
-                          <td colSpan="2">{formData.dob}</td>
-                        </tr>
-                        <tr>
-                          <td>Place of Birth Town/City</td>
-                          <td colSpan="2">{formData.birthCity}</td>
-                          <td>Visible Identification Marks</td>
-                          <td colSpan="2">{formData.identification}</td>
-                        </tr>
-                        <tr>
-                          <td>Current Nationality</td>
-                          <td colSpan="2">{formData.currentN}</td>
-                          <td>National ID No</td>
-                          <td colSpan="2">{formData.nationalId}</td>
-                          <td colSpan="2"></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-                <tr>
-                  <th className="bg-secondary">B. Company Details</th>
-                </tr>
-                <tr>
-                  <td colSpan="3">
-                    <table className="table table-bordered mb-0">
-                      <tbody>
-                        <tr>
-                          <td>Company Name</td>
-                          <td colSpan="2">{formData.company}</td>
-                          <td>Job Title</td>
-                          <td colSpan="2">{formData.jobTitle}</td>
-                        </tr>
-                        <tr>
-                          <td>Duty Duration</td>
-                          <td colSpan="2">{formData.dutyDuration}</td>
-                          <td>Salary</td>
-                          <td colSpan="2">{formData.salary}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-                <tr>
-                  <th className="bg-secondary">C. Passport Details</th>
-                </tr>
-                <tr>
-                  <td colSpan="3">
-                    <table className="table table-bordered mb-0">
-                      <tbody>
-                        <tr>
-                          <td>Passport No</td>
-                          <td>{formData.passport}</td>
-                          <td>Issued Country</td>
-                          <td>{formData.issuedCountry}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-                <tr>
-                  <th className="bg-secondary">
-                    D. Applicant's Contact Details
-                  </th>
-                </tr>
-                <tr>
-                  <td colSpan="3">
-                    <table className="table table-bordered">
-                      <tbody>
-                        <tr>
-                          <td>Phone</td>
-                          <td>{formData.phone}</td>
-                          <td>Email</td>
-                          <td>{formData.email}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                  </span>
+                </div>
+                <div className="d-flex">
+                  <strong className="border surname_one">Given Name</strong>
+                  <span className="border surname_result_one">
+                    {formData.givenN}
+                  </span>
+                </div>
+                <div className="d-flex sex_birth">
+                  <div className="d-flex surname_head">
+                    <strong className="border surname_sex_one">Sex</strong>
+                    <span className="border surname_sex">{formData.sex}</span>
+                  </div>
+                  <div className="d-flex surname_head">
+                    <strong className="border surname_sex_one">
+                      Date of Birth
+                    </strong>
+                    <span className="border surname_sex">{formData.dob}</span>
+                  </div>
+                </div>
+                <div className="d-flex sex_birth">
+                  <div className="d-flex surname_head">
+                    <strong className="border surname_sex">
+                      Place of Birth Town/City
+                    </strong>
+                    <span className="border surname_sex">
+                      {formData.birthCity}
+                    </span>
+                  </div>
+                  <div className="d-flex surname_head">
+                    <strong className="border surname_sex">
+                      Visible Identification Marks
+                    </strong>
+                    <span className="border surname_sex">
+                      {formData.identification}
+                    </span>
+                  </div>
+                </div>
+                <div className="d-flex sex_birth">
+                  <div className="d-flex surname_head">
+                    <strong className="border surname_sex_one">
+                      Current Nationality
+                    </strong>
+                    <span className="border surname_sex">
+                      {formData.currentN}
+                    </span>
+                  </div>
+                  <div className="d-flex surname_head">
+                    <strong className="border surname_sex_one">
+                      National ID No
+                    </strong>
+                    <span className="border surname_sex">
+                      {formData.nationalId}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <h4 className="bg-secondary p-2">B. Company Details</h4>
+
+              <div className="d-flex sex_birth">
+                <div className="d-flex surname_head">
+                  <strong className="border surname_sex_one">
+                    Company Name
+                  </strong>
+                  <span className="border surname_sex">{formData.company}</span>
+                </div>
+                <div className="d-flex surname_head">
+                  <strong className="border surname_sex_one">Job Title</strong>
+                  <span className="border surname_sex">
+                    {formData.jobTitle}
+                  </span>
+                </div>
+              </div>
+              <div className="d-flex sex_birth">
+                <div className="d-flex surname_head">
+                  <strong className="border surname_sex">Duty Duration</strong>
+                  <span className="border surname_sex">
+                    {formData.dutyDuration}
+                  </span>
+                </div>
+                <div className="d-flex surname_head">
+                  <strong className="border surname_sex">Salary</strong>
+                  <span className="border surname_sex">{formData.salary}</span>
+                </div>
+              </div>
+
+              <h4 className="bg-secondary p-2">C. Passport Details</h4>
+
+              <div className="d-flex sex_birth">
+                <div className="d-flex surname_head">
+                  <strong className="border surname_sex_one">
+                    Passport No
+                  </strong>
+                  <span className="border surname_sex">
+                    {formData.passport}
+                  </span>
+                </div>
+                <div className="d-flex surname_head">
+                  <strong className="border surname_sex_one">
+                    Issued Country
+                  </strong>
+                  <span className="border surname_sex">
+                    {formData.issuedCountry}
+                  </span>
+                </div>
+              </div>
+
+              <h4 className="bg-secondary p-2">
+                D. Applicant's Contact Details
+              </h4>
+
+              <div className="d-flex sex_birth">
+                <div className="d-flex surname_head">
+                  <strong className="border surname_sex_one">Phone</strong>
+                  <span className="border surname_sex">{formData.phone}</span>
+                </div>
+                <div className="d-flex surname_head">
+                  <strong className="border surname_sex_one">Email</strong>
+                  <span className="border surname_sex">{formData.email}</span>
+                </div>
+              </div>
+            </div>
             <div className="upload_head pb-2">
-              <div className="file_upload m-3 ">
+              <div className="file_upload ">
                 <form
                   onSubmit={handleSubmit}
                   className="form-control "
@@ -289,20 +313,19 @@ const UserView = () => {
                     <h4 className="fw-bold">JOB LETTERS</h4>
                     <div className="d-flex pb-3  ">
                       <input
-                        id="file"
                         className="form-control ms-auto"
                         type="file"
                         name="file"
                         onChange={handleChange}
                       />
-                      <button
-                        className="btn btn-secondary btn-sm ms-auto"
-                        type="submit"
-                      >
-                        Upload
-                      </button>
                     </div>
-                    <PrintButton apiUrl={apiUrl} formData={formData} />
+                    <div className="w-100">
+                      <img
+                        className="view_image"
+                        src={`/public/job_letter/${formData.file}`}
+                        alt="Attachment"
+                      />
+                    </div>
                   </div>
                   <div className=" pb-4">
                     <h4 className="fw-bold">LMIAS</h4>
@@ -313,14 +336,14 @@ const UserView = () => {
                         name="file1"
                         onChange={handleChange}
                       />
-                      <button
-                        className="btn btn-secondary btn-sm ms-auto"
-                        type="submit"
-                      >
-                        Upload
-                      </button>
                     </div>
-                    <PrintButton1 apiUrl={apiUrl} formData={formData} />
+                    <div className="w-100">
+                      <img
+                        className="view_image"
+                        src={`/public/lmia/${formData.file1}`}
+                        alt="Attachment"
+                      />
+                    </div>
                   </div>
                   <div className="pb-4 ">
                     <h4 className="fw-bold">VISA</h4>
@@ -331,72 +354,75 @@ const UserView = () => {
                         name="file2"
                         onChange={handleChange}
                       />
-                      <button
-                        className="btn btn-secondary btn-sm ms-auto"
-                        type="submit"
-                      >
-                        Upload
-                      </button>
                     </div>
-                    <PrintButton2 apiUrl={apiUrl} formData={formData} />
+                    <div className="w-100">
+                      <img
+                        className="view_image"
+                        src={`/public/visa/${formData.file2}`}
+                        alt="Attachment"
+                      />
+                    </div>
                   </div>
                   <div className="pb-4 ">
                     <h4 className="fw-bold">VISA FORM</h4>
                     <div className="d-flex pb-3  ">
                       <input
-                        id="file"
                         className="form-control ms-auto"
                         type="file"
                         name="file3"
                         onChange={handleChange}
                       />
-                      <button
-                        className="btn btn-secondary btn-sm ms-auto"
-                        type="submit"
-                      >
-                        Upload
-                      </button>
                     </div>
-                    <PrintButton3 apiUrl={apiUrl} formData={formData} />
+                    <div className="w-100">
+                      <img
+                        className="view_image"
+                        src={`/public/visa_form/${formData.file3}`}
+                        alt="Attachment"
+                      />
+                    </div>
                   </div>
                   <div className=" pb-4">
                     <h4 className="fw-bold">WORK PERMITS</h4>
                     <div className="d-flex pb-3  ">
                       <input
-                        id="file"
                         className="form-control ms-auto"
                         type="file"
                         name="file4"
                         onChange={handleChange}
                       />
-                      <button
-                        className="btn btn-secondary btn-sm ms-auto"
-                        type="submit"
-                      >
-                        Upload
-                      </button>
                     </div>
-                    <PrintButton4 apiUrl={apiUrl} formData={formData} />
+                    <div className="w-100">
+                      <img
+                        className="view_image"
+                        src={`/public/work_permit/${formData.file4}`}
+                        alt="Attachment"
+                      />
+                    </div>
                   </div>
-                  <div className=" pb-4">
+                  <div className=" pb-4 w-100">
                     <h4 className="fw-bold">AIR TICKETS</h4>
                     <div className="d-flex pb-3  ">
                       <input
-                        id="file"
                         className="form-control ms-auto"
                         type="file"
                         name="file5"
                         onChange={handleChange}
                       />
-                      <button
-                        className="btn btn-secondary btn-sm ms-auto"
-                        type="submit"
-                      >
-                        Upload
-                      </button>
                     </div>
-                    <PrintButton5 apiUrl={apiUrl} formData={formData} />
+                    <div className="w-100">
+                      <img
+                        className="view_image"
+                        src={`/public/air_ticket/${formData.file5}`}
+                        alt="Attachment"
+                      />
+                    </div>
                   </div>
+                  <button
+                    className="btn btn-secondary btn-sm ms-auto"
+                    type="submit"
+                  >
+                    Upload
+                  </button>
                 </form>
               </div>
             </div>

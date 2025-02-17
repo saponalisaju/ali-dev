@@ -19,15 +19,21 @@ hr {
   opacity: 25%;
 }
 
-table {
-  box-shadow: 0 2px 4px 2px rgba(86, 88, 88, 0.2);
-}
-
 .btn_approved {
   margin: 0.5rem;
 }
 
+.tapp_head_one {
+  width: 39rem;
+}
+
+.tapp_head_two {
+  width: 31rem;
+}
+
 .user_manage,
+.user_profile,
+.user_application,
 .add_user {
   width: 68rem;
   margin-top: 5rem;
@@ -54,8 +60,38 @@ table {
 }
 
 .search_box .input-search {
-  width: 15rem;
-  height: 3.5rem;
+  width: 12rem;
+  height: 2rem;
+}
+
+.input-search {
+  margin-left: auto;
+}
+
+.surname,
+.surname_one {
+  width: 25%;
+  padding: 0.5rem;
+}
+.surname_result,
+.surname_result_one {
+  padding: 0.5rem;
+  width: 75%;
+}
+
+.surname_sex,
+.surname_sex_one {
+  padding: 0.5rem;
+  width: 50%;
+}
+
+.surname_head,
+.surname_head_one {
+  width: 100%;
+}
+
+.view_image {
+  width: 100%;
 }
 
 /* attachment start */
@@ -96,6 +132,7 @@ table {
 
 @media (max-width: 1400px) {
   .user_manage,
+  .user_profile,
   .add_user {
     width: 68rem;
   }
@@ -103,13 +140,34 @@ table {
 
 @media (max-width: 1200px) {
   .user_manage,
+  .user_profile,
   .add_user {
-    width: 55rem;
+    width: 57rem;
   }
 }
 
 @media (max-width: 992px) {
+  /* view one start */
+  .surname_one,
+  .surname_result_one {
+    width: 50%;
+  }
+
+  .view_one_body {
+    padding: 0 1rem;
+  }
+
+  .surname_head_one {
+    width: 100%;
+  }
+
+  .sex_birth {
+    flex-direction: column;
+  }
+
+  /* view one end */
   .user_manage,
+  .user_profile,
   .add_user {
     width: 43rem;
   }
@@ -117,12 +175,23 @@ table {
 
 @media (max-width: 810px) {
   .upload_head {
-    width: 36rem;
+    width: 30.3rem;
+    margin-left: 0;
   }
   .user_manage,
+  .user_profile,
   .add_user {
-    width: 29rem;
+    width: 32rem;
+    margin-left: 16rem;
+    font-size: 13px;
   }
+
+  .user_manage,
+  .user_app_head,
+  .user_app a {
+    font-size: 12px;
+  }
+
   .search-bar {
     margin-top: 1.5rem;
   }
@@ -132,13 +201,20 @@ table {
   .user_manage_hr {
     width: 27rem;
   }
+  .user_manage_app,
+  .user_app {
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 768px) {
+  .upload_head {
+    width: 30.5rem;
+    margin-left: 0;
+  }
   .user_manage,
   .add_user {
-    width: 29rem;
-    margin-left: 16.5rem;
+    width: 32rem;
   }
   .user_manage_hr {
     width: 20rem;
@@ -146,11 +222,35 @@ table {
 }
 
 @media (max-width: 576px) {
+  .pagination {
+    width: 12rem;
+    padding-top: 1rem;
+  }
+  .page-link {
+    width: 12rem;
+
+    padding-top: 1rem;
+  }
+  .surname_sex_one {
+    padding: 0.5rem;
+    width: 30%;
+  }
+  .surname_sex {
+    width: 70%;
+  }
+  .footer_area {
+    padding: 1rem auto;
+    background-color: rgb(65, 68, 67);
+    color: wheat;
+  }
   .birth_date,
   .search_box,
   .theme_description,
   .search_option {
     flex-direction: column;
+  }
+  .user_manage_head a {
+    width: 10rem;
   }
   .surname_edit {
     width: 100%;
@@ -159,10 +259,28 @@ table {
     width: 36rem;
   }
 
+  .user_manage_hr {
+    width: 18rem;
+  }
+
   .user_manage,
   .add_user {
-    width: 18rem;
+    width: 21rem;
     padding-top: 1rem;
+  }
+
+  .user_profile {
+    width: 20rem;
+    margin-left: 16.5rem;
+  }
+
+  .input-search,
+  .pagination {
+    margin-left: auto;
+  }
+
+  .upload_head {
+    width: 19.3rem;
   }
 
   .search-bar {
@@ -198,23 +316,38 @@ table {
 }
 
 @media (max-width: 480px) {
+  /* view one start */
+
+  .surname_sex_one {
+    padding: 0.5rem;
+    width: 30%;
+  }
+  .surname_sex {
+    width: 70%;
+  }
+
+  /* view one end */
   .view_one_head {
     margin: 0;
+  }
+
+  .user_profile {
+    width: 13rem;
   }
   .user_manage_head {
     flex-direction: column;
   }
+  .user_manage_head a {
+    width: 12rem;
+  }
+  .user_manage_hr {
+    width: 13rem;
+  }
+
   .user_manage_app {
     text-align: center;
   }
-  .add_user,
-  .user_manage {
-    width: 12rem;
-  }
-  .add_user input,
-  .user_manage_hr {
-    width: 11rem;
-  }
+
   #publish {
     width: 12rem;
   }
@@ -232,6 +365,14 @@ table {
   #sex {
     width: 10rem;
   }
+  .user_manage,
+  .add_user {
+    width: 14rem;
+  }
+  .edit_delete {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 412px) {
@@ -242,7 +383,19 @@ table {
   #sex {
     width: 10rem;
   }
-
+  .user_manage_hr {
+    width: 13rem;
+  }
+  .user_manage_head a {
+    width: 10rem;
+  }
+  .user_manage_hr {
+    width: 13rem;
+  }
+  .user_profile {
+    width: 13rem;
+    margin-left: 12rem;
+  }
   .user_manage_head .btn {
     margin: 0.3rem 1rem;
   }
@@ -254,18 +407,41 @@ table {
   }
   .user_manage,
   .add_user {
+    width: 12rem;
     padding-top: 0;
     margin-left: 12rem;
   }
 
-  #search,
-  #jobTitle {
+  #search {
     width: 12rem;
+  }
+  #sex,
+  #jobTitle {
+    width: 11rem;
   }
 }
 @media (max-width: 360px) {
+  .view_one_body {
+    padding: 0 0.1rem;
+  }
+  .user_profile {
+    width: 12rem;
+    margin-left: 10rem;
+  }
+  /* view one start */
+
+  .surname_sex_one {
+    padding: 0.5rem;
+    width: 30%;
+  }
+  .surname_sex {
+    width: 70%;
+  }
+
+  /* view one end */
   .user_manage,
   .add_user {
+    font-size: 10px;
     padding-top: 1rem;
     margin-left: 10rem;
   }
@@ -283,5 +459,8 @@ table {
   .search-bar {
     display: flex;
     flex-direction: column;
+  }
+  .user_manage_hr {
+    width: 13rem;
   }
 }

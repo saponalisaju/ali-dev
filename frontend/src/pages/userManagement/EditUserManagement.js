@@ -67,7 +67,7 @@ const EditUserManagement = () => {
               Email
             </label>
             <input
-              className="form-control p-2 mb-3"
+              className="form-control p-2 mb-5"
               type="email"
               id="email"
               name="email"

@@ -99,7 +99,7 @@ const AddNewPage = () => {
               Status
             </label>
             <select
-              className="form-select p-2 mb-3"
+              className="form-select p-2 mb-5"
               id="status"
               name="status"
               value={status}

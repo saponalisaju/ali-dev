@@ -45,9 +45,9 @@ const Profile = () => {
   return (
     <>
       <Common />
-      <main className="add_user">
+      <main className="user_profile">
         <h2>Profile</h2>
-        <hr className="user_manage_hr" />
+        <hr className="user_profile_hr" />
         <form onSubmit={handleSubmit}>
           <div className="form-field">
             <label className="form-label" htmlFor="name">
@@ -96,7 +96,7 @@ const Profile = () => {
               Confirm Password*
             </label>
             <input
-              className="form-control p-2 mb-3"
+              className="form-control p-2 mb-5"
               type="password"
               id="confirmPassword"
               name="confirmPassword"
@@ -105,6 +105,7 @@ const Profile = () => {
               required
             />
           </div>
+          {error && <p style={{ color: "red" }}>{error}</p>}
           <div className="w-full pt-2">
             <button
               className="btn btn-primary"
@@ -115,7 +116,6 @@ const Profile = () => {
             </button>
           </div>
         </form>
-        {error && <p style={{ color: "red" }}>{error}</p>}
       </main>
     </>
   );

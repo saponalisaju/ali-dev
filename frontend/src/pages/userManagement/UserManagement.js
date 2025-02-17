@@ -65,7 +65,7 @@ const UserManagement = () => {
       >
         <div className="user_manage_head  d-flex">
           <h2 className="me-auto user_manage_app">User Management</h2>
-          <Link className="btn btn-primary  " to="/addUserManagement">
+          <Link className="btn btn-primary btn-sm " to="/addUserManagement">
             Add New User
           </Link>
         </div>

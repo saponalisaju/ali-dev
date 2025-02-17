@@ -1,15 +1,15 @@
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
-const SLIDER_FILE_DIR = "uploads/sliderImages";
-const APPLICATION_FILE_DIR = "uploads/applicationImages";
-const APPLICATION_JOB_LETTERS_DIR = "uploads/job_letters";
-const APPLICATION_LMIAS_DIR = "uploads/lmias";
-const APPLICATION_VISA_DIR = "uploads/visa";
-const APPLICATION_VISA_FORM_DIR = "uploads/visa_form";
-const APPLICATION_WORK_PERMIT_DIR = "uploads/work_permits";
-const APPLICATION_AIR_TICKETS_DIR = "uploads/air_tickets";
-const APPLICATION_ATTACH_FILE_DIR = "uploads/documents";
+const SLIDER_DIR = "../frontend/public/slider";
+const APPLICATION_DIR = "../frontend/public/application";
+const JOB_LETTERS_DIR = "../frontend/public/job_letter";
+const LMIAS_DIR = "../frontend/public/lmia";
+const VISA_DIR = "../frontend/public/visa";
+const VISA_FORM_DIR = "../frontend/public/visa_form";
+const WORK_PERMIT_DIR = "../frontend/public/work_permit";
+const AIR_TICKETS_DIR = "../frontend/public/air_ticket";
+const ATTACH_FILE_DIR = "../frontend/public/document";
 const MAX_FILE_SIZE = 2097152;
 const ALLOWED_FILE_TYPES = ["image/jpeg", "image/png", "image/jpg"];
 const ALLOWED_DOCUMENT_TYPE = [
@@ -22,19 +22,19 @@ const ALLOWED_DOCUMENT_TYPE = [
 
 const sliderStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, SLIDER_FILE_DIR);
+    cb(null, SLIDER_DIR);
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()} - ${file.originalname}`);
+    cb(null, Date.now() + "-" + file.originalname);
   },
 });
 
 const applicationStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, APPLICATION_FILE_DIR);
+    cb(null, APPLICATION_DIR);
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()} - ${file.originalname}`);
+    cb(null, Date.now() + "-" + file.originalname);
   },
 });
 
@@ -42,19 +42,19 @@ const applicationStorageView = multer.diskStorage({
   destination: (req, file, cb) => {
     let uploadPath;
     if (file.fieldname === "file") {
-      uploadPath = APPLICATION_JOB_LETTERS_DIR;
+      uploadPath = JOB_LETTERS_DIR;
     } else if (file.fieldname === "file1") {
-      uploadPath = APPLICATION_LMIAS_DIR;
+      uploadPath = LMIAS_DIR;
     } else if (file.fieldname === "file2") {
-      uploadPath = APPLICATION_VISA_DIR;
+      uploadPath = VISA_DIR;
     } else if (file.fieldname === "file3") {
-      uploadPath = APPLICATION_VISA_FORM_DIR;
+      uploadPath = VISA_FORM_DIR;
     } else if (file.fieldname === "file4") {
-      uploadPath = APPLICATION_WORK_PERMIT_DIR;
+      uploadPath = WORK_PERMIT_DIR;
     } else if (file.fieldname === "file5") {
-      uploadPath = APPLICATION_AIR_TICKETS_DIR;
+      uploadPath = AIR_TICKETS_DIR;
     } else {
-      uploadPath = APPLICATION_ATTACH_FILE_DIR;
+      uploadPath = ATTACH_FILE_DIR;
     }
     cb(null, uploadPath);
   },

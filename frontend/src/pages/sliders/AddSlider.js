@@ -86,7 +86,7 @@ const AddSlider = () => {
             </label>{" "}
             <select
               id="publish"
-              className="form-select publish mb-3 p-2"
+              className="form-select publish mb-5 p-2"
               name="status"
               value={status}
               onChange={(e) => setStatus(e.target.value)}

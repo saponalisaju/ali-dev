@@ -42,17 +42,14 @@ const PageManagement = () => {
       >
         <div className="user_manage_head  d-flex">
           <h2 className="me-auto user_manage_app">Page Management</h2>
-          <Link className="btn btn-primary " to="/addNewPage">
+          <Link className="btn btn-primary btn-sm" to="/addNewPage">
             Add New Page
           </Link>
         </div>
-        <hr />
+        <hr className="user_manage_hr" />
         <table className="table table-striped-column table-bordered">
           <thead className="">
             <tr>
-              <th scope="col" className="bg-light ">
-                SL No.
-              </th>
               <th scope="col" className="bg-light ">
                 TITLE
               </th>

@@ -41,6 +41,11 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Resource-Policy", "same-site");
+  next();
+});
+
 app.use(helmet());
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 200 });
 app.use(limiter);
@@ -49,8 +54,48 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static("public"));
+
 app.use(express.static(__dirname + "public"));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+app.use(
+  "/public/slider",
+  express.static(path.join(__dirname, "../frontend/public/slider"))
+);
+
+app.use(
+  "/public/application",
+  express.static(path.join(__dirname, "../frontend/public/application"))
+);
+app.use(
+  "/public/job_letter",
+  express.static(path.join(__dirname, "../frontend/public/job_letter"))
+);
+app.use(
+  "/public/visa",
+  express.static(path.join(__dirname, "../frontend/public/visa"))
+);
+app.use(
+  "/public/visa_form",
+  express.static(path.join(__dirname, "../frontend/public/visa_form"))
+);
+app.use(
+  "/public/lmia",
+  express.static(path.join(__dirname, "../frontend/public/lmia"))
+);
+app.use(
+  "/public/work_permit",
+  express.static(path.join(__dirname, "../frontend/public/work_permit"))
+);
+app.use(
+  "/public/air_ticket",
+  express.static(path.join(__dirname, "../frontend/public/air_ticket"))
+);
+app.use(
+  "/public/document",
+  express.static(path.join(__dirname, "../frontend/public/document"))
+);
 
 app.use("/uploads", express.static("uploads"));
 
@@ -58,6 +103,11 @@ app.use(
   "/uploads/documents",
   express.static(path.join(__dirname, "uploads/documents"))
 );
+
+app.get("/uploads/slide/", (req, res) => {
+  res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+  res.sendFile(path.join(__dirname, "uploads/slider", req.params.image));
+});
 
 app.use("/api/users", userRouter);
 app.use("/api/designation", designationRouter);

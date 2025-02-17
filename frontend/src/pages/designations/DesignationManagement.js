@@ -71,7 +71,7 @@ const DesignationManagement = () => {
       >
         <div className="user_manage_head d-flex">
           <h2 className="me-auto user_manage_app">Designation Management</h2>
-          <Link className="btn btn-primary" to="/addDesignation">
+          <Link className="btn btn-primary btn-sm" to="/addDesignation">
             Add New Designation
           </Link>
         </div>
@@ -126,11 +126,11 @@ const DesignationManagement = () => {
         </table>
         <div className="pagination justify-content-end">
           <button
-            className="btn btn-info"
+            className="btn btn-info btn-sm p-1"
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
             disabled={page === 1}
           >
-            Previous
+            Prev
           </button>
 
           <span className="page-link">
@@ -138,7 +138,7 @@ const DesignationManagement = () => {
           </span>
 
           <button
-            className="btn btn-info"
+            className="btn btn-info btn-sm p-1"
             onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={page === totalPages}
           >

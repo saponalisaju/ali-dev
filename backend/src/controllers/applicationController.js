@@ -93,29 +93,39 @@ exports.fetchApplicationEnquiry = async (req, res) => {
 };
 
 exports.addApplication = async (req, res) => {
-  const image = req.file?.filename;
-  const path = req.file?.path;
   try {
     const existingUser = await Application.findOne({
       $or: [{ email: req.body.email }, { passport: req.body.passport }],
     });
     if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+      return res
+        .status(400)
+        .json({ message: "User with this email or passport already exists." });
     }
 
     if (!req.file || !req.body.email) {
-      return res.status(400).json({ message: "File and email are required." });
+      return res
+        .status(400)
+        .json({ message: "Both file and email are required." });
     }
+
+    const image = req.file.filename;
+    const imagePath = req.file.path;
+
     const newApplication = new Application({
       ...req.body,
       image: image,
-      path: path,
+      path: imagePath,
     });
     await newApplication.save();
     console.log(newApplication);
     res.status(201).json(newApplication);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error adding application:", error);
+    res.status(500).json({
+      message: "Error adding application. Please try again.",
+      error: error.message,
+    });
   }
 };
 
@@ -263,6 +273,7 @@ exports.deleteApplication = async (req, res) => {
     if (!application) {
       return res.status(404).json({ message: "Application not found" });
     }
+
     const filePaths = [
       application.path,
       application.filePath,
@@ -275,7 +286,11 @@ exports.deleteApplication = async (req, res) => {
 
     for (const filePath of filePaths) {
       if (filePath) {
-        await deleteImage(filePath);
+        try {
+          await deleteImage(filePath);
+        } catch (error) {
+          console.error(`Error deleting file at path ${filePath}:`, error);
+        }
       }
     }
 
