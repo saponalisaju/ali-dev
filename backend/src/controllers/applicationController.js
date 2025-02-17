@@ -110,12 +110,12 @@ exports.addApplication = async (req, res) => {
     }
 
     const image = req.file.filename;
-    const imagePath = req.file.path;
+    const path = req.file.path;
 
     const newApplication = new Application({
       ...req.body,
       image: image,
-      path: imagePath,
+      path: path,
     });
     await newApplication.save();
     console.log(newApplication);

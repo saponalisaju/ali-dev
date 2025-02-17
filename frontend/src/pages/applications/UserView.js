@@ -4,6 +4,7 @@ import "../../assets/styles/main.css";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 
 import api from "./api";
+import apiUrl from "../../secret";
 
 const UserView = () => {
   const [error, setError] = useState("");
@@ -69,9 +70,13 @@ const UserView = () => {
     });
 
     try {
-      const response = await api.put(`/updateApplicationAdd/${id}`, data, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = await api.put(
+        `${apiUrl}/api/application/updateApplicationAdd/${id}`,
+        data,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       if (response.status === 200) {
         navigate("/application", { replace: true });
       } else {

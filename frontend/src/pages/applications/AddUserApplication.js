@@ -3,6 +3,8 @@ import Common from "../../layouts/Common";
 import { useNavigate } from "react-router-dom";
 import "../../assets/styles/main.css";
 import api from "./api";
+import apiUrl from "../../secret";
+import axios from "axios";
 
 const AddUserApplication = () => {
   const [applications, setApplications] = useState([]);
@@ -112,10 +114,15 @@ const AddUserApplication = () => {
         formDataToSend.append("image", image);
       }
 
-      const response = await api.post(`/addApplication`, formDataToSend, {
-        headers: { "Content-Type": "multipart/form-data" },
-        timeout: 10000,
-      });
+      const response = await axios.post(
+        `${apiUrl}/api/application/addApplication`,
+        formDataToSend,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          timeout: 20000, // increased timeout to 20 seconds
+        }
+      );
+
       if (response.status === 201) {
         navigate("/application", { replace: true });
         setError(""); // Clear error message on success

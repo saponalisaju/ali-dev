@@ -12,13 +12,7 @@ const AIR_TICKETS_DIR = "../frontend/public/air_ticket";
 const ATTACH_FILE_DIR = "../frontend/public/document";
 const MAX_FILE_SIZE = 2097152;
 const ALLOWED_FILE_TYPES = ["image/jpeg", "image/png", "image/jpg"];
-const ALLOWED_DOCUMENT_TYPE = [
-  "image/jpeg",
-  "image/png",
-  "image/jpg",
-  "application/pdf",
-  "application/msword",
-];
+const ALLOWED_DOCUMENT_TYPE = ["image/jpeg", "image/png", "image/jpg"];
 
 const sliderStorage = multer.diskStorage({
   destination: (req, file, cb) => {
